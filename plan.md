@@ -78,12 +78,12 @@ Core domains:
 
 ### Phase 00 — Project foundation
 
-- [ ] Tạo repository và branch strategy.
-- [ ] Khởi tạo React + TypeScript + Vite.
-- [ ] Chuẩn hóa ESLint/Prettier/TypeScript strict.
-- [ ] Thiết lập environment variables.
-- [ ] Thiết lập CI cơ bản.
-- [ ] Thiết lập `.agent/` và state management.
+- [x] Tạo repository và branch strategy.
+- [x] Khởi tạo React + TypeScript + Vite.
+- [x] Chuẩn hóa ESLint/Prettier/TypeScript strict.
+- [x] Thiết lập environment variables.
+- [x] Thiết lập CI cơ bản.
+- [x] Thiết lập `.agent/` và state management.
 
 ### Phase 01 — Design system & UX foundation
 

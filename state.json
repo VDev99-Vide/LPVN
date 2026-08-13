@@ -3,14 +3,14 @@
   "schema_version": 1,
   "status": "PLANNING",
   "current_phase": "phase-00",
-  "current_task": "project-foundation",
+  "current_task": "phase-01-design-system",
   "last_session": {
     "status": "completed",
-    "summary": "Environment architecture review: fixed broken doc references (DESIGN(1).md -> DESIGN.md), rewrote stale .claude/skills and ~/.opencode/skills paths to repo-relative .opencode/skills, made scripts executable, hardened quality-gate.sh and check-state.sh for pre-scaffold/python3-only environments, and added README.",
-    "timestamp": "2026-08-13T15:10:00+07:00"
+    "summary": "Hoàn tất Phase 00: scaffold React + TypeScript + Vite, ESLint/Prettier/TypeScript strict, environment variables typed, CI GitHub Actions, quality gate npm, và checkpoint governance (state.json, plan.md, .agent/). Phase 00 DONE 100%.",
+    "timestamp": "2026-08-13T16:30:00+07:00"
   },
   "progress": {
-    "phase-00": { "status": "READY", "percent": 0 },
+    "phase-00": { "status": "DONE", "percent": 100 },
     "phase-01": { "status": "LOCKED", "percent": 0 },
     "phase-02": { "status": "LOCKED", "percent": 0 },
     "phase-03": { "status": "LOCKED", "percent": 0 },
@@ -67,6 +67,16 @@
       "id": "ADR-003",
       "decision": "Authorization must be enforced server-side/database-side; UI role checks are not sufficient.",
       "status": "accepted"
+    },
+    {
+      "id": "ADR-004",
+      "decision": "Phase-00 toolchain: Vite 7 + React 19 + TS strict + ESLint 9 flat + Prettier + Vitest; npm as package manager; GitHub Actions for CI.",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-005",
+      "decision": "Repository workflow: feature branches with PRs for real features; main receives direct commits for foundation/config work.",
+      "status": "accepted"
     }
   ],
   "files_created": [
@@ -79,7 +89,10 @@
     "README.md",
     "scripts/check-state.sh",
     "scripts/bootstrap-project.sh",
-    "scripts/quality-gate.sh"
+    "scripts/quality-gate.sh",
+    "src/env.ts",
+    ".env.example",
+    ".github/workflows/ci.yml"
   ],
   "validation": {
     "documents_created": true,
@@ -88,9 +101,8 @@
   },
   "blockers": [],
   "next_actions": [
-    "Initialize application repository.",
-    "Create Supabase project/schema migration strategy.",
-    "Create phase-00 project foundation checklist and commit.",
-    "Add CI quality gates."
+    "Tạo design tokens riêng cho hệ thống HR SaaS.",
+    "Thiết kế dashboard layout.",
+    "Thiết kế form components chuẩn."
   ]
 }

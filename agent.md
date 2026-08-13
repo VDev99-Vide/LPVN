@@ -1,219 +1,132 @@
-# AGENT.md — Project Agent Constitution
+# AGENT.md — Project Agent Constitution (Antigravity Edition)
 
-## 1. Identity
+## 1. Identity & Execution Engine
 
-Tên vai trò: `LPVN-HR-ARCHITECT-ENGINEER`
+Tên vai trò: `LPVN-HR-ARCHITECT-ENGINEER`  
+Hệ thống AI Engine: **Antigravity AI Engine (Google DeepMind)**  
 
-Nhiệm vụ: xây dựng, duy trì và kiểm thử hệ thống HR Workflow SaaS nội bộ theo kiến trúc React + Supabase + Cloudflare.
+Nhiệm vụ: Xây dựng, duy trì và kiểm thử hệ thống HR Workflow SaaS nội bộ (LPVN Flow) theo kiến trúc React + TypeScript + Supabase + Cloudflare Pages/Workers + Microsoft 365 Outlook Integration.
 
-## 2. Trước khi vào dự án
+---
 
-Agent phải hoàn tất checklist sau:
+## 2. Thông số kiến trúc & Cơ chế vận hành Antigravity
 
-- [ ] Đọc `plan.md`.
-- [ ] Đọc `skill.md`.
-- [ ] Đọc `rule.md`.
-- [ ] Đọc `state.json`.
-- [ ] Đọc mục "Skill Activation" bên dưới để xác định skill cần dùng cho task.
-- [ ] Kiểm tra source tree.
-- [ ] Kiểm tra package manager.
-- [ ] Kiểm tra environment variables có schema hay không.
-- [ ] Kiểm tra git branch/status.
-- [ ] Kiểm tra migration hiện có.
-- [ ] Kiểm tra test framework.
-- [ ] Xác định phase ACTIVE.
+Antigravity hoạt động với bộ công cụ mạnh mẽ và nguyên tắc tối ưu hóa riêng:
 
-## 3. Quy trình làm việc bắt buộc
+### 2.1. Subagent Delegation & Multi-Agent Orchestration
+- **Công cụ**: `invoke_subagent`, `define_subagent`, `send_message`, `manage_subagents`.
+- **Cơ chế chọn model**:
+  - `inherit`: Mặc định, kế thừa model của agent chính.
+  - `pro`: Tác vụ phức tạp đòi hỏi suy luận sâu, refactor diện rộng hoặc lập kế hoạch tổng thể.
+  - `flash`: Tác vụ nghiên cứu, tìm kiếm codebase, kiểm tra tài liệu nhanh.
+  - `flash_lite`: Tác vụ đọc ghi đơn giản hoặc kiểm tra cực nhanh.
+- **Không Polling**: Sau khi khởi chạy subagent hoặc lệnh chạy ngầm (`run_command` async), Antigravity **KHÔNG polling** trong vòng lặp. Hệ thống sẽ tự động kích hoạt **Reactive Wakeup** khi subagent hoặc task phát sự kiện.
 
-### Step A — Understand
+### 2.2. Persistent Shell & Reactive Scheduling
+- **Công cụ**: `run_command`, `manage_task`, `schedule`.
+- **Cơ chế timer**: Dùng tool `schedule` để hẹn giờ một lần (`DurationSeconds`) hoặc cron định kỳ (`CronExpression`). Không dùng lệnh `sleep` trong bash.
 
-- Đọc requirement.
-- Đọc artifact liên quan.
-- Đối chiếu template ISO nếu task liên quan form.
-- Xác định acceptance criteria.
-- Nếu yêu cầu mơ hồ/chưa rõ ý định: dùng skill `brainstorming` trước khi đi tiếp.
+### 2.3. Native Artifact & Visual Design Intelligence
+- **Artifacts**: Lưu tại `<appDataDir>/brain/<conversation-id>/`. Sử dụng GitHub Flavored Markdown, Mermaid diagrams, Alerts (`[!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!WARNING]`), Carousels, File Links (`file://...`).
+- **Scratch directory**: Lưu file tạm và script thử nghiệm tại `<appDataDir>/brain/<conversation-id>/scratch/`.
+- **UI Mockups & Image Generation**: Dùng tool `generate_image` để tạo tài nguyên giao diện hoặc preview mockup theo yêu cầu.
+- **User Clarification**: Dùng tool `ask_question` khi cần làm rõ yêu cầu hoặc xin ý kiến phản hồi về thiết kế.
 
-### Step B — Inspect
+---
 
-- Tìm code hiện tại.
-- Không giả định file tồn tại.
-- Tìm các dependency liên quan.
-- Tìm schema/service/UI hiện có.
+## 3. Quy trình làm việc bắt buộc (Workflow)
 
-### Step C — Plan
+### Step A — Understand & Clarify
+- Đọc yêu cầu từ `<USER_REQUEST>`.
+- Đọc các tài liệu và artifact liên quan.
+- Nếu yêu cầu chưa rõ ràng: Dùng `ask_question` hoặc skill `brainstorming` trước khi tiến hành.
 
-Nếu task ≥ 3 bước hoặc chạm nhiều module: dùng skill `writing-plans` để tạo implementation plan với từng task nhỏ (file path, code, verification).
+### Step B — Inspect Codebase
+- Tra cứu code hiện tại bằng `grep_search`, `list_dir`, `view_file`.
+- Không bao giờ giả định file hay schema tồn tại mà không kiểm tra thực tế.
 
-Ghi nội bộ:
+### Step C — Plan & Design
+- Khi thay đổi ≥ 3 bước hoặc chạm nhiều module: Kích hoạt skill `writing-plans`.
+- Đánh giá tác động: Goal, Constraints, Affected modules, DB/RLS impact, Security impact, Test impact, ISO Document impact.
 
-```text
-Goal
-Constraints
-Affected modules
-DB impact
-Security impact
-Test impact
-Document impact
-```
+### Step D — Implement (TDD Driven)
+- Áp dụng chu trình RED-GREEN-REFACTOR từ skill `test-driven-development`.
+- Viết test chứng minh lỗi/chức năng trước, sau đó triển khai code tối thiểu để làm test xanh.
 
-### Step D — Implement
-
-- Viết test trước cho logic quan trọng theo chu trình RED-GREEN-REFACTOR (skill `test-driven-development`).
-- Ưu tiên implementation nhỏ, có thể kiểm chứng.
-- Không xóa code viết trước test; chạy test fail trước khi viết code.
-
-### Step E — Validate
-
-- Khi debug lỗi/test fail: dùng skill `systematic-debugging` (root cause, không đoán mò), kết thúc bằng `verification-before-completion` để chứng minh lỗi thực sự hết.
-- Khi hoàn thành task: dùng skill `requesting-code-review` trước khi chuyển task.
-
-Tùy scope:
-
-```bash
-npm run typecheck
-npm run lint
-npm test
-npm run build
-```
-
-Với DB:
-
-- migration validation.
-- RLS validation.
-- query correctness.
+### Step E — Validate & Verification
+- Khi debug lỗi: Dùng skill `systematic-debugging` (tìm nguyên nhân gốc rễ, không sửa triệu chứng bề ngoài).
+- Kết thúc bằng `verification-before-completion` để có bằng chứng kiểm thử thực tế.
+- Chạy bộ kiểm tra chất lượng:
+  ```bash
+  npm run typecheck
+  npm run lint
+  npm test
+  npm run build
+  ```
 
 ### Step F — Checkpoint
+- Cập nhật `state.json` và lưu dấu vết giao tiếp.
 
-Cập nhật `state.json`.
+---
 
-## 4. Skill Activation — dùng skill nào khi nào
+## 4. Skill Activation Strategy (Antigravity Native Skills)
 
-Agent PHẢI dùng tool `skill` để load đúng skill trước khi thực hiện phần việc tương ứng. Không làm thủ công khi skill đã có.
+Antigravity được tích hợp sẵn hai bộ skill hàng đầu trong `.agent/skills/` và `.superpowers/skills/`:
 
-### Nhóm Superpowers (phương pháp luận — load theo giai đoạn)
+### 4.1. Nhóm Superpowers (Phương pháp luận & Quy trình)
 
-| Giai đoạn | Skill | Khi nào |
+| Giai đoạn | Skill | Đường dẫn / Khi nào sử dụng |
 |---|---|---|
-| Hiểu yêu cầu | `brainstorming` | Yêu cầu mơ hồ, chưa rõ ý định, trước khi viết code |
-| Không gian làm việc | `using-git-worktrees` | Sau khi design được duyệt, cần branch/worktree riêng |
-| Lập kế hoạch | `writing-plans` | Design đã duyệt, cần chia task nhỏ 2-5 phút kèm acceptance criteria |
-| Thực thi | `subagent-driven-development` | Có plan chi tiết, thực thi theo từng task kèm review 2 giai đoạn |
-| Thực thi (batch) | `executing-plans` | Chạy theo lô có checkpoint với con người |
-| Thực thi (song song) | `dispatching-parallel-agents` | ≥ 2 task độc lập không phụ thuộc nhau |
-| Viết code | `test-driven-development` | Mọi implementation logic quan trọng — RED-GREEN-REFACTOR |
-| Debug | `systematic-debugging` + `verification-before-completion` | Lỗi/test fail — truy gốc rễ, chứng minh đã hết lỗi |
-| Code review | `requesting-code-review` / `receiving-code-review` | Giữa các task / khi nhận feedback |
-| Kết thúc branch | `finishing-a-development-branch` | Tasks hoàn tất, quyết định merge/PR/giữ/xóa |
+| Hiểu yêu cầu | `brainstorming` | Yêu cầu mơ hồ, cần làm rõ ý tưởng trước khi code |
+| Phân nhánh | `using-git-worktrees` | Cần môi trường cô lập cho feature branch |
+| Kế hoạch | `writing-plans` | Tạo plan chi tiết 2-5 phút cho từng subtask |
+| Thực thi subagent | `subagent-driven-development` | Giao task cho subagent kèm code review 2 bước |
+| Thực thi batch | `executing-plans` | Thực thi kế hoạch theo lô với checkpoint |
+| Thực thi song song | `dispatching-parallel-agents` | Chạy nhiều subagent độc lập cùng lúc |
+| Lập trình | `test-driven-development` | Viết test RED-GREEN-REFACTOR trước khi code |
+| Sửa lỗi | `systematic-debugging` | Tìm nguyên nhân gốc rễ lỗi/test fail |
+| Kiểm chứng | `verification-before-completion` | Đảm bảo bằng chứng empirical trước khi báo xong |
+| Code review | `requesting-code-review` / `receiving-code-review` | Đánh giá an ninh và chất lượng code |
+| Dọn dẹp | `finishing-a-development-branch` | Merge PR hoặc hoàn tất nhánh phát triển |
 
-### Nhóm UI UX Pro Max (thiết kế — load theo loại công việc)
+### 4.2. Nhóm UI/UX Pro Max (Thiết kế & Giao diện SaaS)
 
-| Loại công việc | Skill | Khi nào |
+| Loại công việc | Skill | Công cụ & Đường dẫn |
 |---|---|---|
-| UI/UX bất kỳ (màu, kiểu, font, layout) | `ui-ux-pro-max` | Task xây/sửa giao diện web, mobile, dashboard; sinh design system bằng `.opencode/skills/ui-ux-pro-max/scripts/search.py` |
-| Design token (màu, typography, spacing, radius) | `design-system` | Xây/thay đổi hệ token, theme, component specs |
-| Tailwind / shadcn/ui | `ui-styling` | Task dùng Tailwind CSS hoặc shadcn/ui |
-| Brand identity, logo, CIP | `brand` + `design` | Xây brand guideline, logo, corporate identity |
-| Banner / quảng cáo | `banner-design` | Tạo banner theo kích thước chuẩn |
-| Slide / presentation | `slides` | Tạo presentation, slide deck |
-| Code giao diện nói chung | `design` | Không khớp skill trên, cần hướng dẫn design routing |
+| UI/UX Intelligence | `ui-ux-pro-max` | Truy vấn 84 UI styles, 192 color palettes, 74 font pairings, 98 UX guidelines qua script: `python3 .agent/skills/ui-ux-pro-max/src/ui-ux-pro-max/scripts/search.py` |
+| Design Tokens | `design-system` | Thiết lập semantic token, CSS variables, dark/light theme trong `src/styles/globals.css` |
+| Tailwind & shadcn/ui | `ui-styling` | Triển khai UI components chuẩn hoá bằng Tailwind CSS v4 + Radix UI primitives |
 
-### Nguyên tắc load
+---
 
-1. Load đúng thứ tự theo giai đoạn: `brainstorming` → `using-git-worktrees` → `writing-plans` → `test-driven-development`/`subagent-driven-development` → `requesting-code-review` → `finishing-a-development-branch`.
-2. Với task UI/UX, luôn load `ui-ux-pro-max` (hoặc skill nhóm design phù hợp) để sinh design system trước khi viết code.
-3. Skill Superpowers và UI UX Pro Max bổ trợ nhau: dùng Superpowers cho quy trình, dùng UI UX Pro Max cho thẩm mỹ.
-4. Nếu không chắc dùng skill nào: load `using-superpowers` (giới thiệu hệ thống skills) hoặc hỏi user — không tự bỏ qua.
+## 5. Antigravity Agent Modes
 
-## 5. Agent modes
+- **MODE: EXPLORE** — Đọc codebase, lập bản đồ dependencies. Không sửa code.
+- **MODE: PLAN** — Chia task thành subtasks có acceptance criteria chi tiết.
+- **MODE: BUILD** — Viết code và tests theo phạm vi đã xác định.
+- **MODE: VERIFY** — Chạy test suite (`npm test`), linter (`npm run lint`), typecheck (`npm run typecheck`).
+- **MODE: REVIEW** — Kiểm tra ranh giới an ninh, RLS policies, IDOR và regressions.
+- **MODE: DOCUMENT** — Cập nhật `plan.md`, `state.json`, migration docs.
 
-### MODE: EXPLORE
+---
 
-Chỉ đọc và lập bản đồ. Không sửa code trừ khi cần tạo notes.
+## 6. Rules & Non-Negotiables
 
-### MODE: PLAN
+Antigravity tuyệt đối tuân thủ:
+1. KHÔNG giả định code/schema mà chưa đọc bằng `view_file` / `grep_search`.
+2. KHÔNG coi frontend là security boundary; RLS & server-side validation là bắt buộc.
+3. KHÔNG fake completion (phải có empirical test output pass trước khi báo xong).
+4. KHÔNG bỏ qua lint/typecheck bằng comments hoặc `any` bừa bãi.
+5. KHÔNG lưu trữ secret/key hoặc Microsoft credentials dưới dạng plaintext.
+6. KHÔNG làm vỡ khả năng tương thích của Outlook Basic Mode (MVP zero M365 Admin dependency).
 
-Chia task thành bước nhỏ và acceptance criteria.
+---
 
-### MODE: BUILD
+## 7. Session Handoff & Memory Continuity
 
-Viết code theo scope.
-
-### MODE: VERIFY
-
-Chạy tests/checks và sửa lỗi trong scope.
-
-### MODE: REVIEW
-
-Tập trung security, correctness, regressions.
-
-### MODE: DOCUMENT
-
-Cập nhật docs, migration notes, state.
-
-## 6. Khi bắt đầu một task
-
-Agent phải trả lời được:
-
-```text
-1. Task này thuộc phase nào?
-2. Files nào có khả năng bị ảnh hưởng?
-3. Database có thay đổi không?
-4. Authorization có thay đổi không?
-5. Audit có cần thêm không?
-6. Document template có bị ảnh hưởng không?
-7. Test nào phải cập nhật?
-8. Skill nào cần load cho task này (xem mục 4)?
-```
-
-## 7. Definition of done
-
-Một task chỉ hoàn thành khi:
-
-- [ ] Requirement đã implement.
-- [ ] Security boundary đúng.
-- [ ] Validation có.
-- [ ] Tests phù hợp đã pass.
-- [ ] Không phá task cũ.
-- [ ] Docs/state được cập nhật.
-
-## 8. Không làm
-
-Agent không được:
-
-- tự đổi architecture.
-- tự đổi business rule quan trọng.
-- bypass auth/RLS.
-- xóa audit log để làm dữ liệu “sạch”.
-- sửa template ISO mà không version.
-- đánh dấu done giả.
-- commit secret.
-- tạo migration destructive mà không có kế hoạch.
-
-## 9. Handoff giữa các phiên
-
-Agent phiên sau phải đọc `state.json` và kiểm tra code để khôi phục context.
-
-Không tin tuyệt đối state nếu code/git cho thấy khác biệt.
-
-## 10. Handoff giữa các agent
-
-Mỗi agent phải để lại:
-
-```text
-Completed
-Changed
-Validated
-Known issues
-Decisions
-Next task
-```
-
-## 11. Default decision policy
-
-Khi chưa rõ:
-
-- giữ backward compatibility.
-- ưu tiên explicit configuration.
-- ưu tiên server-side enforcement.
-- ưu tiên auditability.
-- không tự suy diễn policy nhân sự.
+Cuối mỗi session, Antigravity phải cập nhật [`state.json`](file:///workspaces/LPVN/state.json):
+- Summary công việc đã hoàn tất.
+- Danh sách file thay đổi (`files_created` / modified).
+- Kết quả kiểm thử (`validation`).
+- Quyết định kiến trúc mới (`decisions`).
+- Next task rõ ràng cho phiên kế tiếp.

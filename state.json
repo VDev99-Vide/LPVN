@@ -2,16 +2,17 @@
   "project": "LPVN-HR-Workflow-SaaS",
   "schema_version": 1,
   "status": "PLANNING",
-  "current_phase": "phase-00",
-  "current_task": "phase-01-design-system",
+  "current_phase": "phase-01",
+  "current_task": "phase-02-supabase-foundation",
+  "agent_engine": "Antigravity AI Engine (Google DeepMind)",
   "last_session": {
     "status": "completed",
-    "summary": "Hoàn tất Phase 00: scaffold React + TypeScript + Vite, ESLint/Prettier/TypeScript strict, environment variables typed, CI GitHub Actions, quality gate npm, và checkpoint governance (state.json, plan.md, .agent/). Phase 00 DONE 100%.",
-    "timestamp": "2026-08-13T16:30:00+07:00"
+    "summary": "Đã hoàn tất chuyển giao dự án từ OpenCode sang Antigravity AI Engine: tải mới repository obra/superpowers và nextlevelbuilder/ui-ux-pro-max-skill; cập nhật lại AGENT.md, SKILL.md, RULE.md, state.json với thông số tối ưu cho Antigravity (subagent delegation, reactive wakeups, native artifact system, UI UX Pro Max search intelligence).",
+    "timestamp": "2026-08-13T10:32:40+00:00"
   },
   "progress": {
     "phase-00": { "status": "DONE", "percent": 100 },
-    "phase-01": { "status": "LOCKED", "percent": 0 },
+    "phase-01": { "status": "IN_PROGRESS", "percent": 80 },
     "phase-02": { "status": "LOCKED", "percent": 0 },
     "phase-03": { "status": "LOCKED", "percent": 0 },
     "phase-04": { "status": "LOCKED", "percent": 0 },
@@ -22,21 +23,31 @@
     "phase-09": { "status": "LOCKED", "percent": 0 },
     "phase-10": { "status": "LOCKED", "percent": 0 },
     "phase-11": { "status": "LOCKED", "percent": 0 },
+    "phase-11b": { "status": "LOCKED", "percent": 0 },
+    "phase-11c": { "status": "LOCKED", "percent": 0 },
+    "phase-11d": { "status": "LOCKED", "percent": 0 },
+    "phase-11e": { "status": "LOCKED", "percent": 0 },
     "phase-12": { "status": "LOCKED", "percent": 0 },
     "phase-13": { "status": "LOCKED", "percent": 0 },
     "phase-14": { "status": "LOCKED", "percent": 0 }
   },
   "active_context": {
+    "agent_engine": "Antigravity AI Engine",
     "architecture": [
       "React + TypeScript + Vite",
       "Supabase Auth + PostgreSQL + RLS + Storage/Edge Functions",
-      "Cloudflare Pages/Workers",
-      "SaaS workflow forms with post-approval document rendering"
+      "Cloudflare Pages/Workers + Cloudflare R2",
+      "SaaS workflow forms with post-approval document rendering",
+      "Decoupled Notification Engine with Outlook Basic/Advanced Adapters"
     ],
     "forms": [
       "LPVN-HR-F-0008 Attendance Confirmation",
       "LPVN-HR-F-0013 Leave Application",
       "LPVN-HR-F-0014 Employee Gate Pass"
+    ],
+    "skills_installed": [
+      "obra/superpowers (brainstorming, writing-plans, subagent-driven-development, test-driven-development, systematic-debugging, verification-before-completion, executing-plans, dispatching-parallel-agents, finishing-a-development-branch)",
+      "nextlevelbuilder/ui-ux-pro-max-skill (84 UI styles, 192 color palettes, 74 font pairings, 98 UX guidelines, 22 tech stacks)"
     ],
     "core_domains": [
       "employee",
@@ -77,6 +88,26 @@
       "id": "ADR-005",
       "decision": "Repository workflow: feature branches with PRs for real features; main receives direct commits for foundation/config work.",
       "status": "accepted"
+    },
+    {
+      "id": "ADR-006",
+      "decision": "Design direction: teal trung tính hóa từ DESIGN.md, không sao chép visual game UI; professional HR SaaS, light + dark.",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-007",
+      "decision": "Phase-01 UI stack: Tailwind CSS v4 + shadcn/ui (Radix primitives), CSS variables tokens, dark mode class strategy.",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-008",
+      "decision": "Microsoft 365 Outlook Integration Architecture: Approval Engine decoupled from Notification Adapters; MVP zero M365 Admin dependency via Basic Email Mode (deep link to LPVN Flow); Outlook Actionable Messages as progressive upgrade mode; secure anti-replay approval endpoints; snapshot approver identity & template versioning; ELECTRONIC_IMAGE vs DIGITAL_CERTIFICATE signature classification.",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-009",
+      "decision": "Engine Transition & Skill Optimization: Transitioned project agent engine from OpenCode to Antigravity AI Engine; re-cloned latest obra/superpowers and nextlevelbuilder/ui-ux-pro-max-skill into .agent/skills, .antigravity/skills, and .superpowers/skills; updated AGENT.md, SKILL.md, RULE.md, state.json for Antigravity native execution, subagent delegation, reactive wakeups, and artifact system.",
+      "status": "accepted"
     }
   ],
   "files_created": [
@@ -92,17 +123,34 @@
     "scripts/quality-gate.sh",
     "src/env.ts",
     ".env.example",
-    ".github/workflows/ci.yml"
+    ".github/workflows/ci.yml",
+    "src/styles/globals.css",
+    "src/lib/utils.ts",
+    "components.json",
+    "src/components/ui/*",
+    "src/components/layout/*",
+    "src/components/business/StatusBadge.tsx",
+    "src/pages/DashboardPage.tsx",
+    "docs/superpowers/specs/2026-08-13-phase-01-design-system.md",
+    ".agent/skills/*",
+    ".antigravity/skills/*",
+    ".superpowers/skills/*"
   ],
   "validation": {
     "documents_created": true,
     "source_forms_reviewed": true,
-    "code_validation": "passing"
+    "code_validation": "passing",
+    "phase_01_quality_gate": "passing",
+    "outlook_architecture_added": true,
+    "antigravity_skills_installed": true
   },
   "blockers": [],
   "next_actions": [
-    "Tạo design tokens riêng cho hệ thống HR SaaS.",
-    "Thiết kế dashboard layout.",
-    "Thiết kế form components chuẩn."
+    "Hoàn thiện navigation theo role thật (sidebar hiện đang là placeholder).",
+    "Thêm filter và pagination cho bảng (Table đã có, filter/pagination để phase sau).",
+    "Bổ sung drawer và confirmation pattern đầy đủ (đã có Dialog + Alert + DropdownMenu).",
+    "Tạo Supabase project và cấu hình Auth.",
+    "Tạo schema + profiles/departments/positions/employees.",
+    "Thiết lập RLS policies và audit log."
   ]
 }

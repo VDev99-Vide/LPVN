@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   { label: 'Leave', href: '/leave', icon: CalendarDays },
   { label: 'Gate Pass', href: '/gate-pass', icon: DoorOpen },
   { label: 'Attendance', href: '/attendance', icon: ClipboardCheck },
-  { label: 'Employees', href: '/employees', icon: Users },
+  { label: 'Nhân sự & Tổ chức', href: '/employees', icon: Users },
   { label: 'Reports', href: '/reports', icon: BarChart3 },
 ]
 

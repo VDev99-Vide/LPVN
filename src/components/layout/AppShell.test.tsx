@@ -11,7 +11,7 @@ describe('AppShell', () => {
     expect(screen.getByText('Leave')).toBeInTheDocument()
     expect(screen.getByText('Gate Pass')).toBeInTheDocument()
     expect(screen.getByText('Attendance')).toBeInTheDocument()
-    expect(screen.getByText('Employees')).toBeInTheDocument()
+    expect(screen.getByText('Nhân sự & Tổ chức')).toBeInTheDocument()
     expect(screen.getByText('Reports')).toBeInTheDocument()
   })
 

@@ -23,7 +23,7 @@ Design banners across social, ads, web, and print formats. Generates multiple ar
 
 ## Prerequisites
 
-**Python:** This skill uses Python scripts. On Windows, use `python` instead of `python3` (e.g., `python scripts/search.py` instead of `python3 scripts/search.py`).
+**External skills:** This skill references helper skills that are NOT bundled in this repository and must be installed separately before use: `ai-artist`, `ai-multimodal`, `frontend-design`, `chrome-devtools`, `assets-organizing`. Steps relying on them will fail with a clear "command not found" until those skills are present.
 
 ## Workflow
 
@@ -62,12 +62,12 @@ For each art direction option:
 
    **a) Search prompt inspiration** (6000+ examples in ai-artist):
    ```bash
-   python3 .claude/skills/ai-artist/scripts/search.py "<banner style keywords>"
+   python3 .opencode/skills/ai-artist/scripts/search.py "<banner style keywords>"
    ```
 
    **b) Generate with Standard model** (fast, good for backgrounds/patterns):
    ```bash
-   .claude/skills/.venv/bin/python3 .claude/skills/ai-multimodal/scripts/gemini_batch_process.py \
+   .opencode/skills/.venv/bin/python3 .opencode/skills/ai-multimodal/scripts/gemini_batch_process.py \
      --task generate --model gemini-2.5-flash-image \
      --prompt "<banner visual prompt>" --aspect-ratio <platform-ratio> \
      --size 2K --output assets/banners/
@@ -75,7 +75,7 @@ For each art direction option:
 
    **c) Generate with Pro model** (4K, complex illustrations/hero visuals):
    ```bash
-   .claude/skills/.venv/bin/python3 .claude/skills/ai-multimodal/scripts/gemini_batch_process.py \
+   .opencode/skills/.venv/bin/python3 .opencode/skills/ai-multimodal/scripts/gemini_batch_process.py \
      --task generate --model gemini-3-pro-image-preview \
      --prompt "<creative banner prompt>" --aspect-ratio <platform-ratio> \
      --size 4K --output assets/banners/
@@ -107,7 +107,7 @@ After designing HTML banners, export each to PNG using `chrome-devtools` skill:
 2. **Screenshot each banner** at exact platform dimensions:
    ```bash
    # Export banner to PNG at exact dimensions
-   node .claude/skills/chrome-devtools/scripts/screenshot.js \
+   node .opencode/skills/chrome-devtools/scripts/screenshot.js \
      --url "http://localhost:8765/banner-01-minimalist.html" \
      --width 1500 --height 500 \
      --output "assets/banners/{campaign}/{variant}-{size}.png"
@@ -115,7 +115,7 @@ After designing HTML banners, export each to PNG using `chrome-devtools` skill:
 3. **Auto-compress** if >5MB (Sharp compression built-in):
    ```bash
    # With custom max size threshold
-   node .claude/skills/chrome-devtools/scripts/screenshot.js \
+   node .opencode/skills/chrome-devtools/scripts/screenshot.js \
      --url "http://localhost:8765/banner-02-gradient.html" \
      --width 1500 --height 500 --max-size 3 \
      --output "assets/banners/{campaign}/{variant}-{size}.png"

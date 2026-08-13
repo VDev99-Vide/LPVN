@@ -109,7 +109,7 @@ Agent PHẢI dùng tool `skill` để load đúng skill trước khi thực hi�
 
 | Loại công việc | Skill | Khi nào |
 |---|---|---|
-| UI/UX bất kỳ (màu, kiểu, font, layout) | `ui-ux-pro-max` | Task xây/sửa giao diện web, mobile, dashboard; sinh design system bằng `scripts/search.py` |
+| UI/UX bất kỳ (màu, kiểu, font, layout) | `ui-ux-pro-max` | Task xây/sửa giao diện web, mobile, dashboard; sinh design system bằng `.opencode/skills/ui-ux-pro-max/scripts/search.py` |
 | Design token (màu, typography, spacing, radius) | `design-system` | Xây/thay đổi hệ token, theme, component specs |
 | Tailwind / shadcn/ui | `ui-styling` | Task dùng Tailwind CSS hoặc shadcn/ui |
 | Brand identity, logo, CIP | `brand` + `design` | Xây brand guideline, logo, corporate identity |

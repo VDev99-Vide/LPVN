@@ -1,0 +1,96 @@
+{
+  "project": "LPVN-HR-Workflow-SaaS",
+  "schema_version": 1,
+  "status": "PLANNING",
+  "current_phase": "phase-00",
+  "current_task": "project-foundation",
+  "last_session": {
+    "status": "completed",
+    "summary": "Environment architecture review: fixed broken doc references (DESIGN(1).md -> DESIGN.md), rewrote stale .claude/skills and ~/.opencode/skills paths to repo-relative .opencode/skills, made scripts executable, hardened quality-gate.sh and check-state.sh for pre-scaffold/python3-only environments, and added README.",
+    "timestamp": "2026-08-13T15:10:00+07:00"
+  },
+  "progress": {
+    "phase-00": { "status": "READY", "percent": 0 },
+    "phase-01": { "status": "LOCKED", "percent": 0 },
+    "phase-02": { "status": "LOCKED", "percent": 0 },
+    "phase-03": { "status": "LOCKED", "percent": 0 },
+    "phase-04": { "status": "LOCKED", "percent": 0 },
+    "phase-05": { "status": "LOCKED", "percent": 0 },
+    "phase-06": { "status": "LOCKED", "percent": 0 },
+    "phase-07": { "status": "LOCKED", "percent": 0 },
+    "phase-08": { "status": "LOCKED", "percent": 0 },
+    "phase-09": { "status": "LOCKED", "percent": 0 },
+    "phase-10": { "status": "LOCKED", "percent": 0 },
+    "phase-11": { "status": "LOCKED", "percent": 0 },
+    "phase-12": { "status": "LOCKED", "percent": 0 },
+    "phase-13": { "status": "LOCKED", "percent": 0 },
+    "phase-14": { "status": "LOCKED", "percent": 0 }
+  },
+  "active_context": {
+    "architecture": [
+      "React + TypeScript + Vite",
+      "Supabase Auth + PostgreSQL + RLS + Storage/Edge Functions",
+      "Cloudflare Pages/Workers",
+      "SaaS workflow forms with post-approval document rendering"
+    ],
+    "forms": [
+      "LPVN-HR-F-0008 Attendance Confirmation",
+      "LPVN-HR-F-0013 Leave Application",
+      "LPVN-HR-F-0014 Employee Gate Pass"
+    ],
+    "core_domains": [
+      "employee",
+      "organization",
+      "leave",
+      "attendance",
+      "gate-pass",
+      "approval",
+      "signature",
+      "document",
+      "notification",
+      "audit",
+      "reporting"
+    ]
+  },
+  "decisions": [
+    {
+      "id": "ADR-001",
+      "decision": "Users fill web application data forms; ISO documents are rendering templates only.",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-002",
+      "decision": "MVP manager signature is managed signature imagery, not automatically a legally certified PKI signature.",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-003",
+      "decision": "Authorization must be enforced server-side/database-side; UI role checks are not sufficient.",
+      "status": "accepted"
+    }
+  ],
+  "files_created": [
+    "plan.md",
+    "skill.md",
+    "rule.md",
+    "agent.md",
+    "state.json",
+    "DESIGN.md",
+    "README.md",
+    "scripts/check-state.sh",
+    "scripts/bootstrap-project.sh",
+    "scripts/quality-gate.sh"
+  ],
+  "validation": {
+    "documents_created": true,
+    "source_forms_reviewed": true,
+    "code_validation": "not-applicable-yet"
+  },
+  "blockers": [],
+  "next_actions": [
+    "Initialize application repository.",
+    "Create Supabase project/schema migration strategy.",
+    "Create phase-00 project foundation checklist and commit.",
+    "Add CI quality gates."
+  ]
+}

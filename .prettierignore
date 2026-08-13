@@ -1,0 +1,7 @@
+dist
+node_modules
+.opencode
+docs
+*.md
+state.json
+opencode.json

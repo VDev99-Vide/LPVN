@@ -1,11 +1,14 @@
+import { AuthProvider } from './contexts/AuthContext'
 import { AppShell } from './components/layout/AppShell'
 import { DashboardPage } from './pages/DashboardPage'
 
 function App() {
   return (
-    <AppShell>
-      <DashboardPage />
-    </AppShell>
+    <AuthProvider>
+      <AppShell>
+        <DashboardPage />
+      </AppShell>
+    </AuthProvider>
   )
 }
 

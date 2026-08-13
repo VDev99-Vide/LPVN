@@ -2,19 +2,19 @@
   "project": "LPVN-HR-Workflow-SaaS",
   "schema_version": 1,
   "status": "PLANNING",
-  "current_phase": "phase-01",
-  "current_task": "phase-02-supabase-foundation",
+  "current_phase": "phase-02",
+  "current_task": "phase-03-employee-organization",
   "agent_engine": "Antigravity AI Engine (Google DeepMind)",
   "last_session": {
     "status": "completed",
-    "summary": "Đã hoàn tất chuyển giao dự án từ OpenCode sang Antigravity AI Engine: tải mới repository obra/superpowers và nextlevelbuilder/ui-ux-pro-max-skill; cập nhật lại AGENT.md, SKILL.md, RULE.md, state.json với thông số tối ưu cho Antigravity (subagent delegation, reactive wakeups, native artifact system, UI UX Pro Max search intelligence).",
-    "timestamp": "2026-08-13T10:32:40+00:00"
+    "summary": "Completed Phase 02 Supabase Foundation: setup Supabase client & types, created SQL migrations (schema, RBAC, RLS policies, audit_logs, seed_data), implemented AuthContext provider with useAuth hook, and created LoginPage UI.",
+    "timestamp": "2026-08-13T14:02:40+00:00"
   },
   "progress": {
     "phase-00": { "status": "DONE", "percent": 100 },
-    "phase-01": { "status": "IN_PROGRESS", "percent": 80 },
-    "phase-02": { "status": "LOCKED", "percent": 0 },
-    "phase-03": { "status": "LOCKED", "percent": 0 },
+    "phase-01": { "status": "DONE", "percent": 100 },
+    "phase-02": { "status": "DONE", "percent": 100 },
+    "phase-03": { "status": "IN_PROGRESS", "percent": 0 },
     "phase-04": { "status": "LOCKED", "percent": 0 },
     "phase-05": { "status": "LOCKED", "percent": 0 },
     "phase-06": { "status": "LOCKED", "percent": 0 },
@@ -108,6 +108,11 @@
       "id": "ADR-009",
       "decision": "Engine Transition & Skill Optimization: Transitioned project agent engine from OpenCode to Antigravity AI Engine; re-cloned latest obra/superpowers and nextlevelbuilder/ui-ux-pro-max-skill into .agent/skills, .antigravity/skills, and .superpowers/skills; updated AGENT.md, SKILL.md, RULE.md, state.json for Antigravity native execution, subagent delegation, reactive wakeups, and artifact system.",
       "status": "accepted"
+    },
+    {
+      "id": "ADR-010",
+      "decision": "Phase-02 Supabase Foundation: Schema migrations, RBAC model, RLS policies, audit_logs table, LPVN seed data, and React AuthProvider/useAuth hook/LoginPage UI.",
+      "status": "accepted"
     }
   ],
   "files_created": [
@@ -134,23 +139,29 @@
     "docs/superpowers/specs/2026-08-13-phase-01-design-system.md",
     ".agent/skills/*",
     ".antigravity/skills/*",
-    ".superpowers/skills/*"
+    ".superpowers/skills/*",
+    "supabase/migrations/*",
+    "src/lib/supabase.ts",
+    "src/types/database.types.ts",
+    "src/contexts/AuthContext.tsx",
+    "src/hooks/useAuth.ts",
+    "src/pages/LoginPage.tsx",
+    "docs/superpowers/specs/2026-08-13-phase-02-supabase-foundation.md"
   ],
   "validation": {
     "documents_created": true,
     "source_forms_reviewed": true,
     "code_validation": "passing",
     "phase_01_quality_gate": "passing",
+    "phase_02_quality_gate": "passing",
     "outlook_architecture_added": true,
     "antigravity_skills_installed": true
   },
   "blockers": [],
   "next_actions": [
-    "Hoàn thiện navigation theo role thật (sidebar hiện đang là placeholder).",
-    "Thêm filter và pagination cho bảng (Table đã có, filter/pagination để phase sau).",
-    "Bổ sung drawer và confirmation pattern đầy đủ (đã có Dialog + Alert + DropdownMenu).",
-    "Tạo Supabase project và cấu hình Auth.",
-    "Tạo schema + profiles/departments/positions/employees.",
-    "Thiết lập RLS policies và audit log."
+    "Triển khai màn hình CRUD quản lý nhân viên (Phase 03).",
+    "Cấu hình mapping nhân viên -> quản lý trực tiếp (manager_id).",
+    "Cấu hình mapping phòng ban -> Trưởng phòng (Department Head).",
+    "Phát triển giao diện sơ đồ tổ chức (Org Chart View)."
   ]
 }

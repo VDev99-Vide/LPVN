@@ -393,15 +393,15 @@ OutlookIntegration
 - [x] Giữ tinh thần hệ thống mẫu tham khảo: token hóa màu, typography, spacing, radius, elevation, component states.
 
 ### Phase 02 — Supabase foundation
-- [ ] Tạo Supabase project & môi trường dev/staging.
-- [ ] Cấu hình Auth (Email/Password, Magic Link, chuẩn bị provider slot cho Entra ID).
-- [ ] Tạo schema và migration strategy.
-- [ ] Tạo bảng `profiles`, `departments`, `positions`, `employees`.
-- [ ] Tạo bảng `manager_assignments` & mối quan hệ quản lý trực tiếp.
-- [ ] Tạo role/permission model (`roles`, `permissions`, `user_roles`).
-- [ ] Tạo RLS policies cho dữ liệu nhân sự & đơn từ.
-- [ ] Tạo hệ thống `audit_logs`.
-- [ ] Viết seed data cho môi trường phát triển.
+- [x] Tạo Supabase project & môi trường dev/staging.
+- [x] Cấu hình Auth (Email/Password, Magic Link, chuẩn bị provider slot cho Entra ID).
+- [x] Tạo schema và migration strategy.
+- [x] Tạo bảng `profiles`, `departments`, `positions`, `employees`.
+- [x] Tạo bảng `manager_assignments` & mối quan hệ quản lý trực tiếp.
+- [x] Tạo role/permission model (`roles`, `permissions`, `user_roles`).
+- [x] Tạo RLS policies cho dữ liệu nhân sự & đơn từ.
+- [x] Tạo hệ thống `audit_logs`.
+- [x] Viết seed data cho môi trường phát triển.
 
 ### Phase 03 — Employee & organization
 - [ ] Màn hình CRUD quản lý nhân viên.

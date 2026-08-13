@@ -8,7 +8,7 @@ describe('AppShell', () => {
   it('renders sidebar navigation items', () => {
     render(<AppShell>content</AppShell>)
     expect(screen.getByText('Dashboard')).toBeInTheDocument()
-    expect(screen.getByText('Leave')).toBeInTheDocument()
+    expect(screen.getByText('Quản lý Phép năm')).toBeInTheDocument()
     expect(screen.getByText('Gate Pass')).toBeInTheDocument()
     expect(screen.getByText('Attendance')).toBeInTheDocument()
     expect(screen.getByText('Nhân sự & Tổ chức')).toBeInTheDocument()

@@ -23,7 +23,11 @@ describe('AppShell', () => {
   })
 
   it('renders children in the content area', () => {
-    render(<AppShell><p>dashboard content</p></AppShell>)
+    render(
+      <AppShell>
+        <p>dashboard content</p>
+      </AppShell>,
+    )
     expect(screen.getByText('dashboard content')).toBeInTheDocument()
   })
 })

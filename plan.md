@@ -404,12 +404,12 @@ OutlookIntegration
 - [x] Viết seed data cho môi trường phát triển.
 
 ### Phase 03 — Employee & organization
-- [ ] Màn hình CRUD quản lý nhân viên.
-- [ ] Các trường nhân viên bắt buộc: Employee Code, Full Name, Department, Position, Join Date, Email.
-- [ ] Mapping nhân viên → quản lý trực tiếp (`manager_id`).
-- [ ] Mapping phòng ban → Trưởng phòng (Department Head).
-- [ ] Giao diện xem sơ đồ tổ chức (Org Chart View).
-- [ ] Quản lý trạng thái nhân viên (Active / Inactive).
+- [x] Màn hình CRUD quản lý nhân viên.
+- [x] Các trường nhân viên bắt buộc: Employee Code, Full Name, Department, Position, Join Date, Email.
+- [x] Mapping nhân viên → quản lý trực tiếp (`manager_id`).
+- [x] Mapping phòng ban → Trưởng phòng (Department Head).
+- [x] Giao diện xem sơ đồ tổ chức (Org Chart View).
+- [x] Quản lý trạng thái nhân viên (Active / Inactive).
 
 ### Phase 04 — Leave & annual leave
 - [ ] Danh mục loại nghỉ (Nghỉ phép năm, Kết hôn, Nghỉ không lương, Nghỉ ốm, Tang chế, Khác).

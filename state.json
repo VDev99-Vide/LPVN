@@ -2,20 +2,20 @@
   "project": "LPVN-HR-Workflow-SaaS",
   "schema_version": 1,
   "status": "PLANNING",
-  "current_phase": "phase-02",
-  "current_task": "phase-03-employee-organization",
+  "current_phase": "phase-03",
+  "current_task": "phase-04-leave-annual-leave",
   "agent_engine": "Antigravity AI Engine (Google DeepMind)",
   "last_session": {
     "status": "completed",
-    "summary": "Completed Phase 02 Supabase Foundation: setup Supabase client & types, created SQL migrations (schema, RBAC, RLS policies, audit_logs, seed_data), implemented AuthContext provider with useAuth hook, and created LoginPage UI.",
-    "timestamp": "2026-08-13T14:02:40+00:00"
+    "summary": "Completed Phase 03 Employee & Organization: Service layer, EmployeeTable, EmployeeFormDrawer modal, OrgChartView, EmployeesPage navigation integration, and spec documentation.",
+    "timestamp": "2026-08-13T14:36:11+00:00"
   },
   "progress": {
     "phase-00": { "status": "DONE", "percent": 100 },
     "phase-01": { "status": "DONE", "percent": 100 },
     "phase-02": { "status": "DONE", "percent": 100 },
-    "phase-03": { "status": "IN_PROGRESS", "percent": 0 },
-    "phase-04": { "status": "LOCKED", "percent": 0 },
+    "phase-03": { "status": "DONE", "percent": 100 },
+    "phase-04": { "status": "IN_PROGRESS", "percent": 0 },
     "phase-05": { "status": "LOCKED", "percent": 0 },
     "phase-06": { "status": "LOCKED", "percent": 0 },
     "phase-07": { "status": "LOCKED", "percent": 0 },
@@ -113,6 +113,11 @@
       "id": "ADR-010",
       "decision": "Phase-02 Supabase Foundation: Schema migrations, RBAC model, RLS policies, audit_logs table, LPVN seed data, and React AuthProvider/useAuth hook/LoginPage UI.",
       "status": "accepted"
+    },
+    {
+      "id": "ADR-011",
+      "decision": "Phase-03 Employee & Organization: Service layer (employee.service.ts), EmployeeTable, EmployeeFormDrawer modal, interactive OrgChartView, and EmployeesPage navigation integration.",
+      "status": "accepted"
     }
   ],
   "files_created": [
@@ -146,7 +151,13 @@
     "src/contexts/AuthContext.tsx",
     "src/hooks/useAuth.ts",
     "src/pages/LoginPage.tsx",
-    "docs/superpowers/specs/2026-08-13-phase-02-supabase-foundation.md"
+    "docs/superpowers/specs/2026-08-13-phase-02-supabase-foundation.md",
+    "src/services/employee.service.ts",
+    "src/components/business/EmployeeTable.tsx",
+    "src/components/business/EmployeeFormDrawer.tsx",
+    "src/components/business/OrgChartView.tsx",
+    "src/pages/EmployeesPage.tsx",
+    "docs/superpowers/specs/2026-08-13-phase-03-employee-organization.md"
   ],
   "validation": {
     "documents_created": true,
@@ -154,14 +165,12 @@
     "code_validation": "passing",
     "phase_01_quality_gate": "passing",
     "phase_02_quality_gate": "passing",
+    "phase_03_quality_gate": "passing",
     "outlook_architecture_added": true,
     "antigravity_skills_installed": true
   },
   "blockers": [],
   "next_actions": [
-    "Triển khai màn hình CRUD quản lý nhân viên (Phase 03).",
-    "Cấu hình mapping nhân viên -> quản lý trực tiếp (manager_id).",
-    "Cấu hình mapping phòng ban -> Trưởng phòng (Department Head).",
-    "Phát triển giao diện sơ đồ tổ chức (Org Chart View)."
+    "Triển khai Phase 04 — Leave & annual leave (Danh mục loại nghỉ, Entitlement, leave_balances)."
   ]
 }

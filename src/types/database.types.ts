@@ -237,6 +237,106 @@ export interface Database {
           created_at?: string
         }
       }
+      leave_types: {
+        Row: {
+          id: string
+          code: string
+          name: string
+          is_paid: boolean
+          requires_attachment: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          code: string
+          name: string
+          is_paid?: boolean
+          requires_attachment?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          code?: string
+          name?: string
+          is_paid?: boolean
+          requires_attachment?: boolean
+          created_at?: string
+        }
+      }
+      leave_entitlements: {
+        Row: {
+          id: string
+          employee_id: string
+          year: number
+          base_days: number
+          seniority_days: number
+          bonus_days: number
+          total_days: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          employee_id: string
+          year?: number
+          base_days?: number
+          seniority_days?: number
+          bonus_days?: number
+          total_days?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          employee_id?: string
+          year?: number
+          base_days?: number
+          seniority_days?: number
+          bonus_days?: number
+          total_days?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      leave_balances: {
+        Row: {
+          id: string
+          employee_id: string
+          year: number
+          leave_type_id: string
+          total_days: number
+          used_days: number
+          pending_days: number
+          remaining_days: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          employee_id: string
+          year?: number
+          leave_type_id: string
+          total_days?: number
+          used_days?: number
+          pending_days?: number
+          remaining_days?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          employee_id?: string
+          year?: number
+          leave_type_id?: string
+          total_days?: number
+          used_days?: number
+          pending_days?: number
+          remaining_days?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
   }
 }
+

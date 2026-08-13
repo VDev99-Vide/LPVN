@@ -16,9 +16,10 @@ LPVN HR Workflow SaaS — internal HR workflow system: React + TypeScript + Vite
 ## Quickstart
 
 ```bash
-npm install                 # install dependencies
-npm run dev                 # start dev server
-npm run typecheck|lint|test|build   # quality gates
+scripts/bootstrap-project.sh   # verify environment
+npm install
+npm run dev
+npm run typecheck && npm run lint && npm test && npm run build
 ```
 
 ## Status

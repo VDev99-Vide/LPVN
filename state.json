@@ -70,7 +70,7 @@
     },
     {
       "id": "ADR-004",
-      "decision": "Phase-00 toolchain: Vite 7 + React 19 + TS strict + ESLint 9 flat + Prettier + Vitest; npm as package manager; GitHub Actions for CI.",
+      "decision": "Phase-00 toolchain: Vite 8 + React 19 + TS strict + oxlint + Prettier + Vitest; npm as package manager; GitHub Actions for CI.",
       "status": "accepted"
     },
     {
@@ -97,7 +97,7 @@
   "validation": {
     "documents_created": true,
     "source_forms_reviewed": true,
-    "code_validation": "not-applicable-yet"
+    "code_validation": "passing"
   },
   "blockers": [],
   "next_actions": [

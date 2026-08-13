@@ -3,6 +3,7 @@ import { AuthProvider } from './contexts/AuthContext'
 import { AppShell } from './components/layout/AppShell'
 import { DashboardPage } from './pages/DashboardPage'
 import { EmployeesPage } from './pages/EmployeesPage'
+import { LeaveManagementPage } from './pages/LeaveManagementPage'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -20,7 +21,13 @@ function App() {
   return (
     <AuthProvider>
       <AppShell>
-        {currentPath === '/employees' ? <EmployeesPage /> : <DashboardPage />}
+        {currentPath === '/employees' ? (
+          <EmployeesPage />
+        ) : currentPath === '/leave' ? (
+          <LeaveManagementPage />
+        ) : (
+          <DashboardPage />
+        )}
       </AppShell>
     </AuthProvider>
   )

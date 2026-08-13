@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils'
 
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/', icon: LayoutDashboard },
-  { label: 'Leave', href: '/leave', icon: CalendarDays },
+  { label: 'Quản lý Phép năm', href: '/leave', icon: CalendarDays },
   { label: 'Gate Pass', href: '/gate-pass', icon: DoorOpen },
   { label: 'Attendance', href: '/attendance', icon: ClipboardCheck },
   { label: 'Nhân sự & Tổ chức', href: '/employees', icon: Users },

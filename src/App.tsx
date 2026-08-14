@@ -17,6 +17,7 @@ import { OutlookActionPage } from './pages/OutlookActionPage'
 import { EntraSettingsPage } from './pages/EntraSettingsPage'
 import { OutlookAdvancedConfigPage } from './pages/OutlookAdvancedConfigPage'
 import { DocumentPipelinePage } from './pages/DocumentPipelinePage'
+import { SecurityAuditPage } from './pages/SecurityAuditPage'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -60,6 +61,8 @@ function App() {
           <NotificationsPage />
         ) : currentPath === '/quick-approve' ? (
           <OutlookActionPage />
+        ) : currentPath === '/settings/security' ? (
+          <SecurityAuditPage />
         ) : currentPath === '/settings/entra-id' ? (
           <EntraSettingsPage />
         ) : currentPath === '/settings/outlook-advanced' ? (

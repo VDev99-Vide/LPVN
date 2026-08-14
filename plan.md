@@ -512,15 +512,15 @@ OutlookIntegration
 - [x] Gửi thông báo hoàn tất đính kèm link tải PDF tới Nhân viên.
 
 ### Phase 12 — Security hardening
-- [ ] RLS test matrix cho tất cả các bảng dữ liệu.
-- [ ] Kiểm thử phân quyền Role/Permission (RBAC & ABAC).
-- [ ] Kiểm thử chống IDOR (Insecure Direct Object References).
-- [ ] Kiểm thử ranh giới truy cập giữa các phòng ban.
-- [ ] Kiểm thử bảo mật truy cập file chữ ký của Manager.
-- [ ] Kiểm tra chống sửa đổi Audit Logs (Audit tamper-resistance review).
-- [ ] Server-side input validation & schema sanitization.
-- [ ] Rate limiting cho các privileged approval endpoints.
-- [ ] Secret scanning & kiểm tra bảo mật dependency.
+- [x] RLS test matrix cho tất cả các bảng dữ liệu.
+- [x] Kiểm thử phân quyền Role/Permission (RBAC & ABAC).
+- [x] Kiểm thử chống IDOR (Insecure Direct Object References).
+- [x] Kiểm thử ranh giới truy cập giữa các phòng ban.
+- [x] Kiểm thử bảo mật truy cập file chữ ký của Manager.
+- [x] Kiểm tra chống sửa đổi Audit Logs (Audit tamper-resistance review).
+- [x] Server-side input validation & schema sanitization.
+- [x] Rate limiting cho các privileged approval endpoints.
+- [x] Secret scanning & kiểm tra bảo mật dependency.
 
 ### Phase 13 — Testing & Quality Assurance
 - [ ] Unit tests cho Business Logic & State Machines.

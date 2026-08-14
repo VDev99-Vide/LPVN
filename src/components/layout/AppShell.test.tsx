@@ -21,6 +21,7 @@ describe('AppShell', () => {
     expect(screen.getByText('Quản lý Phép năm')).toBeInTheDocument()
     expect(screen.getByText('Biểu Mẫu ISO')).toBeInTheDocument()
     expect(screen.getByText('Pipeline Tự Động')).toBeInTheDocument()
+    expect(screen.getByText('An Ninh & RLS')).toBeInTheDocument()
   })
 
   it('renders topbar with theme toggle and user', () => {

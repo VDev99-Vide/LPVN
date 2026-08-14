@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
-import { CheckCircle2, Play, TestTube2, Loader2, Sparkles } from 'lucide-react'
+import { CheckCircle2, Play, TestTube2, Loader2, Sparkles, CheckCheck, Bug, Cpu } from 'lucide-react'
 import { qaRunnerService, type QASuiteItem, type QARunSummary } from '@/services/qa-runner.service'
 
 export function QASuiteDashboard() {
@@ -21,132 +20,155 @@ export function QASuiteDashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Overview Cards */}
+      {/* Overview Glass Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="bg-card rounded-2xl p-5 shadow-xs border border-border border-l-6 border-l-[#27AE60] space-y-1">
-          <div className="text-3xl font-extrabold text-[#27AE60]">
+        <div className="glass-card p-5 space-y-1">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-white/60 font-medium">Tỷ Lệ Đạt (Pass Rate)</span>
+            <div className="p-1.5 rounded-xl bg-emerald-500/20 text-emerald-300">
+              <CheckCheck className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="text-3xl font-extrabold text-emerald-400">
             100%
           </div>
-          <div className="text-xs font-semibold text-muted-foreground">
-            Tỷ Lệ Đạt (Quality Gate Pass Rate)
+          <div className="text-[11px] font-semibold text-emerald-300">
+            Quality Gate Approved
           </div>
         </div>
 
-        <div className="bg-card rounded-2xl p-5 shadow-xs border border-border border-l-6 border-l-[#3CC4BD] space-y-1">
-          <div className="text-3xl font-extrabold text-[#1E8C86] dark:text-[#3CC4BD]">
+        <div className="glass-card p-5 space-y-1">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-white/60 font-medium">Bộ Kiểm Thử E2E</span>
+            <div className="p-1.5 rounded-xl bg-teal-500/20 text-teal-300">
+              <Cpu className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="text-3xl font-extrabold text-white">
             {suites.length} Suites
           </div>
-          <div className="text-xs font-semibold text-muted-foreground">
-            Bộ Kiểm Thử Tự Động (E2E &amp; QA)
+          <div className="text-[11px] font-semibold text-teal-300">
+            Tự Động Hóa 100%
           </div>
         </div>
 
-        <div className="bg-card rounded-2xl p-5 shadow-xs border border-border border-l-6 border-l-[#FFD23F] space-y-1">
-          <div className="text-3xl font-extrabold text-[#8A6300] dark:text-amber-300">
+        <div className="glass-card p-5 space-y-1">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-white/60 font-medium">Kịch Bản Kiểm Thử</span>
+            <div className="p-1.5 rounded-xl bg-amber-500/20 text-amber-300">
+              <TestTube2 className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="text-3xl font-extrabold text-amber-400">
             {totalTests} Tests
           </div>
-          <div className="text-xs font-semibold text-muted-foreground">
-            Kịch Bản Vận Hành Nhà Máy
+          <div className="text-[11px] font-semibold text-amber-300">
+            Phòng Supply Chain LPVN
           </div>
         </div>
 
-        <div className="bg-card rounded-2xl p-5 shadow-xs border border-border border-l-6 border-l-[#5DADE2] space-y-1">
-          <div className="text-3xl font-extrabold text-[#5DADE2]">
+        <div className="glass-card p-5 space-y-1">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-white/60 font-medium">Lỗi Tồn Đọng</span>
+            <div className="p-1.5 rounded-xl bg-sky-500/20 text-sky-300">
+              <Bug className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="text-3xl font-extrabold text-sky-400">
             0 Bugs
           </div>
-          <div className="text-xs font-semibold text-muted-foreground">
-            Lỗi Nghiệp Vụ Chưa Xử Lý
+          <div className="text-[11px] font-semibold text-sky-300">
+            Sẵn Sàng Triển Khai
           </div>
         </div>
       </div>
 
       {/* Interactive Trigger Banner */}
-      <Card className="rounded-2xl border shadow-xs bg-[#E8F6F5]/50 dark:bg-muted/30">
-        <CardContent className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-[#2BA8A2] text-white shadow-xs">
-              <TestTube2 className="h-6 w-6" />
-            </div>
-            <div>
-              <h3 className="text-sm font-bold text-foreground">
-                Thực Thi Bộ Kiểm Thử Chất Lượng Tự Động (Live QA Runner)
-              </h3>
-              <p className="text-xs text-muted-foreground">
-                {summary
-                  ? `Lần chạy gần nhất lúc ${summary.timestamp} · Hoàn thành trong ${summary.totalDurationMs}ms (${summary.passedSuites}/${summary.totalSuites} Suites PASS)`
-                  : 'Kiểm tra toàn bộ luồng Happy Path, Rejection recovery, Outlook fallback và ranh giới phòng ban.'}
-              </p>
-            </div>
+      <div className="glass-card p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-2xl bg-[#0066fe]/20 text-sky-300 border border-sky-400/30">
+            <TestTube2 className="h-6 w-6" />
           </div>
+          <div>
+            <h3 className="text-sm font-bold text-white">
+              Thực Thi Bộ Kiểm Thử Chất Lượng Tự Động (Live QA Runner)
+            </h3>
+            <p className="text-xs text-white/60">
+              {summary
+                ? `Lần chạy gần nhất lúc ${summary.timestamp} · Hoàn thành trong ${summary.totalDurationMs}ms (${summary.passedSuites}/${summary.totalSuites} Suites PASS)`
+                : 'Kiểm tra toàn bộ luồng Happy Path, Rejection recovery, Outlook fallback và ranh giới phòng ban.'}
+            </p>
+          </div>
+        </div>
 
-          <Button
-            onClick={handleRunAll}
-            disabled={isRunning}
-            className="text-xs h-10 px-5 font-bold rounded-full btn-gold gap-2 shrink-0"
-          >
-            {isRunning ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span>Đang Kiểm Thử...</span>
-              </>
-            ) : (
-              <>
-                <Play className="h-4 w-4" />
-                <span>Chạy Toàn Bộ Kiểm Thử</span>
-              </>
-            )}
-          </Button>
-        </CardContent>
-      </Card>
+        <Button
+          onClick={handleRunAll}
+          disabled={isRunning}
+          className="text-xs h-10 px-5 font-bold rounded-2xl bg-[#0066fe] hover:bg-[#0056d6] text-white gap-2 shrink-0 shadow-[0_4px_16px_rgba(0,102,254,0.4)] cursor-pointer"
+        >
+          {isRunning ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              <span>Đang Kiểm Thử...</span>
+            </>
+          ) : (
+            <>
+              <Play className="h-4 w-4" />
+              <span>Chạy Toàn Bộ Kiểm Thử</span>
+            </>
+          )}
+        </Button>
+      </div>
 
       {/* Test Suites Table */}
-      <Card className="rounded-2xl shadow-xs border">
-        <CardHeader className="pb-3 border-b">
+      <div className="glass-card">
+        <div className="card-header-glass pb-3 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-[#E8F6F5] text-[#1E8C86] dark:bg-teal-950/60 dark:text-teal-300">
+            <div className="p-1.5 rounded-xl bg-teal-500/20 text-teal-300">
               <Sparkles className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle className="text-base font-bold">
+              <div className="card-title-glass text-base font-bold">
                 Danh Sách Các Kịch Bản Kiểm Thử (QA Test Matrix)
-              </CardTitle>
-              <CardDescription className="text-xs">
+              </div>
+              <div className="card-subtitle-glass text-xs">
                 Toàn bộ các luồng kiểm thử hồi quy và kiểm thử tích hợp của hệ thống
-              </CardDescription>
+              </div>
             </div>
           </div>
-        </CardHeader>
-        <CardContent className="pt-2">
+        </div>
+
+        <div className="pt-2 overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="border-b-2 border-dashed">
-                <TableHead className="text-xs uppercase font-bold">Mã Suite</TableHead>
-                <TableHead className="text-xs uppercase font-bold">Tên Kịch Bản</TableHead>
-                <TableHead className="text-xs uppercase font-bold">Phân Loại</TableHead>
-                <TableHead className="text-xs uppercase font-bold text-center">Số Tests</TableHead>
-                <TableHead className="text-xs uppercase font-bold">Mô Tả Luồng Nghiệp Vụ</TableHead>
-                <TableHead className="text-xs uppercase font-bold text-right">Kết Quả</TableHead>
+              <TableRow className="border-b border-white/10">
+                <TableHead className="text-xs uppercase font-bold text-white/70">Mã Suite</TableHead>
+                <TableHead className="text-xs uppercase font-bold text-white/70">Tên Kịch Bản</TableHead>
+                <TableHead className="text-xs uppercase font-bold text-white/70">Phân Loại</TableHead>
+                <TableHead className="text-xs uppercase font-bold text-center text-white/70">Số Tests</TableHead>
+                <TableHead className="text-xs uppercase font-bold text-white/70">Mô Tả Luồng Nghiệp Vụ</TableHead>
+                <TableHead className="text-xs uppercase font-bold text-right text-white/70">Kết Quả</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {suites.map((s) => (
-                <TableRow key={s.id} className="hover:bg-[#E8F6F5]/40 transition-colors">
-                  <TableCell className="font-mono text-xs font-bold text-muted-foreground">{s.id}</TableCell>
-                  <TableCell className="text-xs font-bold text-foreground flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                <TableRow key={s.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                  <TableCell className="font-mono text-xs font-bold text-white/50">{s.id}</TableCell>
+                  <TableCell className="text-xs font-bold text-white flex items-center gap-2">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                     <span>{s.name}</span>
                   </TableCell>
                   <TableCell className="text-xs">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-muted">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-white border border-white/15">
                       {s.category}
                     </span>
                   </TableCell>
-                  <TableCell className="text-center font-mono text-xs font-bold">
+                  <TableCell className="text-center font-mono text-xs font-bold text-white">
                     {s.testsCount} tests
                   </TableCell>
-                  <TableCell className="text-xs text-muted-foreground max-w-[320px]">{s.description}</TableCell>
+                  <TableCell className="text-xs text-white/60 max-w-[320px]">{s.description}</TableCell>
                   <TableCell className="text-right">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                       ✓ PASS ({s.durationMs}ms)
                     </span>
                   </TableCell>
@@ -154,8 +176,8 @@ export function QASuiteDashboard() {
               ))}
             </TableBody>
           </Table>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

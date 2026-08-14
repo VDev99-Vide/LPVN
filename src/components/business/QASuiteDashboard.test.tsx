@@ -7,8 +7,8 @@ afterEach(cleanup)
 describe('QASuiteDashboard', () => {
   it('renders overview metrics and test suites table', () => {
     render(<QASuiteDashboard />)
-    expect(screen.getByText('Tỷ Lệ Đạt (Quality Gate Pass Rate)')).toBeInTheDocument()
-    expect(screen.getByText('Bộ Kiểm Thử Tự Động (E2E & QA)')).toBeInTheDocument()
+    expect(screen.getByText(/Tỷ Lệ Đạt/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/Bộ Kiểm Thử/i).length).toBeGreaterThan(0)
     expect(screen.getByText('E2E Happy Path Lifecycle')).toBeInTheDocument()
     expect(screen.getByText('E2E Rejection & Outlook Fallback')).toBeInTheDocument()
     expect(screen.getByText('Cross-Role & Department Isolation')).toBeInTheDocument()

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { Play, ShieldCheck, Loader2 } from 'lucide-react'
 import { securityHardeningService } from '@/services/security-hardening.service'
 
@@ -68,42 +67,40 @@ export function SecurityScanTrigger() {
   }
 
   return (
-    <Card className="rounded-2xl border shadow-xs bg-[#E8F6F5]/50 dark:bg-muted/30">
-      <CardContent className="p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-[#2BA8A2] text-white shadow-xs">
-            <ShieldCheck className="h-6 w-6" />
-          </div>
-          <div>
-            <h3 className="text-sm font-bold text-foreground">
-              Bộ Quét An Ninh Toàn Diện Hệ Thống (Live Security Posture Scan)
-            </h3>
-            <p className="text-xs text-muted-foreground">
-              {lastScanResult
-                ? `Lần quét gần nhất lúc ${lastScanResult.timestamp} · Hoàn thành trong ${lastScanResult.latencyMs}ms (${lastScanResult.testsPassed}/${lastScanResult.totalTests} bài kiểm tra PASS)`
-                : 'Chạy kiểm định bảo mật trực tiếp trên các chính sách RLS, IDOR, ranh giới Supply Chain và mã băm nhật ký.'}
-            </p>
-          </div>
+    <div className="glass-card p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="flex items-center gap-3">
+        <div className="p-2.5 rounded-2xl bg-[#0066fe]/20 text-sky-300 border border-sky-400/30">
+          <ShieldCheck className="h-6 w-6" />
         </div>
+        <div>
+          <h3 className="text-sm font-bold text-white">
+            Bộ Quét An Ninh Toàn Diện Hệ Thống (Live Security Posture Scan)
+          </h3>
+          <p className="text-xs text-white/60">
+            {lastScanResult
+              ? `Lần quét gần nhất lúc ${lastScanResult.timestamp} · Hoàn thành trong ${lastScanResult.latencyMs}ms (${lastScanResult.testsPassed}/${lastScanResult.totalTests} bài kiểm tra PASS)`
+              : 'Chạy kiểm định bảo mật trực tiếp trên các chính sách RLS, IDOR, ranh giới Supply Chain và mã băm nhật ký.'}
+          </p>
+        </div>
+      </div>
 
-        <Button
-          onClick={handleRunScan}
-          disabled={isScanning}
-          className="text-xs h-10 px-5 font-bold rounded-full btn-gold gap-2 shrink-0"
-        >
-          {isScanning ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              <span>Đang Quét An Ninh...</span>
-            </>
-          ) : (
-            <>
-              <Play className="h-4 w-4" />
-              <span>Chạy Quét An Ninh Ngay</span>
-            </>
-          )}
-        </Button>
-      </CardContent>
-    </Card>
+      <Button
+        onClick={handleRunScan}
+        disabled={isScanning}
+        className="text-xs h-10 px-5 font-bold rounded-2xl bg-[#0066fe] hover:bg-[#0056d6] text-white gap-2 shrink-0 shadow-[0_4px_16px_rgba(0,102,254,0.4)] cursor-pointer"
+      >
+        {isScanning ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            <span>Đang Quét An Ninh...</span>
+          </>
+        ) : (
+          <>
+            <Play className="h-4 w-4" />
+            <span>Chạy Quét An Ninh Ngay</span>
+          </>
+        )}
+      </Button>
+    </div>
   )
 }

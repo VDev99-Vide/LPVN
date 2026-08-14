@@ -58,9 +58,13 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   const visibleDockItems = ALL_DOCK_ITEMS.filter((item) => item.roles.includes(currentRole))
 
+  // Instant 0ms Zero-Flicker SPA Navigation
   const navigateTo = (href: string) => {
     if (typeof window !== 'undefined') {
-      window.location.href = href
+      if (window.location.pathname !== href) {
+        window.history.pushState({}, '', href)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      }
     }
   }
 
@@ -125,7 +129,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         
         {/* Left: Bright Transparent Leggett Logo & LPVN Brand */}
         <div className="flex items-center gap-3">
-          <a href="/" className="h-9 flex items-center gap-2 group">
+          <button
+            onClick={() => navigateTo('/')}
+            className="h-9 flex items-center gap-2 group bg-transparent border-0 cursor-pointer p-0"
+          >
             <img
               src="/leggett-transparent.png"
               alt="Leggett & Platt Logo"
@@ -134,7 +141,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 e.currentTarget.src = '/images/leggett-transparent.png'
               }}
             />
-          </a>
+          </button>
           <div className="flex flex-col border-l border-white/20 pl-3">
             <div className="flex items-center gap-1.5">
               <span className="text-xs font-bold text-white tracking-wide">LPVN</span>
@@ -192,9 +199,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
 
           {/* User Profile Glass Avatar */}
-          <a
-            href="/signatures"
-            className="flex items-center gap-2 pl-2 pr-2.5 py-1 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-white/30 transition-all cursor-pointer"
+          <button
+            onClick={() => navigateTo('/signatures')}
+            className="flex items-center gap-2 pl-2 pr-2.5 py-1 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-white/30 transition-all cursor-pointer text-left"
             title={`${activeUser.name} · ${roleTitleMap[currentRole]}`}
           >
             <div className="h-7 w-7 rounded-full bg-gradient-to-tr from-amber-400 to-amber-200 text-neutral-900 font-extrabold flex items-center justify-center text-[11px] shadow-sm">
@@ -204,29 +211,37 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span className="text-xs font-bold text-white truncate leading-tight">{activeUser.name}</span>
               <span className="text-[9px] text-white/60 truncate leading-tight">{roleTitleMap[currentRole]}</span>
             </div>
-          </a>
+          </button>
 
           {/* Quick Logout to Demo Gateway */}
-          <a
-            href="/login"
-            className="p-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-red-400/40 text-white/60 hover:text-red-400 transition-all"
+          <button
+            onClick={() => navigateTo('/login')}
+            className="p-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-red-400/40 text-white/60 hover:text-red-400 transition-all cursor-pointer"
             title="Đăng xuất / Chọn tài khoản Demo"
           >
             <LogOut className="w-4 h-4" />
-          </a>
+          </button>
         </div>
       </header>
 
       {/* Spatial Workspace Shell */}
       <div className="spatial-workspace">
         
-        {/* Floating Left App Dock (Icons Only with Animated Hover Tooltips) */}
+        {/* Floating Left App Dock (Icons Only with Animated Hover Tooltip Appearing on LEFT side) */}
         <aside className="floating-left-dock" aria-label="Global Vision Pro Navigation Dock">
           {visibleDockItems.map((item) => {
             const Icon = item.icon
             const isActive = currentPath === item.href
             return (
               <div key={item.href} className="relative group flex items-center justify-center">
+                
+                {/* Animated VisionOS Hover Tooltip appearing on the LEFT side (Never blocks main container) */}
+                <div className="absolute right-full mr-3 px-3 py-1.5 rounded-2xl bg-[#141722]/95 backdrop-blur-2xl border border-white/20 text-white text-xs font-semibold whitespace-nowrap shadow-[0_10px_30px_rgba(0,0,0,0.7)] opacity-0 translate-x-2 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ease-out z-50">
+                  {item.label}
+                  {/* Subtle right arrow pointer */}
+                  <span className="absolute top-1/2 -right-1 -translate-y-1/2 w-2 h-2 bg-[#141722] border-t border-r border-white/20 rotate-45"></span>
+                </div>
+
                 <button
                   onClick={() => navigateTo(item.href)}
                   className={cn(
@@ -243,10 +258,6 @@ export function AppShell({ children }: { children: ReactNode }) {
                   )}
                 </button>
 
-                {/* Animated VisionOS Hover Tooltip */}
-                <div className="absolute left-14 px-3 py-1.5 rounded-2xl bg-black/80 backdrop-blur-2xl border border-white/20 text-white text-xs font-semibold whitespace-nowrap shadow-2xl opacity-0 -translate-x-2 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ease-out z-50">
-                  {item.label}
-                </div>
               </div>
             )
           })}
@@ -263,6 +274,12 @@ export function AppShell({ children }: { children: ReactNode }) {
               const isActive = tab.match(currentPath)
               return (
                 <div key={tab.href} className="relative group flex items-center justify-center">
+                  
+                  {/* Animated VisionOS Hover Tooltip Above */}
+                  <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-xl bg-[#141722]/95 backdrop-blur-xl border border-white/20 text-white text-[11px] font-medium whitespace-nowrap shadow-xl opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out z-50">
+                    {tab.label}
+                  </div>
+
                   <button
                     onClick={() => navigateTo(tab.href)}
                     className={cn(
@@ -274,10 +291,6 @@ export function AppShell({ children }: { children: ReactNode }) {
                     <Icon className="w-4 h-4" />
                   </button>
 
-                  {/* Animated VisionOS Hover Tooltip Above */}
-                  <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-xl bg-black/85 backdrop-blur-xl border border-white/20 text-white text-[11px] font-medium whitespace-nowrap shadow-xl opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out z-50">
-                    {tab.label}
-                  </div>
                 </div>
               )
             })}

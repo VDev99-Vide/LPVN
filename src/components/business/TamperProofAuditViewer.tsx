@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
 import { History, CheckCircle2, RefreshCw } from 'lucide-react'
@@ -73,20 +72,20 @@ export function TamperProofAuditViewer() {
   }
 
   return (
-    <Card className="rounded-2xl shadow-xs border">
-      <CardHeader className="pb-3 border-b">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="glass-card">
+      <div className="card-header-glass pb-3 border-b border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-[#E8F6F5] text-[#1E8C86] dark:bg-teal-950/60 dark:text-teal-300">
+            <div className="p-1.5 rounded-xl bg-teal-500/20 text-teal-300">
               <History className="h-4 w-4" />
             </div>
             <div>
-              <CardTitle className="text-base font-bold">
+              <div className="card-title-glass text-base font-bold">
                 Nhật Ký Kiểm Toán Chống Giả Mạo (Tamper-Resistant Audit Trail)
-              </CardTitle>
-              <CardDescription className="text-xs">
+              </div>
+              <div className="card-subtitle-glass text-xs">
                 Toàn bộ nhật ký được ký bảo mật HMAC-SHA256 bất biến không thể sửa đổi
-              </CardDescription>
+              </div>
             </div>
           </div>
 
@@ -94,46 +93,46 @@ export function TamperProofAuditViewer() {
             onClick={handleVerifyAll}
             variant="outline"
             size="sm"
-            className="text-xs h-8 rounded-lg gap-1.5 border-[#3CC4BD]/40 text-[#1E8C86] dark:text-[#3CC4BD]"
+            className="text-xs h-8 rounded-xl gap-1.5 bg-white/10 hover:bg-white/20 text-white border-white/20 cursor-pointer"
           >
             <RefreshCw className="h-3.5 w-3.5" />
             <span>Thẩm Tra Mã Băm HMAC</span>
           </Button>
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="pt-2">
+      <div className="pt-2 overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow className="border-b-2 border-dashed">
-              <TableHead className="text-xs uppercase font-bold">Mã Log</TableHead>
-              <TableHead className="text-xs uppercase font-bold">Người Thực Hiện</TableHead>
-              <TableHead className="text-xs uppercase font-bold">Hành Động</TableHead>
-              <TableHead className="text-xs uppercase font-bold">Đối Tượng</TableHead>
-              <TableHead className="text-xs uppercase font-bold">Chi Tiết</TableHead>
-              <TableHead className="text-xs uppercase font-bold text-right">Chữ Ký Toàn Vẹn</TableHead>
+            <TableRow className="border-b border-white/10">
+              <TableHead className="text-xs uppercase font-bold text-white/70">Mã Log</TableHead>
+              <TableHead className="text-xs uppercase font-bold text-white/70">Người Thực Hiện</TableHead>
+              <TableHead className="text-xs uppercase font-bold text-white/70">Hành Động</TableHead>
+              <TableHead className="text-xs uppercase font-bold text-white/70">Đối Tượng</TableHead>
+              <TableHead className="text-xs uppercase font-bold text-white/70">Chi Tiết</TableHead>
+              <TableHead className="text-xs uppercase font-bold text-right text-white/70">Chữ Ký Toàn Vẹn</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {logs.map((log) => (
-              <TableRow key={log.id} className="hover:bg-[#E8F6F5]/40 transition-colors">
-                <TableCell className="font-mono text-xs font-bold text-muted-foreground">{log.id}</TableCell>
-                <TableCell className="text-xs font-medium text-foreground">{log.actorName}</TableCell>
+              <TableRow key={log.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                <TableCell className="font-mono text-xs font-bold text-white/50">{log.id}</TableCell>
+                <TableCell className="text-xs font-medium text-white">{log.actorName}</TableCell>
                 <TableCell>
-                  <span className="font-mono text-[11px] font-bold px-2 py-0.5 rounded bg-muted">
+                  <span className="font-mono text-[11px] font-bold px-2 py-0.5 rounded-full bg-white/10 text-white border border-white/15">
                     {log.action}
                   </span>
                 </TableCell>
-                <TableCell className="font-mono text-xs font-semibold text-[#1E8C86]">{log.targetId}</TableCell>
-                <TableCell className="text-xs max-w-[260px] truncate text-muted-foreground">{log.details}</TableCell>
+                <TableCell className="font-mono text-xs font-semibold text-teal-300">{log.targetId}</TableCell>
+                <TableCell className="text-xs max-w-[260px] truncate text-white/60">{log.details}</TableCell>
                 <TableCell className="text-right">
                   {log.isValid ? (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                       <CheckCircle2 className="h-3 w-3" />
                       <span>HMAC-Verified</span>
                     </span>
                   ) : (
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-destructive/15 text-destructive">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-red-500/20 text-red-300 border border-red-400/30">
                       CORRUPTED
                     </span>
                   )}
@@ -142,7 +141,7 @@ export function TamperProofAuditViewer() {
             ))}
           </TableBody>
         </Table>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }

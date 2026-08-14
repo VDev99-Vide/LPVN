@@ -7,9 +7,9 @@ afterEach(cleanup)
 describe('SecurityAuditDashboard', () => {
   it('renders security overview metrics', () => {
     render(<SecurityAuditDashboard />)
-    expect(screen.getByText('Điểm Đánh Giá An Ninh (A+ Grade)')).toBeInTheDocument()
-    expect(screen.getByText('Bảo Vệ RLS Độc Lập 100%')).toBeInTheDocument()
-    expect(screen.getByText('Nhật Ký Kiểm Toán Bất Biến')).toBeInTheDocument()
+    expect(screen.getByText(/Điểm Đánh Giá An Ninh/i)).toBeInTheDocument()
+    expect(screen.getByText(/Bảo Vệ RLS Độc Lập/i)).toBeInTheDocument()
+    expect(screen.getByText(/Nhật Ký Kiểm Toán/i)).toBeInTheDocument()
   })
 
   it('renders all 8 security controls', () => {

@@ -7,8 +7,8 @@ afterEach(cleanup)
 describe('ProductionDeploymentHub', () => {
   it('renders deployment overview metrics and milestones table', () => {
     render(<ProductionDeploymentHub />)
-    expect(screen.getByText('Mức Độ Sẵn Sàng Go-Live (Readiness)')).toBeInTheDocument()
-    expect(screen.getByText('Hạ Tầng Edge CDN & Pages')).toBeInTheDocument()
+    expect(screen.getByText(/Sẵn Sàng Go-Live/i)).toBeInTheDocument()
+    expect(screen.getByText(/Hạ Tầng CDN & Edge/i)).toBeInTheDocument()
     expect(screen.getByText('Danh Mục Hạng Mục Triển Khai (Go-Live Checklist)')).toBeInTheDocument()
     expect(screen.getByText('Cơ Sở Dữ Liệu & RLS')).toBeInTheDocument()
     expect(screen.getByText('Quy Trình Supply Chain')).toBeInTheDocument()

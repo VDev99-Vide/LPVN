@@ -45,4 +45,33 @@ describe('Database Types Phase 04', () => {
     expect(mockEntitlement.total_days).toBe(13)
     expect(mockBalance.remaining_days).toBe(10)
   })
+
+  it('includes gate_passes table in Database interface', () => {
+    type GatePassRow = Database['public']['Tables']['gate_passes']['Row']
+    const mockGatePass: GatePassRow = {
+      id: 'gp-1',
+      document_no: 'LPVN-HR-F-0014',
+      employee_id: 'emp-1',
+      reason_type: 'BUSINESS',
+      reason_details: 'Gặp khách hàng tại VSIP 1',
+      pass_date: '2026-08-14',
+      from_time: '13:30',
+      to_time: '16:30',
+      accompanied_items: 'Laptop + Hồ sơ',
+      status: 'APPROVED',
+      approver_id: 'mgr-1',
+      approved_at: '2026-08-14T01:00:00Z',
+      manager_notes: 'Đã duyệt',
+      security_out_time: null,
+      security_in_time: null,
+      security_guard_id: null,
+      security_guard_name: null,
+      security_notes: null,
+      created_at: '2026-08-14T00:00:00Z',
+      updated_at: '2026-08-14T00:00:00Z',
+    }
+
+    expect(mockGatePass.document_no).toBe('LPVN-HR-F-0014')
+    expect(mockGatePass.status).toBe('APPROVED')
+  })
 })

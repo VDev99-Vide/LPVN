@@ -20,11 +20,19 @@ const NAV_ITEMS = [
 export function Sidebar() {
   return (
     <aside className="flex h-screen w-64 flex-col border-r border-border bg-card">
-      <div className="flex h-14 items-center gap-2 border-b border-border px-4">
-        <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
-          L
+      <div className="flex h-16 items-center gap-3 border-b border-border px-4">
+        <img
+          src="/images/leggett-logo.jpg"
+          alt="Leggett & Platt Logo"
+          className="h-8 w-auto max-w-[110px] object-contain rounded-sm bg-white p-0.5"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none'
+          }}
+        />
+        <div className="flex flex-col">
+          <span className="font-semibold text-sm leading-tight text-foreground">LPVN HR</span>
+          <span className="text-[10px] text-muted-foreground">Workflow SaaS</span>
         </div>
-        <span className="font-semibold">LPVN HR</span>
       </div>
       <nav className="flex-1 space-y-1 p-2">
         {NAV_ITEMS.map((item) => {

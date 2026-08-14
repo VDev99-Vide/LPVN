@@ -336,6 +336,74 @@ export interface Database {
           updated_at?: string
         }
       }
+      gate_passes: {
+        Row: {
+          id: string
+          document_no: string
+          employee_id: string
+          reason_type: 'BUSINESS' | 'PERSONAL_OR_RESIGNED'
+          reason_details: string | null
+          pass_date: string
+          from_time: string
+          to_time: string
+          accompanied_items: string | null
+          status: 'DRAFT' | 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED' | 'IN_TRANSIT' | 'COMPLETED' | 'CANCELLED'
+          approver_id: string | null
+          approved_at: string | null
+          manager_notes: string | null
+          security_out_time: string | null
+          security_in_time: string | null
+          security_guard_id: string | null
+          security_guard_name: string | null
+          security_notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          document_no?: string
+          employee_id: string
+          reason_type: 'BUSINESS' | 'PERSONAL_OR_RESIGNED'
+          reason_details?: string | null
+          pass_date?: string
+          from_time: string
+          to_time: string
+          accompanied_items?: string | null
+          status?: 'DRAFT' | 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED' | 'IN_TRANSIT' | 'COMPLETED' | 'CANCELLED'
+          approver_id?: string | null
+          approved_at?: string | null
+          manager_notes?: string | null
+          security_out_time?: string | null
+          security_in_time?: string | null
+          security_guard_id?: string | null
+          security_guard_name?: string | null
+          security_notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          document_no?: string
+          employee_id?: string
+          reason_type?: 'BUSINESS' | 'PERSONAL_OR_RESIGNED'
+          reason_details?: string | null
+          pass_date?: string
+          from_time?: string
+          to_time?: string
+          accompanied_items?: string | null
+          status?: 'DRAFT' | 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED' | 'IN_TRANSIT' | 'COMPLETED' | 'CANCELLED'
+          approver_id?: string | null
+          approved_at?: string | null
+          manager_notes?: string | null
+          security_out_time?: string | null
+          security_in_time?: string | null
+          security_guard_id?: string | null
+          security_guard_name?: string | null
+          security_notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
   }
 }

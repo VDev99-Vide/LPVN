@@ -412,21 +412,21 @@ OutlookIntegration
 - [x] Quản lý trạng thái nhân viên (Active / Inactive).
 
 ### Phase 04 — Leave & annual leave
-- [ ] Danh mục loại nghỉ (Nghỉ phép năm, Kết hôn, Nghỉ không lương, Nghỉ ốm, Tang chế, Khác).
-- [ ] Entitlement ngày nghỉ hàng năm theo quy định công ty & thâm niên.
-- [ ] Tính toán số ngày phép đã dùng & số ngày phép còn lại (`leave_balances`).
-- [ ] Tự động kiểm tra số dư phép khi gửi đơn nghỉ phép.
-- [ ] Ngăn chặn gửi đơn vượt quá số phép còn lại (trừ trường hợp xin nghỉ không lương).
-- [ ] Snapshot số ngày phép tại thời điểm submit/approve để audit.
+- [x] Danh mục loại nghỉ (Nghỉ phép năm, Kết hôn, Nghỉ không lương, Nghỉ ốm, Tang chế, Khác).
+- [x] Entitlement ngày nghỉ hàng năm theo quy định công ty & thâm niên.
+- [x] Tính toán số ngày phép đã dùng & số ngày phép còn lại (`leave_balances`).
+- [x] Tự động kiểm tra số dư phép khi gửi đơn nghỉ phép.
+- [x] Ngăn chặn gửi đơn vượt quá số phép còn lại (trừ trường hợp xin nghỉ không lương).
+- [x] Snapshot số ngày phép tại thời điểm submit/approve để audit.
 
 ### Phase 05 — Gate Pass
-- [ ] Web Form SaaS cho Giấy xin ra cổng (Employee Gate Pass - LPVN-HR-F-0014).
-- [ ] Loại lý do: Công tác / Việc riêng / Nghỉ việc ra về.
-- [ ] Khung giờ ra/vào dự kiến (From time → To time).
-- [ ] Danh sách tài liệu/vật dụng/tài sản mang theo.
-- [ ] Luồng trình duyệt quản lý trực tiếp.
-- [ ] Giao diện dành riêng cho Bảo vệ cổng (Security View).
-- [ ] Ghi nhận thời gian ra/vào thực tế & nhân viên bảo vệ ca trực.
+- [x] Web Form SaaS cho Giấy xin ra cổng (Employee Gate Pass - LPVN-HR-F-0014).
+- [x] Loại lý do: Công tác / Việc riêng / Nghỉ việc ra về.
+- [x] Khung giờ ra/vào dự kiến (From time → To time).
+- [x] Danh sách tài liệu/vật dụng/tài sản mang theo.
+- [x] Luồng trình duyệt quản lý trực tiếp.
+- [x] Giao diện dành riêng cho Bảo vệ cổng (Security View).
+- [x] Ghi nhận thời gian ra/vào thực tế & nhân viên bảo vệ ca trực.
 
 ### Phase 06 — Attendance Confirmation
 - [ ] Web Form SaaS cho Giấy xác nhận ngày công (LPVN-HR-F-0008).

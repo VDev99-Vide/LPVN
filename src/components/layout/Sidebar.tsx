@@ -1,5 +1,6 @@
 import {
   BarChart3,
+  Bell,
   CalendarDays,
   CheckSquare,
   ClipboardCheck,
@@ -14,6 +15,7 @@ import { cn } from '@/lib/utils'
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/', icon: LayoutDashboard },
   { label: 'Trung Tâm Duyệt', href: '/approvals', icon: CheckSquare },
+  { label: 'Thông Báo', href: '/notifications', icon: Bell },
   { label: 'Quản lý Phép năm', href: '/leave', icon: CalendarDays },
   { label: 'Gate Pass', href: '/gate-pass', icon: DoorOpen },
   { label: 'Attendance', href: '/attendance', icon: ClipboardCheck },

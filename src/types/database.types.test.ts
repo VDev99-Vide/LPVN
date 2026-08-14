@@ -201,4 +201,41 @@ describe('Database Types Phase 04', () => {
     expect(mockTemplate.template_code).toBe('LPVN-HR-F-0013')
     expect(mockGenDoc.document_hash).toHaveLength(64)
   })
+
+  it('includes notifications and notification_queue tables in Database interface', () => {
+    type NotificationRow = Database['public']['Tables']['notifications']['Row']
+    type NotificationQueueRow = Database['public']['Tables']['notification_queue']['Row']
+
+    const mockNotif: NotificationRow = {
+      id: 'notif-1',
+      recipient_id: 'user-1',
+      event_type: 'REQUEST_APPROVED',
+      title: 'Đơn nghỉ phép đã được duyệt',
+      message: 'Quản lý đã phê duyệt đơn nghỉ phép của bạn.',
+      action_url: '/leave',
+      is_read: false,
+      read_at: null,
+      metadata: { leave_days: 2 },
+      created_at: '2026-08-14T00:00:00Z',
+    }
+
+    const mockQueue: NotificationQueueRow = {
+      id: 'q-1',
+      event_type: 'REQUEST_ASSIGNED',
+      channel: 'EMAIL',
+      recipient_email: 'manager@lpvn.com',
+      subject: '[LPVN Flow] Yêu cầu phê duyệt đơn nghỉ phép',
+      body_html: '<html><body>Please review</body></html>',
+      status: 'PENDING',
+      retry_count: 0,
+      max_retries: 3,
+      last_error: null,
+      sent_at: null,
+      created_at: '2026-08-14T00:00:00Z',
+    }
+
+    expect(mockNotif.event_type).toBe('REQUEST_APPROVED')
+    expect(mockQueue.channel).toBe('EMAIL')
+    expect(mockQueue.status).toBe('PENDING')
+  })
 })

@@ -469,16 +469,16 @@ OutlookIntegration
 - [x] Xuất báo cáo dữ liệu định dạng Excel / CSV / PDF.
 
 ### Phase 11 — Notification Core & Email Integration
-- [ ] **Notification Core**:
-  - [ ] Thiết lập Domain Notification Events (`REQUEST_SUBMITTED`, `REQUEST_ASSIGNED`, `REQUEST_APPROVED`, `REQUEST_REJECTED`, `DOCUMENT_GENERATED`).
-  - [ ] Xây dựng Notification Queue & Retry mechanism.
-  - [ ] Notification logs & failure logging.
-  - [ ] In-App Notification Center (Hộp thư thông báo trong ứng dụng, đánh dấu đọc/chưa đọc).
-- [ ] **Email Notification Engine**:
-  - [ ] Xây dựng HTML Email Template Engine responsive, tương thích Outlook.
-  - [ ] Email thông báo cho Manager khi có đơn mới chờ duyệt.
-  - [ ] Email thông báo cho Employee khi đơn được Duyệt/Từ chối kèm đường link kết quả.
-  - [ ] Chèn secure deep link `[ 🔎 XEM YÊU CẦU ]`.
+- [x] **Notification Core**:
+  - [x] Thiết lập Domain Notification Events (`REQUEST_SUBMITTED`, `REQUEST_ASSIGNED`, `REQUEST_APPROVED`, `REQUEST_REJECTED`, `DOCUMENT_GENERATED`).
+  - [x] Xây dựng Notification Queue & Retry mechanism.
+  - [x] Notification logs & failure logging.
+  - [x] In-App Notification Center (Hộp thư thông báo trong ứng dụng, đánh dấu đọc/chưa đọc).
+- [x] **Email Notification Engine**:
+  - [x] Xây dựng HTML Email Template Engine responsive, tương thích Outlook.
+  - [x] Email thông báo cho Manager khi có đơn mới chờ duyệt.
+  - [x] Email thông báo cho Employee khi đơn được Duyệt/Từ chối kèm đường link kết quả.
+  - [x] Chèn secure deep link `[ 🔎 XEM YÊU CẦU ]`.
 
 ### Phase 11b — Outlook Basic Mode (MVP Default)
 - [ ] Thiết lập Email Template chuẩn tương thích Microsoft 365 Outlook.

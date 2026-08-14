@@ -682,6 +682,88 @@ export interface Database {
           created_at?: string
         }
       }
+      notifications: {
+        Row: {
+          id: string
+          recipient_id: string
+          event_type: 'REQUEST_SUBMITTED' | 'REQUEST_ASSIGNED' | 'REQUEST_APPROVED' | 'REQUEST_REJECTED' | 'DOCUMENT_GENERATED' | 'SYSTEM_ALERT'
+          title: string
+          message: string
+          action_url: string | null
+          is_read: boolean
+          read_at: string | null
+          metadata: Record<string, any> | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          recipient_id: string
+          event_type: 'REQUEST_SUBMITTED' | 'REQUEST_ASSIGNED' | 'REQUEST_APPROVED' | 'REQUEST_REJECTED' | 'DOCUMENT_GENERATED' | 'SYSTEM_ALERT'
+          title: string
+          message: string
+          action_url?: string | null
+          is_read?: boolean
+          read_at?: string | null
+          metadata?: Record<string, any> | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          recipient_id?: string
+          event_type?: 'REQUEST_SUBMITTED' | 'REQUEST_ASSIGNED' | 'REQUEST_APPROVED' | 'REQUEST_REJECTED' | 'DOCUMENT_GENERATED' | 'SYSTEM_ALERT'
+          title?: string
+          message?: string
+          action_url?: string | null
+          is_read?: boolean
+          read_at?: string | null
+          metadata?: Record<string, any> | null
+          created_at?: string
+        }
+      }
+      notification_queue: {
+        Row: {
+          id: string
+          event_type: string
+          channel: 'EMAIL' | 'IN_APP' | 'WEBHOOK'
+          recipient_email: string
+          subject: string
+          body_html: string
+          status: 'PENDING' | 'SENT' | 'FAILED' | 'RETRYING'
+          retry_count: number
+          max_retries: number
+          last_error: string | null
+          sent_at: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          event_type: string
+          channel?: 'EMAIL' | 'IN_APP' | 'WEBHOOK'
+          recipient_email: string
+          subject: string
+          body_html: string
+          status?: 'PENDING' | 'SENT' | 'FAILED' | 'RETRYING'
+          retry_count?: number
+          max_retries?: number
+          last_error?: string | null
+          sent_at?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          event_type?: string
+          channel?: 'EMAIL' | 'IN_APP' | 'WEBHOOK'
+          recipient_email?: string
+          subject?: string
+          body_html?: string
+          status?: 'PENDING' | 'SENT' | 'FAILED' | 'RETRYING'
+          retry_count?: number
+          max_retries?: number
+          last_error?: string | null
+          sent_at?: string | null
+          created_at?: string
+        }
+      }
     }
   }
 }

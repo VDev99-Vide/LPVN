@@ -1,32 +1,44 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { cleanup, render, screen } from '@testing-library/react'
+import { AuthProvider } from '@/contexts/AuthContext'
 import { AppShell } from './AppShell'
 
 afterEach(cleanup)
 
 describe('AppShell', () => {
   it('renders sidebar navigation items', () => {
-    render(<AppShell>content</AppShell>)
+    render(
+      <AuthProvider>
+        <AppShell>content</AppShell>
+      </AuthProvider>
+    )
     expect(screen.getByText('Dashboard')).toBeInTheDocument()
     expect(screen.getByText('Quản lý Phép năm')).toBeInTheDocument()
     expect(screen.getByText('Gate Pass')).toBeInTheDocument()
     expect(screen.getByText('Attendance')).toBeInTheDocument()
+    expect(screen.getByText('Thông Báo')).toBeInTheDocument()
     expect(screen.getByText('Nhân sự & Tổ chức')).toBeInTheDocument()
     expect(screen.getByText('Reports')).toBeInTheDocument()
   })
 
   it('renders topbar with theme toggle and user', () => {
-    render(<AppShell>content</AppShell>)
+    render(
+      <AuthProvider>
+        <AppShell>content</AppShell>
+      </AuthProvider>
+    )
     expect(screen.getByRole('button', { name: /toggle theme/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /notifications/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Thông báo/i })).toBeInTheDocument()
     expect(screen.getByText('LPVN Admin')).toBeInTheDocument()
   })
 
   it('renders children in the content area', () => {
     render(
-      <AppShell>
-        <p>dashboard content</p>
-      </AppShell>,
+      <AuthProvider>
+        <AppShell>
+          <p>dashboard content</p>
+        </AppShell>
+      </AuthProvider>
     )
     expect(screen.getByText('dashboard content')).toBeInTheDocument()
   })

@@ -19,17 +19,15 @@ function renderLoginPage() {
 }
 
 describe('LoginPage - Vision Pro Spatial Demo Gateway', () => {
-  it('renders heading, Leggett branding, login form, and demo role cards', () => {
+  it('renders Leggett logo, login form, and demo role cards', () => {
     renderLoginPage()
 
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('LPVN')
-    expect(screen.getByText('Leggett & Platt')).toBeInTheDocument()
+    expect(screen.getByAltText('Leggett & Platt Logo')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Đăng Nhập Vào Hệ Thống/i })).toBeInTheDocument()
     expect(screen.getByText('Nguyễn Văn A')).toBeInTheDocument()
     expect(screen.getByText('Lê Văn C')).toBeInTheDocument()
     expect(screen.getByText('Trần Thị B')).toBeInTheDocument()
     expect(screen.getByText('Aaron Zhang')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Đăng nhập bằng Microsoft 365/i })).toBeInTheDocument()
   })
 
   it('submits login form and displays success message', async () => {

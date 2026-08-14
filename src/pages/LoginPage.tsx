@@ -4,7 +4,6 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useAuth, DEMO_SUPPLY_CHAIN_USERS } from '@/contexts/AuthContext'
-import { SSOLoginButton } from '@/components/business/SSOLoginButton'
 import { Shield, User, Users, ShieldCheck, ArrowRight, Lock, KeyRound, AlertCircle, CheckCircle2 } from 'lucide-react'
 
 const REMEMBER_EMAIL_KEY = 'lpvn_remember_email'
@@ -115,11 +114,11 @@ export function LoginPage() {
       <div className="w-full max-w-xl z-10">
         
         {/* Main Glassmorphic Login Gateway */}
-        <Card className="border border-white/20 bg-[#12151e]/85 backdrop-blur-3xl shadow-[0_35px_80px_rgba(0,0,0,0.6)] rounded-[32px] overflow-hidden text-white">
+        <Card className="border border-white/16 bg-[rgba(26,29,36,0.62)] backdrop-blur-[50px] saturate-[210%] shadow-[0_35px_80px_rgba(0,0,0,0.55),inset_0_1.5px_1.5px_rgba(255,255,255,0.25),inset_0_-1.5px_1.5px_rgba(0,0,0,0.4)] rounded-[36px] overflow-hidden text-white">
           <CardHeader className="flex flex-col items-center justify-center pt-8 pb-3 text-center">
             
             {/* Bright Leggett Logo */}
-            <div className="mb-2">
+            <div className="py-2">
               <img
                 src="/leggett-transparent.png"
                 alt="Leggett & Platt Logo"
@@ -129,22 +128,6 @@ export function LoginPage() {
                 }}
               />
             </div>
-
-            <div className="flex items-center gap-2">
-              <h1 className="font-extrabold text-2xl sm:text-3xl tracking-tight text-white">
-                LPVN
-              </h1>
-              <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-500/25 text-emerald-300 border border-emerald-400/40 rounded-full shadow-[0_0_10px_rgba(52,211,153,0.4)]">
-                visionOS
-              </span>
-            </div>
-            
-            <div className="text-xs sm:text-sm font-semibold text-teal-300 mt-0.5 tracking-wide">
-              Leggett &amp; Platt
-            </div>
-            <p className="text-[11.5px] text-white/60 mt-1 max-w-md">
-              Cổng đăng nhập hệ thống số hóa quy trình &amp; phê duyệt biểu mẫu ISO
-            </p>
           </CardHeader>
 
           <CardContent className="space-y-5 px-6 sm:px-10 pb-8">
@@ -249,16 +232,6 @@ export function LoginPage() {
                   )
                 })}
               </div>
-            </div>
-
-            {/* Microsoft 365 SSO Option */}
-            <div className="pt-2 border-t border-white/10">
-              <div className="text-center mb-2">
-                <span className="text-[10px] text-white/40 uppercase font-semibold">
-                  Hoặc đăng nhập với tài khoản công ty
-                </span>
-              </div>
-              <SSOLoginButton />
             </div>
 
           </CardContent>

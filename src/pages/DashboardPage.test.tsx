@@ -19,9 +19,6 @@ describe('DashboardPage - Real System Data & Vision Pro Spatial Edition', () => 
     expect(screen.getByText('Welcome Back,')).toBeInTheDocument()
     expect(screen.getByText(/Phòng ban:/i)).toBeInTheDocument()
     expect(screen.getAllByText(/Ban Quản Trị & Nhân Sự|Supply Chain/i).length).toBeGreaterThan(0)
-    expect(screen.getByText('Today')).toBeInTheDocument()
-    expect(screen.getByText('This month')).toBeInTheDocument()
-    expect(screen.getByText('Date')).toBeInTheDocument()
   })
 
   it('renders Mark Attendance card with timer, location toggle and action buttons', () => {

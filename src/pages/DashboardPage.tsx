@@ -3,7 +3,6 @@ import {
   ArrowDown,
   ArrowUp,
   ArrowUpRight,
-  Calendar,
   Clock,
   LogOut,
   Plus,
@@ -72,9 +71,6 @@ const PENDING_REQUESTS = [
 export function DashboardPage() {
   const { activeUser, currentRole } = useAuth()
   const isSupervisorOrAdmin = currentRole === 'SUPERVISOR' || currentRole === 'ADMIN'
-
-  // Time filter state
-  const [timeFilter, setTimeFilter] = useState<'today' | 'month' | 'custom'>('month')
   
   // Location toggle state (Office vs WFH)
   const [locationMode, setLocationMode] = useState<'office' | 'wfh'>('office')
@@ -146,7 +142,6 @@ export function DashboardPage() {
   return (
     <div className="space-y-6">
       
-      {/* Action Notification Toast */}
       {actionNotice && (
         <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-emerald-600/90 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-2xl backdrop-blur-md border border-emerald-400/40 flex items-center gap-2 animate-in fade-in slide-in-from-top-2">
           <Sparkles className="w-3.5 h-3.5" />
@@ -163,29 +158,6 @@ export function DashboardPage() {
           </h1>
           <div className="text-xs text-white/60 mt-0.5">
             Phòng ban: <span className="font-semibold text-teal-300">{activeUser.dept || 'Supply Chain'}</span> · Nhà máy Leggett &amp; Platt LPVN
-          </div>
-        </div>
-
-        <div className="header-controls">
-          <div className="time-filter-pill">
-            <button
-              onClick={() => setTimeFilter('today')}
-              className={`filter-btn ${timeFilter === 'today' ? 'active' : ''}`}
-            >
-              Today
-            </button>
-            <button
-              onClick={() => setTimeFilter('month')}
-              className={`filter-btn ${timeFilter === 'month' ? 'active' : ''}`}
-            >
-              This month
-            </button>
-            <button
-              onClick={() => setTimeFilter('custom')}
-              className={`filter-btn ${timeFilter === 'custom' ? 'active' : ''}`}
-            >
-              <Calendar className="w-3.5 h-3.5" /> Date
-            </button>
           </div>
         </div>
       </header>

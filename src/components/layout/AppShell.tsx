@@ -12,7 +12,6 @@ import {
   LayoutDashboard,
   LogOut,
   Rocket,
-  Search,
   Settings,
   ShieldCheck,
   TestTube2,
@@ -25,7 +24,6 @@ import {
 } from 'lucide-react'
 import { useAuth, type AppUserRole } from '@/contexts/AuthContext'
 import { NotificationBell } from '@/components/business/NotificationBell'
-import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
 interface NavDockItem {
@@ -121,47 +119,11 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="vision-spatial-root">
       
-      {/* Top Floating Glass Header */}
-      <header className="top-floating-header" role="banner">
+      {/* Top Right Controls Glass Panel */}
+      <header className="w-full max-w-[1360px] mx-auto flex items-center justify-end px-2 py-1.5 mb-2 z-30" role="banner">
         
-        {/* Left: Bright Transparent Leggett Logo & LPVN Brand */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => navigateTo('/')}
-            className="h-9 flex items-center gap-2 group bg-transparent border-0 cursor-pointer p-0"
-          >
-            <img
-              src="/leggett-transparent.png"
-              alt="Leggett & Platt Logo"
-              className="h-8 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] brightness-150 contrast-125 group-hover:scale-105 transition-transform"
-              onError={(e) => {
-                e.currentTarget.src = '/images/leggett-transparent.png'
-              }}
-            />
-          </button>
-          <div className="flex flex-col border-l border-white/20 pl-3">
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold text-white tracking-wide">LPVN</span>
-              <span className="px-1.5 py-0.2 text-[9px] font-semibold bg-emerald-500/25 text-emerald-300 border border-emerald-400/35 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.3)]">
-                visionOS
-              </span>
-            </div>
-            <span className="text-[10px] text-white/65 font-medium">Leggett &amp; Platt</span>
-          </div>
-        </div>
-
-        {/* Center: Frosted Glass Search Input */}
-        <div className="relative flex-1 max-w-xs min-w-[200px] hidden md:block">
-          <Search className="pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2 text-white/50" />
-          <Input
-            type="search"
-            placeholder="Tìm kiếm nhanh đơn từ, nhân sự..."
-            className="pl-8.5 pr-3 h-8 text-xs bg-black/35 border-white/15 text-white placeholder:text-white/45 rounded-full backdrop-blur-md focus-visible:ring-white/30"
-          />
-        </div>
-
         {/* Right Controls: Role Switcher, Notification Bell & Profile Avatar */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2 p-1.5 rounded-full bg-black/40 backdrop-blur-2xl border border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
           
           {/* Custom VisionOS Glass Role Switcher Dropdown (No native white background) */}
           <div className="relative">
@@ -311,9 +273,19 @@ export function AppShell({ children }: { children: ReactNode }) {
         </main>
       </div>
 
-      {/* Fixed "By Vinh © 2026" Badge on Bottom Right */}
-      <footer className="fixed bottom-3 right-4 z-40 pointer-events-auto">
-        <div className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-[10.5px] font-medium text-white/50 shadow-md tracking-wider flex items-center gap-1.5 hover:text-white hover:opacity-100 hover:border-white/25 transition-all duration-300 opacity-60">
+      {/* Fixed Bottom-Right Pinned Logo & Badge */}
+      <footer className="fixed bottom-3 right-4 z-40 flex items-center gap-2.5 pointer-events-auto">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/45 backdrop-blur-2xl border border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.5)] hover:border-white/30 transition-all">
+          <img
+            src="/Logo.jpg"
+            alt="Leggett & Platt Logo"
+            className="h-6 w-auto object-contain rounded"
+            onError={(e) => {
+              e.currentTarget.src = '/Leggett.jpg'
+            }}
+          />
+        </div>
+        <div className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-[10.5px] font-medium text-white/60 shadow-md tracking-wider flex items-center gap-1.5 hover:text-white hover:opacity-100 hover:border-white/25 transition-all duration-300">
           <span className="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-[0_0_6px_rgba(45,212,191,0.8)]"></span>
           <span>By Vinh © 2026</span>
         </div>

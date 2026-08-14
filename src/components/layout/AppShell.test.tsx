@@ -6,7 +6,7 @@ import { AppShell } from './AppShell'
 afterEach(cleanup)
 
 describe('AppShell - Global Vision Pro Spatial Workspace', () => {
-  it('renders global branding with Leggett logo and visionOS badge', () => {
+  it('renders top-right controls and pinned bottom-right Leggett logo', () => {
     render(
       <AuthProvider>
         <AppShell>
@@ -15,9 +15,7 @@ describe('AppShell - Global Vision Pro Spatial Workspace', () => {
       </AuthProvider>
     )
     expect(screen.getByAltText('Leggett & Platt Logo')).toBeInTheDocument()
-    expect(screen.getAllByText('LPVN').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('visionOS').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Leggett & Platt').length).toBeGreaterThan(0)
+    expect(screen.getByRole('button', { name: /Đăng xuất khỏi hệ thống/i })).toBeInTheDocument()
   })
 
   it('renders floating left dock with key navigation routes', () => {

@@ -463,6 +463,85 @@ export interface Database {
           updated_at?: string
         }
       }
+      approval_tasks: {
+        Row: {
+          id: string
+          document_type: 'LEAVE' | 'GATE_PASS' | 'ATTENDANCE_CONFIRMATION'
+          document_id: string
+          document_no: string
+          requester_id: string
+          approver_id: string
+          step_order: number
+          status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'CANCELLED'
+          decision_notes: string | null
+          decided_at: string | null
+          security_token: string | null
+          token_expires_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          document_type: 'LEAVE' | 'GATE_PASS' | 'ATTENDANCE_CONFIRMATION'
+          document_id: string
+          document_no: string
+          requester_id: string
+          approver_id: string
+          step_order?: number
+          status?: 'PENDING' | 'APPROVED' | 'REJECTED' | 'CANCELLED'
+          decision_notes?: string | null
+          decided_at?: string | null
+          security_token?: string | null
+          token_expires_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          document_type?: 'LEAVE' | 'GATE_PASS' | 'ATTENDANCE_CONFIRMATION'
+          document_id?: string
+          document_no?: string
+          requester_id?: string
+          approver_id?: string
+          step_order?: number
+          status?: 'PENDING' | 'APPROVED' | 'REJECTED' | 'CANCELLED'
+          decision_notes?: string | null
+          decided_at?: string | null
+          security_token?: string | null
+          token_expires_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      workflow_transitions: {
+        Row: {
+          id: string
+          task_id: string
+          from_status: string
+          to_status: string
+          actor_id: string | null
+          reason: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          task_id: string
+          from_status: string
+          to_status: string
+          actor_id?: string | null
+          reason?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          task_id?: string
+          from_status?: string
+          to_status?: string
+          actor_id?: string | null
+          reason?: string | null
+          created_at?: string
+        }
+      }
     }
   }
 }

@@ -436,13 +436,13 @@ OutlookIntegration
 - [x] Luồng chuyển giao HR ghi nhận chấm công sau khi trưởng bộ phận duyệt.
 
 ### Phase 07 — Approval workflow engine
-- [ ] Generic approval workflow state machine (`DRAFT`, `SUBMITTED`, `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `DOCUMENT_GENERATED`).
-- [ ] Tự động tìm kiếm quản lý trực tiếp (Manager resolution).
-- [ ] Tạo `approval_task` kèm snapshot thông tin approver tại thời điểm tạo đơn.
-- [ ] Xử lý hành động Approve / Reject kèm lý do rejection.
-- [ ] Policy re-submit/re-open đơn khi bị từ chối.
-- [ ] Dashboard hiển thị danh sách đơn chờ duyệt (Pending Approvals).
-- [ ] Audit log mọi thay đổi trạng thái chuyển giao (state transitions).
+- [x] Generic approval workflow state machine (`DRAFT`, `SUBMITTED`, `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `DOCUMENT_GENERATED`).
+- [x] Tự động tìm kiếm quản lý trực tiếp (Manager resolution).
+- [x] Tạo `approval_task` kèm snapshot thông tin approver tại thời điểm tạo đơn.
+- [x] Xử lý hành động Approve / Reject kèm lý do rejection.
+- [x] Policy re-submit/re-open đơn khi bị từ chối.
+- [x] Dashboard hiển thị danh sách đơn chờ duyệt (Pending Approvals).
+- [x] Audit log mọi thay đổi trạng thái chuyển giao (state transitions).
 
 ### Phase 08 — Digital signature library
 - [ ] Signature profile cho từng Manager/Approver.

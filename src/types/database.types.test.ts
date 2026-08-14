@@ -100,4 +100,40 @@ describe('Database Types Phase 04', () => {
     expect(mockAttendance.document_no).toBe('LPVN-HR-F-0008')
     expect(mockAttendance.status).toBe('PENDING_APPROVAL')
   })
+
+  it('includes approval_tasks and workflow_transitions tables in Database interface', () => {
+    type ApprovalTaskRow = Database['public']['Tables']['approval_tasks']['Row']
+    type WorkflowTransitionRow = Database['public']['Tables']['workflow_transitions']['Row']
+
+    const mockTask: ApprovalTaskRow = {
+      id: 'task-1',
+      document_type: 'LEAVE',
+      document_id: 'leave-1',
+      document_no: 'LPVN-HR-F-0013',
+      requester_id: 'emp-1',
+      approver_id: 'mgr-1',
+      step_order: 1,
+      status: 'PENDING',
+      decision_notes: null,
+      decided_at: null,
+      security_token: 'token-abc-123',
+      token_expires_at: '2026-08-20T00:00:00Z',
+      created_at: '2026-08-14T00:00:00Z',
+      updated_at: '2026-08-14T00:00:00Z',
+    }
+
+    const mockTransition: WorkflowTransitionRow = {
+      id: 'trans-1',
+      task_id: 'task-1',
+      from_status: 'PENDING',
+      to_status: 'APPROVED',
+      actor_id: 'mgr-1',
+      reason: 'Đồng ý duyệt',
+      created_at: '2026-08-14T01:00:00Z',
+    }
+
+    expect(mockTask.document_type).toBe('LEAVE')
+    expect(mockTask.status).toBe('PENDING')
+    expect(mockTransition.to_status).toBe('APPROVED')
+  })
 })

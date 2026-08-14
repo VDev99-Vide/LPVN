@@ -10,7 +10,7 @@ afterEach(() => {
 describe('App', () => {
   it('renders the dashboard inside the spatial shell', () => {
     render(<App />)
-    expect(screen.getAllByText('LPVN Flow').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('LPVN').length).toBeGreaterThan(0)
     expect(screen.getAllByText('visionOS').length).toBeGreaterThan(0)
     expect(screen.getByText(/Mark Attendance/i)).toBeInTheDocument()
     expect(screen.getByText(/Leaves Summary/i)).toBeInTheDocument()

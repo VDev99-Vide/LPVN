@@ -767,3 +767,49 @@
   color: rgba(255, 255, 255, 0.45);
 }
 
+/* =========================================================================
+   Radix UI Popovers, Dropdowns, Dialogs, Selects in VisionOS
+   ========================================================================= */
+[data-slot="dialog-content"],
+[data-slot="select-content"],
+[data-slot="dropdown-menu-content"],
+[data-slot="popover-content"],
+[role="dialog"],
+[role="listbox"],
+[role="menu"] {
+  background: rgba(18, 21, 30, 0.9) !important;
+  backdrop-filter: blur(35px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(35px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65) !important;
+  color: #ffffff !important;
+}
+
+[data-slot="select-item"],
+[data-slot="dropdown-menu-item"],
+[role="option"],
+[role="menuitem"] {
+  color: rgba(255, 255, 255, 0.85) !important;
+  border-radius: 12px !important;
+  transition: all 0.15s ease !important;
+}
+
+[data-slot="select-item"]:hover,
+[data-slot="dropdown-menu-item"]:hover,
+[role="option"]:hover,
+[role="menuitem"]:hover,
+[data-highlighted] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+}
+
+.vision-container select option {
+  background: #141722;
+  color: #ffffff;
+}
+
+.vision-container [data-slot="badge"] {
+  backdrop-filter: blur(12px);
+}
+

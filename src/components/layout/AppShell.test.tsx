@@ -15,9 +15,9 @@ describe('AppShell - Global Vision Pro Spatial Workspace', () => {
       </AuthProvider>
     )
     expect(screen.getByAltText('Leggett & Platt Logo')).toBeInTheDocument()
-    expect(screen.getByText('LPVN Flow')).toBeInTheDocument()
-    expect(screen.getByText('visionOS')).toBeInTheDocument()
-    expect(screen.getByText(/Supply Chain Hub · Leggett & Platt/i)).toBeInTheDocument()
+    expect(screen.getAllByText('LPVN').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('visionOS').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Leggett & Platt').length).toBeGreaterThan(0)
   })
 
   it('renders floating left dock and bottom dock with key navigation routes', () => {

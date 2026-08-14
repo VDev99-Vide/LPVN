@@ -18,16 +18,21 @@ function renderLoginPage() {
   )
 }
 
-describe('LoginPage', () => {
-  it('renders heading, SSO login button, and email input', () => {
+describe('LoginPage - Vision Pro Spatial Demo Gateway', () => {
+  it('renders heading, Leggett branding, demo role cards, and SSO button', () => {
     renderLoginPage()
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('LPVN')
+    expect(screen.getByText('Leggett & Platt')).toBeInTheDocument()
+    expect(screen.getByText(/Truy Cập Không Gian visionOS/i)).toBeInTheDocument()
+    expect(screen.getByText('Nguyễn Văn A')).toBeInTheDocument()
+    expect(screen.getByText('Lê Văn C')).toBeInTheDocument()
+    expect(screen.getByText('Trần Thị B')).toBeInTheDocument()
+    expect(screen.getByText('Aaron Zhang')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Đăng nhập bằng Microsoft 365/i })).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('nhanvien@leggett.com')).toBeInTheDocument()
   })
 
-  it('submits form and displays success message', async () => {
+  it('submits manual login form and displays success message', async () => {
     vi.spyOn(supabase.auth, 'getSession').mockResolvedValue({
       data: { session: null },
       error: null,
@@ -43,7 +48,7 @@ describe('LoginPage', () => {
 
     const input = screen.getByPlaceholderText('nhanvien@leggett.com')
     const passInput = screen.getByPlaceholderText('••••••••')
-    const button = screen.getByRole('button', { name: /^Đăng nhập$/i })
+    const button = screen.getByRole('button', { name: /Đăng nhập với Mật khẩu/i })
 
     await user.clear(input)
     await user.type(input, 'nhanvien@leggett.com')
@@ -64,17 +69,17 @@ describe('LoginPage', () => {
       error: null,
     })
 
+    const user = userEvent.setup()
+    renderLoginPage()
+
     vi.spyOn(supabase.auth, 'signInWithOtp').mockResolvedValue({
       data: { user: null, session: null },
       error: { name: 'AuthError', message: 'Invalid email provider', status: 400, code: 'invalid_provider' } as any,
     })
 
-    const user = userEvent.setup()
-    renderLoginPage()
-
     const input = screen.getByPlaceholderText('nhanvien@leggett.com')
     const passInput = screen.getByPlaceholderText('••••••••')
-    const button = screen.getByRole('button', { name: /^Đăng nhập$/i })
+    const button = screen.getByRole('button', { name: /Đăng nhập với Mật khẩu/i })
 
     await user.clear(input)
     await user.type(input, 'invalid@example.com')

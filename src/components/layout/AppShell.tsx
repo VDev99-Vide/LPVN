@@ -10,6 +10,7 @@ import {
   GitMerge,
   Glasses,
   LayoutDashboard,
+  LogOut,
   Receipt,
   Rocket,
   Search,
@@ -106,19 +107,29 @@ export function AppShell({ children }: { children: ReactNode }) {
     },
   ]
 
+  const bottomTabs = [
+    { label: 'Dashboard', href: '/', icon: Glasses, match: (p: string) => p === '/' },
+    { label: 'Tạo đơn', href: '/new-request', icon: FilePlus2, match: (p: string) => p === '/new-request' },
+    { label: 'Quản lý phép', href: '/leave', icon: Receipt, match: (p: string) => p === '/leave' },
+    { label: 'Chấm công', href: '/attendance', icon: Clock, match: (p: string) => p === '/attendance' },
+    { label: 'Duyệt đơn', href: '/approvals', icon: UserCheck, match: (p: string) => p === '/approvals' },
+    { label: 'Báo cáo', href: '/reports', icon: BarChart3, match: (p: string) => p === '/reports' },
+    { label: 'Cài đặt', href: '/settings/security', icon: Settings, match: (p: string) => p.startsWith('/settings') },
+  ]
+
   return (
     <div className="vision-spatial-root">
       
-      {/* Top Global Header Bar (Leggett Transparent Logo + Search + Role Switcher + Notifs + Profile) */}
+      {/* Top Global Header Bar (Leggett Bright Logo + LPVN + Search + Role Switcher + Notifs + Profile) */}
       <header className="w-full max-w-[1360px] flex items-center justify-between py-2.5 px-3 mb-3 z-20 flex-wrap gap-3">
         
-        {/* Left: Transparent Leggett Logo & LPVN Hub Badge */}
+        {/* Left: Bright Transparent Leggett Logo & LPVN Brand */}
         <div className="flex items-center gap-3">
           <a href="/" className="h-9 flex items-center gap-2 group">
             <img
               src="/leggett-transparent.png"
               alt="Leggett & Platt Logo"
-              className="h-8 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] brightness-110 group-hover:scale-105 transition-transform"
+              className="h-8 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] brightness-150 contrast-125 group-hover:scale-105 transition-transform"
               onError={(e) => {
                 e.currentTarget.src = '/images/leggett-transparent.png'
               }}
@@ -126,12 +137,12 @@ export function AppShell({ children }: { children: ReactNode }) {
           </a>
           <div className="flex flex-col border-l border-white/20 pl-3">
             <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold text-white tracking-wide">LPVN Flow</span>
+              <span className="text-xs font-bold text-white tracking-wide">LPVN</span>
               <span className="px-1.5 py-0.2 text-[9px] font-semibold bg-emerald-500/25 text-emerald-300 border border-emerald-400/35 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.3)]">
                 visionOS
               </span>
             </div>
-            <span className="text-[10px] text-white/65">Supply Chain Hub · Leggett &amp; Platt</span>
+            <span className="text-[10px] text-white/65 font-medium">Leggett &amp; Platt</span>
           </div>
         </div>
 
@@ -194,31 +205,49 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span className="text-[9px] text-white/60 truncate leading-tight">{roleTitleMap[currentRole]}</span>
             </div>
           </a>
+
+          {/* Quick Logout to Demo Gateway */}
+          <a
+            href="/login"
+            className="p-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-red-400/40 text-white/60 hover:text-red-400 transition-all"
+            title="Đăng xuất / Chọn tài khoản Demo"
+          >
+            <LogOut className="w-4 h-4" />
+          </a>
         </div>
       </header>
 
       {/* Spatial Workspace Shell */}
       <div className="spatial-workspace">
         
-        {/* Floating Left App Dock */}
+        {/* Floating Left App Dock (Icons Only with Animated Hover Tooltips) */}
         <aside className="floating-left-dock" aria-label="Global Vision Pro Navigation Dock">
           {visibleDockItems.map((item) => {
             const Icon = item.icon
             const isActive = currentPath === item.href
             return (
-              <button
-                key={item.href}
-                onClick={() => navigateTo(item.href)}
-                className={cn('dock-icon-btn relative', isActive && 'active')}
-                title={item.label}
-              >
-                <Icon className="w-5 h-5" />
-                {item.badge !== undefined && (
-                  <span className="absolute -top-1 -right-1 bg-coral-dark text-white text-[9px] font-extrabold px-1 rounded-full shadow-[0_0_8px_rgba(239,108,74,0.8)]">
-                    {item.badge}
-                  </span>
-                )}
-              </button>
+              <div key={item.href} className="relative group flex items-center justify-center">
+                <button
+                  onClick={() => navigateTo(item.href)}
+                  className={cn(
+                    'dock-icon-btn relative hover:scale-110 active:scale-95 transition-all duration-200',
+                    isActive && 'active'
+                  )}
+                  aria-label={item.label}
+                >
+                  <Icon className="w-5 h-5" />
+                  {item.badge !== undefined && (
+                    <span className="absolute -top-1 -right-1 bg-coral-dark text-white text-[9px] font-extrabold px-1 rounded-full shadow-[0_0_8px_rgba(239,108,74,0.8)]">
+                      {item.badge}
+                    </span>
+                  )}
+                </button>
+
+                {/* Animated VisionOS Hover Tooltip */}
+                <div className="absolute left-14 px-3 py-1.5 rounded-2xl bg-black/80 backdrop-blur-2xl border border-white/20 text-white text-xs font-semibold whitespace-nowrap shadow-2xl opacity-0 -translate-x-2 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ease-out z-50">
+                  {item.label}
+                </div>
+              </div>
             )
           })}
         </aside>
@@ -227,58 +256,39 @@ export function AppShell({ children }: { children: ReactNode }) {
         <main className="vision-container">
           {children}
 
-          {/* Bottom Floating Navigation Dock */}
+          {/* Bottom Floating Navigation Dock (Icons with Animated Hover Tooltips) */}
           <nav className="bottom-nav-dock" aria-label="Bottom Navigation">
-            <button
-              onClick={() => navigateTo('/')}
-              className={cn('nav-tab-btn', currentPath === '/' && 'active')}
-            >
-              <Glasses className="w-4 h-4" /> Dashboard
-            </button>
-            <button
-              onClick={() => navigateTo('/new-request')}
-              className={cn('nav-tab-btn', currentPath === '/new-request' && 'active')}
-            >
-              <FilePlus2 className="w-4 h-4" /> Tạo đơn
-            </button>
-            <button
-              onClick={() => navigateTo('/leave')}
-              className={cn('nav-tab-btn', currentPath === '/leave' && 'active')}
-            >
-              <Receipt className="w-4 h-4" /> Quản lý phép
-            </button>
-            <button
-              onClick={() => navigateTo('/attendance')}
-              className={cn('nav-tab-btn', currentPath === '/attendance' && 'active')}
-            >
-              <Clock className="w-4 h-4" /> Chấm công
-            </button>
-            <button
-              onClick={() => navigateTo('/approvals')}
-              className={cn('nav-tab-btn', currentPath === '/approvals' && 'active')}
-            >
-              <UserCheck className="w-4 h-4" /> Duyệt đơn
-            </button>
-            <button
-              onClick={() => navigateTo('/reports')}
-              className={cn('nav-tab-btn', currentPath === '/reports' && 'active')}
-            >
-              <BarChart3 className="w-4 h-4" /> Báo cáo
-            </button>
-            <button
-              onClick={() => navigateTo('/settings/security')}
-              className={cn('nav-tab-btn', currentPath.startsWith('/settings') && 'active')}
-            >
-              <Settings className="w-4 h-4" /> Cài đặt
-            </button>
+            {bottomTabs.map((tab) => {
+              const Icon = tab.icon
+              const isActive = tab.match(currentPath)
+              return (
+                <div key={tab.href} className="relative group flex items-center justify-center">
+                  <button
+                    onClick={() => navigateTo(tab.href)}
+                    className={cn(
+                      'nav-tab-btn px-3.5 py-2 hover:scale-105 active:scale-95 transition-all duration-200',
+                      isActive && 'active'
+                    )}
+                    aria-label={tab.label}
+                  >
+                    <Icon className="w-4 h-4" />
+                  </button>
+
+                  {/* Animated VisionOS Hover Tooltip Above */}
+                  <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-xl bg-black/85 backdrop-blur-xl border border-white/20 text-white text-[11px] font-medium whitespace-nowrap shadow-xl opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out z-50">
+                    {tab.label}
+                  </div>
+                </div>
+              )
+            })}
           </nav>
         </main>
 
       </div>
 
-      {/* Fixed Frosted Glass Bottom Badge: By Vinh © 2026 */}
-      <footer className="fixed bottom-2 left-1/2 -translate-x-1/2 z-40 pointer-events-auto">
-        <div className="px-3.5 py-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/15 text-[11px] font-medium text-white/70 shadow-lg tracking-wider flex items-center gap-1.5 hover:text-white hover:border-white/30 transition-all">
+      {/* Subtle & Elegant "By Vinh © 2026" Badge on Bottom Right */}
+      <footer className="fixed bottom-3 right-4 z-40 pointer-events-auto">
+        <div className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-[10.5px] font-medium text-white/50 shadow-md tracking-wider flex items-center gap-1.5 hover:text-white hover:opacity-100 hover:border-white/25 transition-all duration-300 opacity-60">
           <span className="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-[0_0_6px_rgba(45,212,191,0.8)]"></span>
           <span>By Vinh © 2026</span>
         </div>

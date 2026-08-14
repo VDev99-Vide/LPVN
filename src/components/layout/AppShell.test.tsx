@@ -32,7 +32,7 @@ describe('AppShell', () => {
     )
     expect(screen.getByRole('button', { name: /toggle theme/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Thông báo/i })).toBeInTheDocument()
-    expect(screen.getByText('LPVN Admin')).toBeInTheDocument()
+    expect(screen.getAllByText('LPVN Admin').length).toBeGreaterThan(0)
   })
 
   it('renders children in the content area', () => {

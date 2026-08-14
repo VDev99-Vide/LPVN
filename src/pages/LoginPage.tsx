@@ -37,23 +37,31 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-[80vh] items-center justify-center p-4">
-      <Card className="w-full max-w-md shadow-md border">
-        <CardHeader className="text-center pb-3">
-          <CardTitle role="heading" aria-level={2} className="text-2xl font-bold">
+    <div className="flex min-h-[85vh] items-center justify-center p-4 login-gradient-bg rounded-2xl">
+      <Card className="w-full max-w-[420px] shadow-2xl border-0 rounded-3xl bg-card text-foreground">
+        <CardHeader className="text-center pb-2 pt-6">
+          <div className="flex items-center justify-center gap-2.5 mb-2">
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#2BA8A2] to-[#1E8C86] flex items-center justify-center text-white font-extrabold text-lg shadow-md">
+              HR
+            </div>
+            <span className="font-extrabold text-2xl tracking-tight text-[#1E8C86] dark:text-[#3CC4BD]">
+              HR Flow
+            </span>
+          </div>
+          <CardTitle role="heading" aria-level={2} className="text-base font-bold text-foreground">
             Đăng nhập LPVN HR Flow
           </CardTitle>
-          <CardDescription className="text-xs">
-            Hệ thống quản lý quy trình hành chính & nhân sự Leggett & Platt Vietnam
+          <CardDescription className="text-xs text-muted-foreground">
+            Hệ thống đăng ký &amp; duyệt đơn nội bộ · Leggett &amp; Platt Vietnam
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 px-6 pb-6">
           {/* Microsoft 365 SSO Primary Option */}
           <div className="space-y-2">
             <SSOLoginButton />
           </div>
 
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center my-2">
             <div className="border-t border-border w-full" />
             <span className="bg-card px-2 text-[11px] text-muted-foreground uppercase font-medium absolute">
               Hoặc đăng nhập dự phòng
@@ -62,7 +70,7 @@ export function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-3 pt-1">
             <div className="space-y-1.5">
-              <Label htmlFor="email" className="text-xs">Email công ty (Magic Link)</Label>
+              <Label htmlFor="email" className="text-xs font-semibold text-muted-foreground">Email công ty (Magic Link)</Label>
               <Input
                 id="email"
                 type="email"
@@ -71,13 +79,13 @@ export function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isSubmitting}
-                className="text-xs h-9"
+                className="text-xs h-10 rounded-xl bg-[#FFF8E7] dark:bg-muted/40 border-2 border-[#E1EEED] dark:border-border text-foreground"
               />
             </div>
             {message && (
               <div
                 role="status"
-                className={`p-2.5 rounded-md text-xs ${
+                className={`p-2.5 rounded-xl text-xs ${
                   message.type === 'error'
                     ? 'bg-destructive/15 text-destructive'
                     : 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
@@ -86,10 +94,19 @@ export function LoginPage() {
                 {message.text}
               </div>
             )}
-            <Button type="submit" variant="secondary" className="w-full text-xs h-9" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              className="w-full text-xs h-10 font-bold rounded-full btn-gold"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? 'Đang gửi...' : 'Gửi Mã Đăng Nhập Cục Bộ'}
             </Button>
           </form>
+
+          {/* Hint Box matching Template.html */}
+          <div className="rounded-xl p-3 bg-[#E8F6F5] dark:bg-muted/40 text-[11px] text-[#1E8C86] dark:text-teal-300 leading-relaxed border border-[#3CC4BD]/30">
+            📌 Hệ thống kết nối <strong>Microsoft Entra ID</strong> (Azure AD SSO) và <strong>Supabase RLS</strong> đồng bộ phân quyền tự động theo phòng ban.
+          </div>
         </CardContent>
       </Card>
     </div>

@@ -238,4 +238,30 @@ describe('Database Types Phase 04', () => {
     expect(mockQueue.channel).toBe('EMAIL')
     expect(mockQueue.status).toBe('PENDING')
   })
+
+  it('supports Microsoft Entra ID SSO attributes on profiles table', () => {
+    type ProfileRow = Database['public']['Tables']['profiles']['Row']
+
+    const mockSSOProfile: ProfileRow = {
+      id: 'usr-entra-1',
+      employee_code: 'LPVN-0088',
+      full_name: 'Nguyen Entra User',
+      email: 'user@leggett.com',
+      avatar_url: null,
+      department_id: 'dept-1',
+      position_id: 'pos-1',
+      status: 'ACTIVE',
+      join_date: '2026-01-01',
+      entra_object_id: '11112222-3333-4444-5555-666677778888',
+      azure_tenant_id: 'leggett-tenant-uuid',
+      sso_provider: 'AZURE_AD',
+      sso_metadata: { upn: 'user@leggett.com', groups: ['LPVN_HR_Managers'] },
+      created_at: '2026-08-14T00:00:00Z',
+      updated_at: '2026-08-14T00:00:00Z',
+    }
+
+    expect(mockSSOProfile.entra_object_id).toBe('11112222-3333-4444-5555-666677778888')
+    expect(mockSSOProfile.sso_provider).toBe('AZURE_AD')
+  })
 })
+

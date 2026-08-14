@@ -12,6 +12,7 @@ import { DocumentCenterPage } from './pages/DocumentCenterPage'
 import { ReportsPage } from './pages/ReportsPage'
 import { NotificationsPage } from './pages/NotificationsPage'
 import { OutlookActionPage } from './pages/OutlookActionPage'
+import { EntraSettingsPage } from './pages/EntraSettingsPage'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -49,6 +50,8 @@ function App() {
           <NotificationsPage />
         ) : currentPath === '/quick-approve' ? (
           <OutlookActionPage />
+        ) : currentPath === '/settings/entra-id' ? (
+          <EntraSettingsPage />
         ) : (
           <DashboardPage />
         )}

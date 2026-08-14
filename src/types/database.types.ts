@@ -69,6 +69,10 @@ export interface Database {
           position_id: string | null
           status: 'ACTIVE' | 'INACTIVE' | 'SUSPENDED'
           join_date: string
+          entra_object_id?: string | null
+          azure_tenant_id?: string | null
+          sso_provider?: string
+          sso_metadata?: Record<string, any> | null
           created_at: string
           updated_at: string
         }
@@ -82,6 +86,10 @@ export interface Database {
           position_id?: string | null
           status?: 'ACTIVE' | 'INACTIVE' | 'SUSPENDED'
           join_date?: string
+          entra_object_id?: string | null
+          azure_tenant_id?: string | null
+          sso_provider?: string
+          sso_metadata?: Record<string, any> | null
           created_at?: string
           updated_at?: string
         }
@@ -95,6 +103,10 @@ export interface Database {
           position_id?: string | null
           status?: 'ACTIVE' | 'INACTIVE' | 'SUSPENDED'
           join_date?: string
+          entra_object_id?: string | null
+          azure_tenant_id?: string | null
+          sso_provider?: string
+          sso_metadata?: Record<string, any> | null
           created_at?: string
           updated_at?: string
         }

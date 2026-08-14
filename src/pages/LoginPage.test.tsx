@@ -19,11 +19,12 @@ function renderLoginPage() {
 }
 
 describe('LoginPage', () => {
-  it('renders heading and email input with placeholder', () => {
+  it('renders heading, SSO login button, and email input', () => {
     renderLoginPage()
 
     expect(screen.getByText('Đăng nhập LPVN HR Flow')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('nhanvien@lpvn.com')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Đăng nhập bằng Microsoft 365/i })).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('nhanvien@leggett.com')).toBeInTheDocument()
   })
 
   it('submits form and displays success message', async () => {
@@ -40,13 +41,13 @@ describe('LoginPage', () => {
     const user = userEvent.setup()
     renderLoginPage()
 
-    const input = screen.getByPlaceholderText('nhanvien@lpvn.com')
-    const button = screen.getByRole('button', { name: 'Đăng nhập' })
+    const input = screen.getByPlaceholderText('nhanvien@leggett.com')
+    const button = screen.getByRole('button', { name: /Gửi Mã Đăng Nhập Cục Bộ/i })
 
-    await user.type(input, 'nhanvien@lpvn.com')
+    await user.type(input, 'nhanvien@leggett.com')
     await user.click(button)
 
-    expect(signInSpy).toHaveBeenCalledWith({ email: 'nhanvien@lpvn.com' })
+    expect(signInSpy).toHaveBeenCalledWith({ email: 'nhanvien@leggett.com' })
 
     await waitFor(() => {
       expect(screen.getByRole('status')).toHaveTextContent('Đã gửi liên kết đăng nhập đến email của bạn.')
@@ -67,8 +68,8 @@ describe('LoginPage', () => {
     const user = userEvent.setup()
     renderLoginPage()
 
-    const input = screen.getByPlaceholderText('nhanvien@lpvn.com')
-    const button = screen.getByRole('button', { name: 'Đăng nhập' })
+    const input = screen.getByPlaceholderText('nhanvien@leggett.com')
+    const button = screen.getByRole('button', { name: /Gửi Mã Đăng Nhập Cục Bộ/i })
 
     await user.type(input, 'invalid@example.com')
     await user.click(button)

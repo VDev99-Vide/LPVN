@@ -2,13 +2,13 @@
   "project": "LPVN-HR-Workflow-SaaS",
   "schema_version": 1,
   "status": "PLANNING",
-  "current_phase": "phase-11b",
-  "current_task": "phase-11c-entra-id-integration",
+  "current_phase": "phase-11c",
+  "current_task": "phase-11d-outlook-advanced-approval-mode",
   "agent_engine": "Antigravity AI Engine (Google DeepMind)",
   "last_session": {
     "status": "completed",
-    "summary": "Completed Phase 11b Outlook Basic Mode: outlook-basic.service for secure short-lived token deep linking & zero-admin verification, OutlookApprovalGate, OutlookDeepLinkGenerator, OutlookCompatibilityBadge, and OutlookActionPage routing (/quick-approve).",
-    "timestamp": "2026-08-14T02:46:00+00:00"
+    "summary": "Completed Phase 11c Microsoft Entra ID (Azure AD) Integration: SQL migration for profiles SSO columns, entra-id.service for OIDC SSO & Tenant Assessment & Group Mapping, EntraTenantAssessmentCard, EntraGroupRoleMappingTable, SSOLoginButton, LoginPage Microsoft SSO integration, and EntraSettingsPage routing.",
+    "timestamp": "2026-08-14T02:53:00+00:00"
   },
   "progress": {
     "phase-00": { "status": "DONE", "percent": 100 },
@@ -24,8 +24,8 @@
     "phase-10": { "status": "DONE", "percent": 100 },
     "phase-11": { "status": "DONE", "percent": 100 },
     "phase-11b": { "status": "DONE", "percent": 100 },
-    "phase-11c": { "status": "IN_PROGRESS", "percent": 0 },
-    "phase-11d": { "status": "LOCKED", "percent": 0 },
+    "phase-11c": { "status": "DONE", "percent": 100 },
+    "phase-11d": { "status": "IN_PROGRESS", "percent": 0 },
     "phase-11e": { "status": "LOCKED", "percent": 0 },
     "phase-12": { "status": "LOCKED", "percent": 0 },
     "phase-13": { "status": "LOCKED", "percent": 0 },
@@ -38,7 +38,8 @@
       "Supabase Auth + PostgreSQL + RLS + Storage/Edge Functions",
       "Cloudflare Pages/Workers + Cloudflare R2",
       "SaaS workflow forms with post-approval document rendering",
-      "Decoupled Notification Engine with Outlook Basic/Advanced Adapters"
+      "Decoupled Notification Engine with Outlook Basic/Advanced Adapters",
+      "Microsoft Entra ID (Azure AD) OIDC SSO & Group-to-Role Mapping"
     ],
     "forms": [
       "LPVN-HR-F-0008 Attendance Confirmation",
@@ -60,6 +61,7 @@
       "signature",
       "document",
       "notification",
+      "entra-id",
       "audit",
       "reporting"
     ]
@@ -163,6 +165,11 @@
     {
       "id": "ADR-020",
       "decision": "Phase-11b Outlook Basic Mode: outlookBasicService with zero-admin verification and short-lived anti-replay tokens, OutlookApprovalGate, OutlookDeepLinkGenerator, OutlookCompatibilityBadge, and OutlookActionPage routing (/quick-approve).",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-021",
+      "decision": "Phase-11c Microsoft Entra ID Integration: Schema migration (20260814000013_entra_id_integration.sql), entraIdService for OIDC SSO & Tenant Assessment & Group Mapping, EntraTenantAssessmentCard, EntraGroupRoleMappingTable, SSOLoginButton, LoginPage Microsoft SSO integration, and EntraSettingsPage routing.",
       "status": "accepted"
     }
   ],
@@ -282,7 +289,15 @@
     "src/components/business/OutlookCompatibilityBadge.tsx",
     "src/pages/OutlookActionPage.tsx",
     "docs/superpowers/specs/2026-08-14-phase-11b-outlook-basic-mode.md",
-    "docs/superpowers/plans/2026-08-14-phase-11b-outlook-basic-mode.md"
+    "docs/superpowers/plans/2026-08-14-phase-11b-outlook-basic-mode.md",
+    "supabase/migrations/20260814000013_entra_id_integration.sql",
+    "src/services/entra-id.service.ts",
+    "src/components/business/EntraTenantAssessmentCard.tsx",
+    "src/components/business/EntraGroupRoleMappingTable.tsx",
+    "src/components/business/SSOLoginButton.tsx",
+    "src/pages/EntraSettingsPage.tsx",
+    "docs/superpowers/specs/2026-08-14-phase-11c-entra-id-integration.md",
+    "docs/superpowers/plans/2026-08-14-phase-11c-entra-id-integration.md"
   ],
   "validation": {
     "documents_created": true,
@@ -300,11 +315,12 @@
     "phase_10_quality_gate": "passing",
     "phase_11_quality_gate": "passing",
     "phase_11b_quality_gate": "passing",
+    "phase_11c_quality_gate": "passing",
     "outlook_architecture_added": true,
     "antigravity_skills_installed": true
   },
   "blockers": [],
   "next_actions": [
-    "Triển khai Phase 11c — Microsoft Entra ID (Azure AD) Integration (OAuth2/OIDC SSO, Tenant Capability Assessment, Identity & Role mapping và cơ chế Auth fallback)."
+    "Triển khai Phase 11d — Outlook Advanced Approval Mode (Feature Nâng cấp: Microsoft Graph API adapter, Actionable Messages Adaptive Cards, Replay Protection và OutlookCapabilityDetector)."
   ]
 }

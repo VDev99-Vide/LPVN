@@ -7,6 +7,7 @@ import {
   DoorOpen,
   FileCheck,
   FileText,
+  KeyRound,
   LayoutDashboard,
   Users,
 } from 'lucide-react'
@@ -23,6 +24,7 @@ const NAV_ITEMS = [
   { label: 'Biểu Mẫu ISO', href: '/documents', icon: FileText },
   { label: 'Nhân sự & Tổ chức', href: '/employees', icon: Users },
   { label: 'Reports', href: '/reports', icon: BarChart3 },
+  { label: 'Entra ID SSO', href: '/settings/entra-id', icon: KeyRound },
 ]
 
 export function Sidebar() {

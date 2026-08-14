@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/contexts/AuthContext'
+import { SSOLoginButton } from '@/components/business/SSOLoginButton'
 
 export function LoginPage() {
   const { signIn } = useAuth()
@@ -37,33 +38,46 @@ export function LoginPage() {
 
   return (
     <div className="flex min-h-[80vh] items-center justify-center p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
+      <Card className="w-full max-w-md shadow-md border">
+        <CardHeader className="text-center pb-3">
           <CardTitle role="heading" aria-level={2} className="text-2xl font-bold">
             Đăng nhập LPVN HR Flow
           </CardTitle>
-          <CardDescription>
-            Nhập email công ty để nhận liên kết đăng nhập (Magic Link)
+          <CardDescription className="text-xs">
+            Hệ thống quản lý quy trình hành chính & nhân sự Leggett & Platt Vietnam
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email công ty</Label>
+        <CardContent className="space-y-4">
+          {/* Microsoft 365 SSO Primary Option */}
+          <div className="space-y-2">
+            <SSOLoginButton />
+          </div>
+
+          <div className="relative flex items-center justify-center">
+            <div className="border-t border-border w-full" />
+            <span className="bg-card px-2 text-[11px] text-muted-foreground uppercase font-medium absolute">
+              Hoặc đăng nhập dự phòng
+            </span>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-3 pt-1">
+            <div className="space-y-1.5">
+              <Label htmlFor="email" className="text-xs">Email công ty (Magic Link)</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="nhanvien@lpvn.com"
+                placeholder="nhanvien@leggett.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isSubmitting}
+                className="text-xs h-9"
               />
             </div>
             {message && (
               <div
                 role="status"
-                className={`p-3 rounded-md text-sm ${
+                className={`p-2.5 rounded-md text-xs ${
                   message.type === 'error'
                     ? 'bg-destructive/15 text-destructive'
                     : 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
@@ -72,8 +86,8 @@ export function LoginPage() {
                 {message.text}
               </div>
             )}
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? 'Đang gửi...' : 'Đăng nhập'}
+            <Button type="submit" variant="secondary" className="w-full text-xs h-9" disabled={isSubmitting}>
+              {isSubmitting ? 'Đang gửi...' : 'Gửi Mã Đăng Nhập Cục Bộ'}
             </Button>
           </form>
         </CardContent>

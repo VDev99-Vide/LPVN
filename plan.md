@@ -488,11 +488,11 @@ OutlookIntegration
 - [x] Đảm bảo vận hành hoàn hảo 100% mà KHÔNG cần quyền Admin Microsoft 365.
 
 ### Phase 11c — Microsoft Entra ID (Azure AD) Integration
-- [ ] Đánh giá khả năng tích hợp (Capability Assessment) của Tenant.
-- [ ] Cấu hình OAuth2 / OpenID Connect (OIDC) Single Sign-On (SSO).
-- [ ] Ánh xạ danh tính (Identity Mapping): `entra_object_id` ↔ `employee_id` ↔ `company_email`.
-- [ ] Ánh xạ Vai trò / Role Mapping từ Entra ID Groups sang LPVN Flow Roles.
-- [ ] Cơ chế Auth Fallback tự động khi Entra ID không khả dụng.
+- [x] Đánh giá khả năng tích hợp (Capability Assessment) của Tenant.
+- [x] Cấu hình OAuth2 / OpenID Connect (OIDC) Single Sign-On (SSO).
+- [x] Ánh xạ danh tính (Identity Mapping): `entra_object_id` ↔ `employee_id` ↔ `company_email`.
+- [x] Ánh xạ Vai trò / Role Mapping từ Entra ID Groups sang LPVN Flow Roles.
+- [x] Cơ chế Auth Fallback tự động khi Entra ID không khả dụng.
 
 ### Phase 11d — Outlook Advanced Approval Mode (Feature Nâng cấp)
 - [ ] Tích hợp Microsoft Graph Email API Adapter.

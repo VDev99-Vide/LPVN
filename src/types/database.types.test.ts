@@ -136,4 +136,36 @@ describe('Database Types Phase 04', () => {
     expect(mockTask.status).toBe('PENDING')
     expect(mockTransition.to_status).toBe('APPROVED')
   })
+
+  it('includes digital_signatures and signature_audit_logs tables in Database interface', () => {
+    type DigitalSignatureRow = Database['public']['Tables']['digital_signatures']['Row']
+    type SignatureAuditLogRow = Database['public']['Tables']['signature_audit_logs']['Row']
+
+    const mockSig: DigitalSignatureRow = {
+      id: 'sig-1',
+      user_id: 'user-1',
+      signature_type: 'CANVAS_DRAWN',
+      signature_url: 'data:image/png;base64,mockpngdata',
+      title: 'Chữ ký chính thức',
+      is_default: true,
+      is_active: true,
+      metadata: { width: 300, height: 150 },
+      created_at: '2026-08-14T00:00:00Z',
+      updated_at: '2026-08-14T00:00:00Z',
+    }
+
+    const mockLog: SignatureAuditLogRow = {
+      id: 'log-1',
+      signature_id: 'sig-1',
+      action: 'CREATED',
+      performed_by: 'user-1',
+      document_id: null,
+      document_type: null,
+      created_at: '2026-08-14T00:00:00Z',
+    }
+
+    expect(mockSig.signature_type).toBe('CANVAS_DRAWN')
+    expect(mockSig.is_default).toBe(true)
+    expect(mockLog.action).toBe('CREATED')
+  })
 })

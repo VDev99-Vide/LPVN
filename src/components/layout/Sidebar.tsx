@@ -4,6 +4,7 @@ import {
   CheckSquare,
   ClipboardCheck,
   DoorOpen,
+  FileCheck,
   LayoutDashboard,
   Users,
 } from 'lucide-react'
@@ -15,6 +16,7 @@ const NAV_ITEMS = [
   { label: 'Quản lý Phép năm', href: '/leave', icon: CalendarDays },
   { label: 'Gate Pass', href: '/gate-pass', icon: DoorOpen },
   { label: 'Attendance', href: '/attendance', icon: ClipboardCheck },
+  { label: 'Chữ Ký Số', href: '/signatures', icon: FileCheck },
   { label: 'Nhân sự & Tổ chức', href: '/employees', icon: Users },
   { label: 'Reports', href: '/reports', icon: BarChart3 },
 ]

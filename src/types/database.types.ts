@@ -542,6 +542,73 @@ export interface Database {
           created_at?: string
         }
       }
+      digital_signatures: {
+        Row: {
+          id: string
+          user_id: string
+          signature_type: 'ELECTRONIC_IMAGE' | 'CANVAS_DRAWN' | 'DIGITAL_CERTIFICATE'
+          signature_url: string
+          title: string | null
+          is_default: boolean
+          is_active: boolean
+          metadata: Record<string, any> | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          signature_type?: 'ELECTRONIC_IMAGE' | 'CANVAS_DRAWN' | 'DIGITAL_CERTIFICATE'
+          signature_url: string
+          title?: string | null
+          is_default?: boolean
+          is_active?: boolean
+          metadata?: Record<string, any> | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          signature_type?: 'ELECTRONIC_IMAGE' | 'CANVAS_DRAWN' | 'DIGITAL_CERTIFICATE'
+          signature_url?: string
+          title?: string | null
+          is_default?: boolean
+          is_active?: boolean
+          metadata?: Record<string, any> | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      signature_audit_logs: {
+        Row: {
+          id: string
+          signature_id: string | null
+          action: string
+          performed_by: string | null
+          document_id: string | null
+          document_type: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          signature_id?: string | null
+          action: string
+          performed_by?: string | null
+          document_id?: string | null
+          document_type?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          signature_id?: string | null
+          action?: string
+          performed_by?: string | null
+          document_id?: string | null
+          document_type?: string | null
+          created_at?: string
+        }
+      }
     }
   }
 }

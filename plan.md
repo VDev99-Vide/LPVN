@@ -445,13 +445,13 @@ OutlookIntegration
 - [x] Audit log mọi thay đổi trạng thái chuyển giao (state transitions).
 
 ### Phase 08 — Digital signature library
-- [ ] Signature profile cho từng Manager/Approver.
-- [ ] Upload & quản lý nét ký/hình ảnh chữ ký (`ELECTRONIC_IMAGE`).
-- [ ] Metadata: owner, active_status, created_at, updated_at.
-- [ ] Phân quyền bảo mật: Chỉ Manager được xem/chỉnh sửa chữ ký của chính mình.
-- [ ] Tự động chèn chữ ký vào file PDF sau khi yêu cầu được duyệt thành công.
-- [ ] Truy xuất chữ ký qua Server-side secure storage URL / Private bucket access.
-- [ ] Audit log toàn bộ thao tác thêm/sửa/xóa chữ ký.
+- [x] Signature profile cho từng Manager/Approver.
+- [x] Upload & quản lý nét ký/hình ảnh chữ ký (`ELECTRONIC_IMAGE`).
+- [x] Metadata: owner, active_status, created_at, updated_at.
+- [x] Phân quyền bảo mật: Chỉ Manager được xem/chỉnh sửa chữ ký của chính mình.
+- [x] Tự động chèn chữ ký vào file PDF sau khi yêu cầu được duyệt thành công.
+- [x] Truy xuất chữ ký qua Server-side secure storage URL / Private bucket access.
+- [x] Audit log toàn bộ thao tác thêm/sửa/xóa chữ ký.
 
 ### Phase 09 — Document template & rendering
 - [ ] Định nghĩa Template Contract cho từng biểu mẫu ISO (LPVN-HR-F-0008, 0013, 0014).

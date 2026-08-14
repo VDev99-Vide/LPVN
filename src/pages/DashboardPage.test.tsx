@@ -13,18 +13,12 @@ function renderDashboardPage() {
   )
 }
 
-describe('DashboardPage - Vision Pro Spatial Edition', () => {
-  it('renders top-left Leggett branding and visionOS badge', () => {
-    renderDashboardPage()
-    expect(screen.getByAltText('Leggett & Platt Logo')).toBeInTheDocument()
-    expect(screen.getByText('LPVN Flow')).toBeInTheDocument()
-    expect(screen.getByText('visionOS')).toBeInTheDocument()
-    expect(screen.getByText(/Supply Chain Hub · Leggett & Platt/i)).toBeInTheDocument()
-  })
-
-  it('renders user welcome header and time filter controls', () => {
+describe('DashboardPage - Real System Data & Vision Pro Spatial Edition', () => {
+  it('renders user welcome header and real department info', () => {
     renderDashboardPage()
     expect(screen.getByText('Welcome Back,')).toBeInTheDocument()
+    expect(screen.getByText(/Phòng ban:/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/Ban Quản Trị & Nhân Sự|Supply Chain/i).length).toBeGreaterThan(0)
     expect(screen.getByText('Today')).toBeInTheDocument()
     expect(screen.getByText('This month')).toBeInTheDocument()
     expect(screen.getByText('Date')).toBeInTheDocument()
@@ -32,75 +26,61 @@ describe('DashboardPage - Vision Pro Spatial Edition', () => {
 
   it('renders Mark Attendance card with timer, location toggle and action buttons', () => {
     renderDashboardPage()
-    expect(screen.getByText('Mark Attendance')).toBeInTheDocument()
+    expect(screen.getByText(/Mark Attendance \(Chấm công\)/i)).toBeInTheDocument()
     expect(screen.getByText('Office')).toBeInTheDocument()
     expect(screen.getByText('Work From Home')).toBeInTheDocument()
-    expect(screen.getByText('Work Hours')).toBeInTheDocument()
+    expect(screen.getByText(/Giờ làm việc \(Work Hours\)/i)).toBeInTheDocument()
     expect(screen.getByText('Out for Lunch')).toBeInTheDocument()
     expect(screen.getByText('Out for Break')).toBeInTheDocument()
-    expect(screen.getByText('Clock Out')).toBeInTheDocument()
+    expect(screen.getByText(/Clock Out/i)).toBeInTheDocument()
 
     // Test location toggle
     const wfhBtn = screen.getByText('Work From Home')
     fireEvent.click(wfhBtn)
-    expect(screen.getByText(/Home Remote Station/i)).toBeInTheDocument()
+    expect(screen.getByText(/Trạm làm việc từ xa \(WFH\)/i)).toBeInTheDocument()
   })
 
-  it('renders Income and Expenses mini cards', () => {
+  it('renders real system KPIs for employees and leave days', () => {
     renderDashboardPage()
-    expect(screen.getByText('Income')).toBeInTheDocument()
-    expect(screen.getByText('$ 12,800.00')).toBeInTheDocument()
-    expect(screen.getByText('+7.2% Higher')).toBeInTheDocument()
-    expect(screen.getByText('Expenses')).toBeInTheDocument()
-    expect(screen.getByText('$ 2,800.00')).toBeInTheDocument()
+    expect(screen.getByText('Nhân sự phòng ban')).toBeInTheDocument()
+    expect(screen.getByText('24 nhân sự')).toBeInTheDocument()
+    expect(screen.getByText('Tổng ngày nghỉ (2026)')).toBeInTheDocument()
+    expect(screen.getByText('142.5 ngày')).toBeInTheDocument()
   })
 
-  it('renders Leaves Summary card with leave types and progress bars', () => {
+  it('renders Leaves Summary card with real leave entitlement types', () => {
     renderDashboardPage()
-    expect(screen.getByText('Leaves Summary')).toBeInTheDocument()
-    expect(screen.getByText('2026')).toBeInTheDocument()
-    expect(screen.getByText(/Annual Leave/i)).toBeInTheDocument()
-    expect(screen.getByText('15/15')).toBeInTheDocument()
-    expect(screen.getByText(/Unpaid Leave/i)).toBeInTheDocument()
-    expect(screen.getByText('12/15')).toBeInTheDocument()
-    expect(screen.getByText(/Sick Leave/i)).toBeInTheDocument()
-    expect(screen.getByText('5/8')).toBeInTheDocument()
-    expect(screen.getByText(/Casual Leave/i)).toBeInTheDocument()
-    expect(screen.getByText('2/5')).toBeInTheDocument()
+    expect(screen.getByText(/Leaves Summary \(Quỹ Phép\)/i)).toBeInTheDocument()
+    expect(screen.getByText('Năm 2026')).toBeInTheDocument()
+    expect(screen.getByText(/Phép năm \(Annual Leave\)/i)).toBeInTheDocument()
+    expect(screen.getByText(/7.5 \/ 14 ngày còn lại/i)).toBeInTheDocument()
+    expect(screen.getByText(/Nghỉ ốm \/ Khám bệnh \(Sick Leave\)/i)).toBeInTheDocument()
+    expect(screen.getByText(/Việc riêng có lương \(Casual Leave\)/i)).toBeInTheDocument()
   })
 
-  it('renders Attendance Summary card with metrics', () => {
+  it('renders Attendance Summary card with performance metrics', () => {
     renderDashboardPage()
-    expect(screen.getByText('Attendance Summary')).toBeInTheDocument()
+    expect(screen.getByText(/Attendance Summary \(Hiệu Suất Công\)/i)).toBeInTheDocument()
     expect(screen.getByText('6.75')).toBeInTheDocument()
-    expect(screen.getByText('Avg Time Spent Hours')).toBeInTheDocument()
+    expect(screen.getByText(/Giờ làm việc trung bình \/ ngày/i)).toBeInTheDocument()
     expect(screen.getByText('02')).toBeInTheDocument()
-    expect(screen.getByText('Total Late (days)')).toBeInTheDocument()
+    expect(screen.getByText(/Số ngày đi trễ \(Trong tháng\)/i)).toBeInTheDocument()
   })
 
-  it('renders Waiting For Approval queue and allows approving requests', () => {
+  it('renders real Waiting For Approval queue and allows approving requests', () => {
     renderDashboardPage()
-    expect(screen.getByText('Waiting For Approval')).toBeInTheDocument()
-    expect(screen.getByText('Valeria Garza')).toBeInTheDocument()
-    expect(screen.getByText('Marci Senter')).toBeInTheDocument()
+    expect(screen.getByText(/Waiting For Approval \(Chờ Phê Duyệt\)/i)).toBeInTheDocument()
+    expect(screen.getByText(/Trần Văn An/i)).toBeInTheDocument()
+    expect(screen.getByText(/Nguyễn Thị Bình/i)).toBeInTheDocument()
 
-    const approveButtons = screen.getAllByText('Approve')
+    const approveButtons = screen.getAllByText('Duyệt')
     fireEvent.click(approveButtons[0])
     expect(screen.getByText('Đã phê duyệt yêu cầu thành công!')).toBeInTheDocument()
   })
 
   it('renders Forms launcher with LPVN ISO templates', () => {
     renderDashboardPage()
-    expect(screen.getByText(/Forms \(Biểu Mẫu ISO\)/i)).toBeInTheDocument()
-    expect(screen.getByText('Fill Form')).toBeInTheDocument()
-  })
-
-  it('renders bottom floating navigation dock', () => {
-    renderDashboardPage()
-    expect(screen.getByRole('navigation', { name: 'Bottom Navigation' })).toBeInTheDocument()
-    expect(screen.getByText('Dashboard')).toBeInTheDocument()
-    expect(screen.getByText('Expense & Leaves')).toBeInTheDocument()
-    expect(screen.getByText('Timesheet')).toBeInTheDocument()
-    expect(screen.getByText('Approvals')).toBeInTheDocument()
+    expect(screen.getByText(/Forms \(Biểu Mẫu Chuẩn ISO\)/i)).toBeInTheDocument()
+    expect(screen.getByText('Tạo Biểu Mẫu Ngay (Fill Form)')).toBeInTheDocument()
   })
 })

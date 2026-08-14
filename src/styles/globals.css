@@ -707,9 +707,63 @@
     position: static;
     justify-content: center;
     border-radius: 24px;
+    flex-wrap: wrap;
   }
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* =========================================================================
+   Global VisionOS Child Component Adaptation
+   ========================================================================= */
+
+.vision-container [data-slot="card"] {
+  background: rgba(20, 22, 28, 0.52);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 10px 24px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+}
+
+.vision-container [data-slot="card-title"] {
+  color: #ffffff;
+}
+
+.vision-container [data-slot="card-description"] {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.vision-container table {
+  color: #ffffff;
+}
+
+.vision-container th {
+  color: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vision-container td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.vision-container tr:hover td {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.vision-container input, 
+.vision-container select, 
+.vision-container textarea {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border-radius: 14px;
+}
+
+.vision-container input::placeholder, 
+.vision-container textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
 }
 

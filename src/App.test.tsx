@@ -10,11 +10,11 @@ afterEach(() => {
 describe('App', () => {
   it('renders the dashboard inside the spatial shell', () => {
     render(<App />)
-    expect(screen.getByText('LPVN Flow')).toBeInTheDocument()
-    expect(screen.getByText('visionOS')).toBeInTheDocument()
-    expect(screen.getByText('Mark Attendance')).toBeInTheDocument()
-    expect(screen.getByText('Leaves Summary')).toBeInTheDocument()
-    expect(screen.getByText('Waiting For Approval')).toBeInTheDocument()
+    expect(screen.getAllByText('LPVN Flow').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('visionOS').length).toBeGreaterThan(0)
+    expect(screen.getByText(/Mark Attendance/i)).toBeInTheDocument()
+    expect(screen.getByText(/Leaves Summary/i)).toBeInTheDocument()
+    expect(screen.getByText(/Waiting For Approval/i)).toBeInTheDocument()
   })
 
   it('renders NewRequestPage when path is /new-request', () => {

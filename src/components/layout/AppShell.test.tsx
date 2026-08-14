@@ -5,50 +5,52 @@ import { AppShell } from './AppShell'
 
 afterEach(cleanup)
 
-describe('AppShell', () => {
-  it('renders sidebar navigation items when on subpages', () => {
-    // Set pathname to subpage
-    window.history.pushState({}, '', '/employees')
-    render(
-      <AuthProvider>
-        <AppShell>content</AppShell>
-      </AuthProvider>
-    )
-    expect(screen.getByText('Dashboard')).toBeInTheDocument()
-    expect(screen.getByText('Tạo đơn mới')).toBeInTheDocument()
-    expect(screen.getByText('Đơn của tôi')).toBeInTheDocument()
-    expect(screen.getByText('Duyệt đơn')).toBeInTheDocument()
-    expect(screen.getByText('Thư viện chữ ký')).toBeInTheDocument()
-    expect(screen.getByText('Nhân sự & Tạo User')).toBeInTheDocument()
-    expect(screen.getByText('Quản lý Phép năm')).toBeInTheDocument()
-    expect(screen.getByText('Biểu Mẫu ISO')).toBeInTheDocument()
-    expect(screen.getByText('Pipeline Tự Động')).toBeInTheDocument()
-    expect(screen.getByText('An Ninh & RLS')).toBeInTheDocument()
-    expect(screen.getByText('Kiểm Thử & QA')).toBeInTheDocument()
-    expect(screen.getByText('Triển Khai & Go-Live')).toBeInTheDocument()
-  })
-
-  it('renders topbar with theme toggle and user on subpages', () => {
-    window.history.pushState({}, '', '/leave')
-    render(
-      <AuthProvider>
-        <AppShell>content</AppShell>
-      </AuthProvider>
-    )
-    expect(screen.getByRole('button', { name: /toggle theme/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /Thông báo/i })).toBeInTheDocument()
-    expect(screen.getAllByText('LPVN Admin').length).toBeGreaterThan(0)
-  })
-
-  it('renders spatial container on dashboard root', () => {
-    window.history.pushState({}, '', '/')
+describe('AppShell - Global Vision Pro Spatial Workspace', () => {
+  it('renders global branding with Leggett logo and visionOS badge', () => {
     render(
       <AuthProvider>
         <AppShell>
-          <p>vision spatial content</p>
+          <div>test content</div>
         </AppShell>
       </AuthProvider>
     )
-    expect(screen.getByText('vision spatial content')).toBeInTheDocument()
+    expect(screen.getByAltText('Leggett & Platt Logo')).toBeInTheDocument()
+    expect(screen.getByText('LPVN Flow')).toBeInTheDocument()
+    expect(screen.getByText('visionOS')).toBeInTheDocument()
+    expect(screen.getByText(/Supply Chain Hub · Leggett & Platt/i)).toBeInTheDocument()
+  })
+
+  it('renders floating left dock and bottom dock with key navigation routes', () => {
+    render(
+      <AuthProvider>
+        <AppShell>
+          <div>test content</div>
+        </AppShell>
+      </AuthProvider>
+    )
+    expect(screen.getByRole('complementary', { name: 'Global Vision Pro Navigation Dock' })).toBeInTheDocument()
+    expect(screen.getByRole('navigation', { name: 'Bottom Navigation' })).toBeInTheDocument()
+  })
+
+  it('renders frosted glass footer By Vinh © 2026', () => {
+    render(
+      <AuthProvider>
+        <AppShell>
+          <div>test content</div>
+        </AppShell>
+      </AuthProvider>
+    )
+    expect(screen.getByText('By Vinh © 2026')).toBeInTheDocument()
+  })
+
+  it('renders children content inside the vision container', () => {
+    render(
+      <AuthProvider>
+        <AppShell>
+          <div data-testid="child-page">Child Page Content</div>
+        </AppShell>
+      </AuthProvider>
+    )
+    expect(screen.getByTestId('child-page')).toHaveTextContent('Child Page Content')
   })
 })

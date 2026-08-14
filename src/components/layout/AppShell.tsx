@@ -119,107 +119,6 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="vision-spatial-root">
       
-      {/* Top Right Controls Glass Panel */}
-      <header className="w-full max-w-[1360px] mx-auto flex items-center justify-end px-2 py-1.5 mb-2 z-30" role="banner">
-        
-        {/* Right Controls: Role Switcher, Notification Bell & Profile Avatar */}
-        <div className="flex items-center gap-2 p-1.5 rounded-full bg-black/40 backdrop-blur-2xl border border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-          
-          {/* Custom VisionOS Glass Role Switcher Dropdown (No native white background) */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
-              className="flex items-center gap-2 bg-black/40 backdrop-blur-xl border border-white/15 hover:border-white/30 px-3 py-1 rounded-full shadow-lg text-white text-xs font-semibold cursor-pointer transition-all"
-            >
-              <span className="text-[11px] text-white/60 font-medium hidden sm:inline">Vai trò:</span>
-              <span className="text-teal-300 font-bold">{roleTitleMap[currentRole]}</span>
-              <ChevronDown className={`w-3.5 h-3.5 text-white/60 transition-transform duration-200 ${isRoleDropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            {isRoleDropdownOpen && (
-              <>
-                {/* Backdrop to close on click outside */}
-                <div 
-                  className="fixed inset-0 z-40" 
-                  onClick={() => setIsRoleDropdownOpen(false)} 
-                />
-                
-                {/* Frosted Glass Dropdown Menu */}
-                <div className="absolute top-full mt-2 right-0 w-64 p-2 rounded-2xl bg-[#12151e]/95 backdrop-blur-3xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-50 animate-in fade-in space-y-1 text-white">
-                  <div className="px-2 py-1 text-[10px] uppercase font-bold text-white/50 tracking-wider">
-                    Chuyển đổi vai trò Demo
-                  </div>
-                  {roleOptions.map((item) => {
-                    const isCurrent = currentRole === item.role
-                    const Icon = item.icon
-                    return (
-                      <button
-                        key={item.key}
-                        type="button"
-                        onClick={() => {
-                          switchDemoUser(item.key)
-                          setIsRoleDropdownOpen(false)
-                        }}
-                        className={`w-full flex items-center justify-between p-2 rounded-xl text-left text-xs transition-all cursor-pointer ${
-                          isCurrent
-                            ? 'bg-teal-500/20 text-teal-300 border border-teal-400/30 font-bold shadow-[0_0_10px_rgba(45,212,191,0.2)]'
-                            : 'text-white/80 hover:bg-white/10 hover:text-white'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2">
-                          <div className={`p-1 rounded-lg ${isCurrent ? 'bg-teal-400/20 text-teal-300' : 'bg-white/5 text-white/60'}`}>
-                            <Icon className="w-3.5 h-3.5" />
-                          </div>
-                          <div>
-                            <div className="font-semibold text-xs text-white">{item.label}</div>
-                            <div className="text-[10px] text-white/50">{item.desc}</div>
-                          </div>
-                        </div>
-                        {isCurrent && <Check className="w-3.5 h-3.5 text-teal-300 shrink-0 ml-1" />}
-                      </button>
-                    )
-                  })}
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* In-App Notification Bell */}
-          <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-full p-0.5">
-            <NotificationBell
-              notifications={sampleNotifications}
-              unreadCount={2}
-              onMarkAllRead={() => {}}
-            />
-          </div>
-
-          {/* User Profile Glass Avatar */}
-          <button
-            onClick={() => navigateTo('/signatures')}
-            className="flex items-center gap-2 pl-2 pr-2.5 py-1 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-white/30 transition-all cursor-pointer text-left"
-            title={`${activeUser.name} · ${roleTitleMap[currentRole]}`}
-          >
-            <div className="h-7 w-7 rounded-full bg-gradient-to-tr from-amber-400 to-amber-200 text-neutral-900 font-extrabold flex items-center justify-center text-[11px] shadow-sm">
-              {getInitials(activeUser.name)}
-            </div>
-            <div className="flex flex-col text-left hidden sm:flex max-w-[110px]">
-              <span className="text-xs font-bold text-white truncate leading-tight">{activeUser.name}</span>
-              <span className="text-[9px] text-white/60 truncate leading-tight">{roleTitleMap[currentRole]}</span>
-            </div>
-          </button>
-
-          {/* Quick Logout to Demo Gateway */}
-          <button
-            onClick={logout}
-            className="p-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-red-400/40 text-white/60 hover:text-red-400 transition-all cursor-pointer"
-            title="Đăng xuất khỏi hệ thống"
-          >
-            <LogOut className="w-4 h-4" />
-          </button>
-        </div>
-      </header>
-
       {/* Spatial Workspace Shell */}
       <div className="spatial-workspace">
         
@@ -268,6 +167,108 @@ export function AppShell({ children }: { children: ReactNode }) {
         {/* Main Content Area */}
         <main className="spatial-main-content">
           <div className="vision-container pb-16">
+            
+            {/* Top Right Controls Glass Panel INSIDE the Card */}
+            <header className="flex items-center justify-end mb-5 z-30" role="banner">
+              
+              {/* Right Controls: Role Switcher, Notification Bell & Profile Avatar */}
+              <div className="flex items-center gap-2 p-1.5 rounded-full bg-black/40 backdrop-blur-2xl border border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                
+                {/* Custom VisionOS Glass Role Switcher Dropdown (No native white background) */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
+                    className="flex items-center gap-2 bg-black/40 backdrop-blur-xl border border-white/15 hover:border-white/30 px-3 py-1 rounded-full shadow-lg text-white text-xs font-semibold cursor-pointer transition-all"
+                  >
+                    <span className="text-[11px] text-white/60 font-medium hidden sm:inline">Vai trò:</span>
+                    <span className="text-teal-300 font-bold">{roleTitleMap[currentRole]}</span>
+                    <ChevronDown className={`w-3.5 h-3.5 text-white/60 transition-transform duration-200 ${isRoleDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {isRoleDropdownOpen && (
+                    <>
+                      {/* Backdrop to close on click outside */}
+                      <div 
+                        className="fixed inset-0 z-40" 
+                        onClick={() => setIsRoleDropdownOpen(false)} 
+                      />
+                      
+                      {/* Frosted Glass Dropdown Menu */}
+                      <div className="absolute top-full mt-2 right-0 w-64 p-2 rounded-2xl bg-[#12151e]/95 backdrop-blur-3xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-50 animate-in fade-in space-y-1 text-white">
+                        <div className="px-2 py-1 text-[10px] uppercase font-bold text-white/50 tracking-wider">
+                          Chuyển đổi vai trò Demo
+                        </div>
+                        {roleOptions.map((item) => {
+                          const isCurrent = currentRole === item.role
+                          const Icon = item.icon
+                          return (
+                            <button
+                              key={item.key}
+                              type="button"
+                              onClick={() => {
+                                switchDemoUser(item.key)
+                                setIsRoleDropdownOpen(false)
+                              }}
+                              className={`w-full flex items-center justify-between p-2 rounded-xl text-left text-xs transition-all cursor-pointer ${
+                                isCurrent
+                                  ? 'bg-teal-500/20 text-teal-300 border border-teal-400/30 font-bold shadow-[0_0_10px_rgba(45,212,191,0.2)]'
+                                  : 'text-white/80 hover:bg-white/10 hover:text-white'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2">
+                                <div className={`p-1 rounded-lg ${isCurrent ? 'bg-teal-400/20 text-teal-300' : 'bg-white/5 text-white/60'}`}>
+                                  <Icon className="w-3.5 h-3.5" />
+                                </div>
+                                <div>
+                                  <div className="font-semibold text-xs text-white">{item.label}</div>
+                                  <div className="text-[10px] text-white/50">{item.desc}</div>
+                                </div>
+                              </div>
+                              {isCurrent && <Check className="w-3.5 h-3.5 text-teal-300 shrink-0 ml-1" />}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* In-App Notification Bell */}
+                <div className="bg-black/35 backdrop-blur-md border border-white/15 rounded-full p-0.5">
+                  <NotificationBell
+                    notifications={sampleNotifications}
+                    unreadCount={2}
+                    onMarkAllRead={() => {}}
+                  />
+                </div>
+
+                {/* User Profile Glass Avatar */}
+                <button
+                  onClick={() => navigateTo('/signatures')}
+                  className="flex items-center gap-2 pl-2 pr-2.5 py-1 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-white/30 transition-all cursor-pointer text-left"
+                  title={`${activeUser.name} · ${roleTitleMap[currentRole]}`}
+                >
+                  <div className="h-7 w-7 rounded-full bg-gradient-to-tr from-amber-400 to-amber-200 text-neutral-900 font-extrabold flex items-center justify-center text-[11px] shadow-sm">
+                    {getInitials(activeUser.name)}
+                  </div>
+                  <div className="flex flex-col text-left hidden sm:flex max-w-[110px]">
+                    <span className="text-xs font-bold text-white truncate leading-tight">{activeUser.name}</span>
+                    <span className="text-[9px] text-white/60 truncate leading-tight">{roleTitleMap[currentRole]}</span>
+                  </div>
+                </button>
+
+                {/* Quick Logout to Demo Gateway */}
+                <button
+                  onClick={logout}
+                  className="p-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-red-400/40 text-white/60 hover:text-red-400 transition-all cursor-pointer"
+                  title="Đăng xuất khỏi hệ thống"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            </header>
+
             {children}
           </div>
         </main>

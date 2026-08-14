@@ -113,8 +113,8 @@ export function LoginPage() {
     <div className="vision-spatial-root min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-xl z-10">
         
-        {/* Main Glassmorphic Login Gateway */}
-        <Card className="border border-white/16 bg-[rgba(26,29,36,0.62)] backdrop-blur-[50px] saturate-[210%] shadow-[0_35px_80px_rgba(0,0,0,0.55),inset_0_1.5px_1.5px_rgba(255,255,255,0.25),inset_0_-1.5px_1.5px_rgba(0,0,0,0.4)] rounded-[36px] overflow-hidden text-white">
+        {/* Main Glassmorphic Login Gateway matching system glass cards */}
+        <Card className="glass-card border border-white/14 bg-[rgba(20,22,28,0.52)] backdrop-blur-[30px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.12),0_10px_24px_rgba(0,0,0,0.25)] rounded-[24px] overflow-hidden text-white">
           <CardHeader className="flex flex-col items-center justify-center pt-8 pb-3 text-center">
             
             {/* Bright Leggett Logo */}

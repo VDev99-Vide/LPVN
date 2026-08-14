@@ -9,6 +9,7 @@ import { AttendancePage } from './pages/AttendancePage'
 import { ApprovalsHubPage } from './pages/ApprovalsHubPage'
 import { SignatureSettingsPage } from './pages/SignatureSettingsPage'
 import { DocumentCenterPage } from './pages/DocumentCenterPage'
+import { ReportsPage } from './pages/ReportsPage'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -40,6 +41,8 @@ function App() {
           <SignatureSettingsPage />
         ) : currentPath === '/documents' ? (
           <DocumentCenterPage />
+        ) : currentPath === '/reports' ? (
+          <ReportsPage />
         ) : (
           <DashboardPage />
         )}

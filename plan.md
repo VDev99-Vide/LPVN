@@ -463,10 +463,10 @@ OutlookIntegration
 - [x] Snapshot toàn bộ dữ liệu nghiệp vụ tại thời điểm xuất file.
 
 ### Phase 10 — Reporting & Analytics
-- [ ] Dashboard báo cáo ngày nghỉ theo tháng và năm.
-- [ ] Báo cáo chi tiết theo từng nhân viên, bộ phận, loại hình nghỉ.
-- [ ] Báo cáo tổng hợp số ngày phép năm được hưởng, đã dùng, còn lại.
-- [ ] Xuất báo cáo dữ liệu định dạng Excel / CSV / PDF.
+- [x] Dashboard báo cáo ngày nghỉ theo tháng và năm.
+- [x] Báo cáo chi tiết theo từng nhân viên, bộ phận, loại hình nghỉ.
+- [x] Báo cáo tổng hợp số ngày phép năm được hưởng, đã dùng, còn lại.
+- [x] Xuất báo cáo dữ liệu định dạng Excel / CSV / PDF.
 
 ### Phase 11 — Notification Core & Email Integration
 - [ ] **Notification Core**:

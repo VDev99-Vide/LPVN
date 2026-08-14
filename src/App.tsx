@@ -19,6 +19,7 @@ import { OutlookAdvancedConfigPage } from './pages/OutlookAdvancedConfigPage'
 import { DocumentPipelinePage } from './pages/DocumentPipelinePage'
 import { SecurityAuditPage } from './pages/SecurityAuditPage'
 import { QATestPage } from './pages/QATestPage'
+import { ProductionDeploymentPage } from './pages/ProductionDeploymentPage'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -66,6 +67,8 @@ function App() {
           <OutlookActionPage />
         ) : currentPath === '/settings/security' ? (
           <SecurityAuditPage />
+        ) : currentPath === '/settings/deployment' ? (
+          <ProductionDeploymentPage />
         ) : currentPath === '/settings/entra-id' ? (
           <EntraSettingsPage />
         ) : currentPath === '/settings/outlook-advanced' ? (

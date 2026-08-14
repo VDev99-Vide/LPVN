@@ -23,6 +23,7 @@ describe('AppShell', () => {
     expect(screen.getByText('Pipeline Tự Động')).toBeInTheDocument()
     expect(screen.getByText('An Ninh & RLS')).toBeInTheDocument()
     expect(screen.getByText('Kiểm Thử & QA')).toBeInTheDocument()
+    expect(screen.getByText('Triển Khai & Go-Live')).toBeInTheDocument()
   })
 
   it('renders topbar with theme toggle and user', () => {

@@ -532,14 +532,14 @@ OutlookIntegration
 - [x] E2E Testing cơ chế Fallback khi Outlook Advanced bị tắt/lỗi.
 
 ### Phase 14 — Production deployment
-- [ ] Khởi tạo Production Supabase project & cấu hình môi trường.
-- [ ] Áp dụng Database Migrations chính thức.
-- [ ] Cấu hình Cloudflare Pages / Workers & Environment Variables.
-- [ ] Cấu hình Tên miền chính thức & Custom Mail Domain.
-- [ ] Thiết lập hệ thống Monitoring, Error Tracking & Centralized Logging.
-- [ ] Xây dựng quy trình Backup / Restore dữ liệu định kỳ.
-- [ ] Deployment Rollback Procedure.
-- [ ] Nghiệm thu sản phẩm (UAT Checklist).
+- [x] Khởi tạo Production Supabase project & cấu hình môi trường.
+- [x] Áp dụng Database Migrations chính thức.
+- [x] Cấu hình Cloudflare Pages / Workers & Environment Variables.
+- [x] Cấu hình Tên miền chính thức & Custom Mail Domain.
+- [x] Thiết lập hệ thống Monitoring, Error Tracking & Centralized Logging.
+- [x] Xây dựng quy trình Backup / Restore dữ liệu định kỳ.
+- [x] Deployment Rollback Procedure.
+- [x] Nghiệm thu sản phẩm (UAT Checklist).
 
 ---
 

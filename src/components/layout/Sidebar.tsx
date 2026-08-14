@@ -9,6 +9,7 @@ import {
   GitMerge,
   KeyRound,
   LayoutDashboard,
+  Rocket,
   ShieldCheck,
   TestTube2,
   Users,
@@ -45,6 +46,7 @@ const ALL_NAV_ITEMS: NavItemDef[] = [
   { label: 'Pipeline Tự Động', href: '/pipeline', icon: GitMerge, roles: ['ADMIN'] },
   { label: 'An Ninh & RLS', href: '/settings/security', icon: ShieldCheck, roles: ['ADMIN'] },
   { label: 'Kiểm Thử & QA', href: '/qa', icon: TestTube2, roles: ['ADMIN'] },
+  { label: 'Triển Khai & Go-Live', href: '/settings/deployment', icon: Rocket, roles: ['ADMIN'] },
   { label: 'Entra ID & Email', href: '/settings/entra-id', icon: KeyRound, roles: ['ADMIN'] },
   { label: 'Outlook Actionable', href: '/settings/outlook-advanced', icon: Zap, roles: ['ADMIN'] },
 ]

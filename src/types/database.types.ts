@@ -404,6 +404,65 @@ export interface Database {
           updated_at?: string
         }
       }
+      attendance_confirmations: {
+        Row: {
+          id: string
+          document_no: string
+          employee_id: string
+          reason: string
+          confirmation_date: string
+          from_time: string
+          to_time: string
+          status: 'DRAFT' | 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED' | 'HR_RECORDED' | 'CANCELLED'
+          checker_id: string | null
+          checked_at: string | null
+          approver_id: string | null
+          approved_at: string | null
+          hr_admin_id: string | null
+          hr_recorded_at: string | null
+          notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          document_no?: string
+          employee_id: string
+          reason: string
+          confirmation_date?: string
+          from_time: string
+          to_time: string
+          status?: 'DRAFT' | 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED' | 'HR_RECORDED' | 'CANCELLED'
+          checker_id?: string | null
+          checked_at?: string | null
+          approver_id?: string | null
+          approved_at?: string | null
+          hr_admin_id?: string | null
+          hr_recorded_at?: string | null
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          document_no?: string
+          employee_id?: string
+          reason?: string
+          confirmation_date?: string
+          from_time?: string
+          to_time?: string
+          status?: 'DRAFT' | 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED' | 'HR_RECORDED' | 'CANCELLED'
+          checker_id?: string | null
+          checked_at?: string | null
+          approver_id?: string | null
+          approved_at?: string | null
+          hr_admin_id?: string | null
+          hr_recorded_at?: string | null
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
   }
 }

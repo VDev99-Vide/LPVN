@@ -429,11 +429,11 @@ OutlookIntegration
 - [x] Ghi nhận thời gian ra/vào thực tế & nhân viên bảo vệ ca trực.
 
 ### Phase 06 — Attendance Confirmation
-- [ ] Web Form SaaS cho Giấy xác nhận ngày công (LPVN-HR-F-0008).
-- [ ] Lý do xác nhận (Quên quẹt thẻ, Công tác ngoài, Lỗi máy chấm công,...).
-- [ ] Ngày xác nhận & Khung giờ từ/đến.
-- [ ] Đơn vị/Phòng ban & Người đề nghị / Người kiểm tra / Người duyệt.
-- [ ] Luồng chuyển giao HR ghi nhận chấm công sau khi trưởng bộ phận duyệt.
+- [x] Web Form SaaS cho Giấy xác nhận ngày công (LPVN-HR-F-0008).
+- [x] Lý do xác nhận (Quên quẹt thẻ, Công tác ngoài, Lỗi máy chấm công,...).
+- [x] Ngày xác nhận & Khung giờ từ/đến.
+- [x] Đơn vị/Phòng ban & Người đề nghị / Người kiểm tra / Người duyệt.
+- [x] Luồng chuyển giao HR ghi nhận chấm công sau khi trưởng bộ phận duyệt.
 
 ### Phase 07 — Approval workflow engine
 - [ ] Generic approval workflow state machine (`DRAFT`, `SUBMITTED`, `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `DOCUMENT_GENERATED`).

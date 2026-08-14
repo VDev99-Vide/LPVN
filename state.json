@@ -2,13 +2,13 @@
   "project": "LPVN-HR-Workflow-SaaS",
   "schema_version": 1,
   "status": "PLANNING",
-  "current_phase": "phase-05",
-  "current_task": "phase-06-attendance-confirmation",
+  "current_phase": "phase-06",
+  "current_task": "phase-07-approval-workflow-engine",
   "agent_engine": "Antigravity AI Engine (Google DeepMind)",
   "last_session": {
     "status": "completed",
-    "summary": "Completed Phase 04 Leave & Annual Leave Management and Phase 05 Gate Pass (LPVN-HR-F-0014) subsystem: SQL migration, service layer, GatePassTable, GatePassFormDrawer, GatePassSecurityStation, GatePassPreviewModal with GatePassISO integration, and routing.",
-    "timestamp": "2026-08-14T01:29:00+00:00"
+    "summary": "Completed Phase 06 Attendance Confirmation (LPVN-HR-F-0008): SQL migration, attendance.service, AttendanceTable, AttendanceFormDrawer, AttendanceHRReviewTable, AttendancePreviewModal with AttendanceConfirmationISO, and AttendancePage routing.",
+    "timestamp": "2026-08-14T01:36:00+00:00"
   },
   "progress": {
     "phase-00": { "status": "DONE", "percent": 100 },
@@ -17,8 +17,8 @@
     "phase-03": { "status": "DONE", "percent": 100 },
     "phase-04": { "status": "DONE", "percent": 100 },
     "phase-05": { "status": "DONE", "percent": 100 },
-    "phase-06": { "status": "IN_PROGRESS", "percent": 0 },
-    "phase-07": { "status": "LOCKED", "percent": 0 },
+    "phase-06": { "status": "DONE", "percent": 100 },
+    "phase-07": { "status": "IN_PROGRESS", "percent": 0 },
     "phase-08": { "status": "LOCKED", "percent": 0 },
     "phase-09": { "status": "LOCKED", "percent": 0 },
     "phase-10": { "status": "LOCKED", "percent": 0 },
@@ -129,6 +129,11 @@
       "id": "ADR-013",
       "decision": "Phase-05 Gate Pass: Schema migration (20260814000007_gate_pass_system.sql), gatePassService, GatePassFormDrawer, GatePassTable, GatePassSecurityStation, GatePassPreviewModal, GatePassISO component, and GatePassPage integration.",
       "status": "accepted"
+    },
+    {
+      "id": "ADR-014",
+      "decision": "Phase-06 Attendance Confirmation: Schema migration (20260814000008_attendance_confirmation_system.sql), attendanceService, AttendanceFormDrawer, AttendanceTable, AttendanceHRReviewTable, AttendancePreviewModal, AttendanceConfirmationISO component, and AttendancePage integration.",
+      "status": "accepted"
     }
   ],
   "files_created": [
@@ -187,7 +192,16 @@
     "src/components/business/GatePassPreviewModal.tsx",
     "src/pages/GatePassPage.tsx",
     "docs/superpowers/specs/2026-08-14-phase-05-gate-pass.md",
-    "docs/superpowers/plans/2026-08-14-phase-05-gate-pass.md"
+    "docs/superpowers/plans/2026-08-14-phase-05-gate-pass.md",
+    "supabase/migrations/20260814000008_attendance_confirmation_system.sql",
+    "src/services/attendance.service.ts",
+    "src/components/business/AttendanceFormDrawer.tsx",
+    "src/components/business/AttendanceTable.tsx",
+    "src/components/business/AttendanceHRReviewTable.tsx",
+    "src/components/business/AttendancePreviewModal.tsx",
+    "src/pages/AttendancePage.tsx",
+    "docs/superpowers/specs/2026-08-14-phase-06-attendance-confirmation.md",
+    "docs/superpowers/plans/2026-08-14-phase-06-attendance-confirmation.md"
   ],
   "validation": {
     "documents_created": true,
@@ -198,11 +212,12 @@
     "phase_03_quality_gate": "passing",
     "phase_04_quality_gate": "passing",
     "phase_05_quality_gate": "passing",
+    "phase_06_quality_gate": "passing",
     "outlook_architecture_added": true,
     "antigravity_skills_installed": true
   },
   "blockers": [],
   "next_actions": [
-    "Triển khai Phase 06 — Attendance Confirmation (Xác nhận ngày công - LPVN-HR-F-0008)."
+    "Triển khai Phase 07 — Approval Workflow Engine (Generic state machine, multi-step resolver, anti-replay approval)."
   ]
 }

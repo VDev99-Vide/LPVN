@@ -74,4 +74,30 @@ describe('Database Types Phase 04', () => {
     expect(mockGatePass.document_no).toBe('LPVN-HR-F-0014')
     expect(mockGatePass.status).toBe('APPROVED')
   })
+
+  it('includes attendance_confirmations table in Database interface', () => {
+    type AttendanceRow = Database['public']['Tables']['attendance_confirmations']['Row']
+    const mockAttendance: AttendanceRow = {
+      id: 'att-1',
+      document_no: 'LPVN-HR-F-0008',
+      employee_id: 'emp-1',
+      reason: 'Quên quẹt thẻ lúc vào ca',
+      confirmation_date: '2026-08-14',
+      from_time: '08:00',
+      to_time: '17:00',
+      status: 'PENDING_APPROVAL',
+      checker_id: null,
+      checked_at: null,
+      approver_id: null,
+      approved_at: null,
+      hr_admin_id: null,
+      hr_recorded_at: null,
+      notes: null,
+      created_at: '2026-08-14T00:00:00Z',
+      updated_at: '2026-08-14T00:00:00Z',
+    }
+
+    expect(mockAttendance.document_no).toBe('LPVN-HR-F-0008')
+    expect(mockAttendance.status).toBe('PENDING_APPROVAL')
+  })
 })

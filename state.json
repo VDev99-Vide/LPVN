@@ -185,6 +185,11 @@
       "id": "ADR-023",
       "decision": "Phase-11e Approval to Document Pipeline Integration: approvalDocumentPipelineService with 5-stage automated pipeline (Signature Resolution, Template Version Locking, Snapshot & SHA-256 Hashing, R2/Supabase Storage, Multi-channel dispatch), ApprovalPipelineStatusCard, PipelineTriggerButton, DocumentIntegrityVerifier, and DocumentPipelinePage routing.",
       "status": "accepted"
+    },
+    {
+      "id": "ADR-024",
+      "decision": "Vision Pro Spatial Dashboard Upgrade: Implemented Apple visionOS glassmorphic design system using Backgroud.png spatial wallpaper, transparent Leggett & Platt branding, live ticking work hours timer, interactive attendance action dispatchers, leave summary progress pill bars, waiting for approvals queue with immediate action triggers, ISO form launcher, floating left/bottom docks, and frosted glass 'By Vinh © 2026' footer badge; cleaned up vision_pro_dashboard.html for zero deployment conflicts.",
+      "status": "accepted"
     }
   ],
   "files_created": [

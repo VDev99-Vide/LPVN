@@ -6,7 +6,9 @@ import { AppShell } from './AppShell'
 afterEach(cleanup)
 
 describe('AppShell', () => {
-  it('renders sidebar navigation items', () => {
+  it('renders sidebar navigation items when on subpages', () => {
+    // Set pathname to subpage
+    window.history.pushState({}, '', '/employees')
     render(
       <AuthProvider>
         <AppShell>content</AppShell>
@@ -26,7 +28,8 @@ describe('AppShell', () => {
     expect(screen.getByText('Triển Khai & Go-Live')).toBeInTheDocument()
   })
 
-  it('renders topbar with theme toggle and user', () => {
+  it('renders topbar with theme toggle and user on subpages', () => {
+    window.history.pushState({}, '', '/leave')
     render(
       <AuthProvider>
         <AppShell>content</AppShell>
@@ -37,14 +40,15 @@ describe('AppShell', () => {
     expect(screen.getAllByText('LPVN Admin').length).toBeGreaterThan(0)
   })
 
-  it('renders children in the content area', () => {
+  it('renders spatial container on dashboard root', () => {
+    window.history.pushState({}, '', '/')
     render(
       <AuthProvider>
         <AppShell>
-          <p>dashboard content</p>
+          <p>vision spatial content</p>
         </AppShell>
       </AuthProvider>
     )
-    expect(screen.getByText('dashboard content')).toBeInTheDocument()
+    expect(screen.getByText('vision spatial content')).toBeInTheDocument()
   })
 })

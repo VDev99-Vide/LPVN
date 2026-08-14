@@ -8,10 +8,13 @@ afterEach(() => {
 })
 
 describe('App', () => {
-  it('renders the dashboard inside the app shell', () => {
+  it('renders the dashboard inside the spatial shell', () => {
     render(<App />)
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Dashboard/i)
-    expect(screen.getByText('Quản lý Phép năm')).toBeInTheDocument()
+    expect(screen.getByText('LPVN Flow')).toBeInTheDocument()
+    expect(screen.getByText('visionOS')).toBeInTheDocument()
+    expect(screen.getByText('Mark Attendance')).toBeInTheDocument()
+    expect(screen.getByText('Leaves Summary')).toBeInTheDocument()
+    expect(screen.getByText('Waiting For Approval')).toBeInTheDocument()
   })
 
   it('renders NewRequestPage when path is /new-request', () => {

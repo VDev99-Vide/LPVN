@@ -78,11 +78,11 @@ export function Sidebar() {
       {/* Brand Header */}
       <div className="flex h-16 items-center gap-3 border-b border-white/15 px-4">
         <img
-          src="/images/leggett-logo.jpg"
+          src="/leggett-transparent.png"
           alt="Leggett & Platt Logo"
-          className="h-8 w-auto max-w-[105px] object-contain rounded-sm bg-white p-0.5"
+          className="h-8 w-auto max-w-[105px] object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] brightness-110"
           onError={(e) => {
-            e.currentTarget.style.display = 'none'
+            e.currentTarget.src = '/images/leggett-transparent.png'
           }}
         />
         <div className="flex flex-col">

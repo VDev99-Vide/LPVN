@@ -815,7 +815,19 @@
   color: #ffffff;
 }
 
+select, select option {
+  background-color: #141722 !important;
+  color: #ffffff !important;
+}
+
+select option:checked,
+select option:hover {
+  background-color: #1f2438 !important;
+  color: #38bdf8 !important;
+}
+
 .vision-container [data-slot="badge"] {
   backdrop-filter: blur(12px);
 }
+
 

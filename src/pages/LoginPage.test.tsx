@@ -19,12 +19,12 @@ function renderLoginPage() {
 }
 
 describe('LoginPage - Vision Pro Spatial Demo Gateway', () => {
-  it('renders heading, Leggett branding, demo role cards, and SSO button', () => {
+  it('renders heading, Leggett branding, login form, and demo role cards', () => {
     renderLoginPage()
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('LPVN')
     expect(screen.getByText('Leggett & Platt')).toBeInTheDocument()
-    expect(screen.getByText(/Truy Cập Không Gian visionOS/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Đăng Nhập Vào Hệ Thống/i })).toBeInTheDocument()
     expect(screen.getByText('Nguyễn Văn A')).toBeInTheDocument()
     expect(screen.getByText('Lê Văn C')).toBeInTheDocument()
     expect(screen.getByText('Trần Thị B')).toBeInTheDocument()
@@ -32,63 +32,38 @@ describe('LoginPage - Vision Pro Spatial Demo Gateway', () => {
     expect(screen.getByRole('button', { name: /Đăng nhập bằng Microsoft 365/i })).toBeInTheDocument()
   })
 
-  it('submits manual login form and displays success message', async () => {
+  it('submits login form and displays success message', async () => {
     vi.spyOn(supabase.auth, 'getSession').mockResolvedValue({
       data: { session: null },
-      error: null,
-    })
-
-    const signInSpy = vi.spyOn(supabase.auth, 'signInWithOtp').mockResolvedValue({
-      data: { user: null, session: null },
       error: null,
     })
 
     const user = userEvent.setup()
     renderLoginPage()
 
-    const input = screen.getByPlaceholderText('nhanvien@leggett.com')
-    const passInput = screen.getByPlaceholderText('••••••••')
-    const button = screen.getByRole('button', { name: /Đăng nhập với Mật khẩu/i })
+    const userInput = screen.getByLabelText(/Tên đăng nhập \/ Email \/ Mã Nhân Viên/i)
+    const passInput = screen.getByLabelText(/Mật khẩu/i)
+    const button = screen.getByRole('button', { name: /Đăng Nhập Vào Hệ Thống/i })
 
-    await user.clear(input)
-    await user.type(input, 'nhanvien@leggett.com')
+    await user.clear(userInput)
+    await user.type(userInput, 'aaron.zhang@leggett.com')
     await user.clear(passInput)
-    await user.type(passInput, 'demo1234')
+    await user.type(passInput, 'Leggett@2026')
     await user.click(button)
 
-    expect(signInSpy).toHaveBeenCalledWith({ email: 'nhanvien@leggett.com' })
-
     await waitFor(() => {
-      expect(screen.getByRole('status')).toHaveTextContent('Đăng nhập thành công.')
+      expect(screen.getByText(/Đăng nhập thành công!/i)).toBeInTheDocument()
     })
   })
 
-  it('displays error message when signIn fails', async () => {
-    vi.spyOn(supabase.auth, 'getSession').mockResolvedValue({
-      data: { session: null },
-      error: null,
-    })
-
+  it('allows 1-click filling credentials by clicking a demo role card', async () => {
     const user = userEvent.setup()
     renderLoginPage()
 
-    vi.spyOn(supabase.auth, 'signInWithOtp').mockResolvedValue({
-      data: { user: null, session: null },
-      error: { name: 'AuthError', message: 'Invalid email provider', status: 400, code: 'invalid_provider' } as any,
-    })
+    const employeeCard = screen.getByText('Nguyễn Văn A')
+    await user.click(employeeCard)
 
-    const input = screen.getByPlaceholderText('nhanvien@leggett.com')
-    const passInput = screen.getByPlaceholderText('••••••••')
-    const button = screen.getByRole('button', { name: /Đăng nhập với Mật khẩu/i })
-
-    await user.clear(input)
-    await user.type(input, 'invalid@example.com')
-    await user.clear(passInput)
-    await user.type(passInput, 'demo1234')
-    await user.click(button)
-
-    await waitFor(() => {
-      expect(screen.getByRole('status')).toHaveTextContent('Invalid email provider')
-    })
+    const userInput = screen.getByLabelText(/Tên đăng nhập \/ Email \/ Mã Nhân Viên/i) as HTMLInputElement
+    expect(userInput.value).toBe('nguyen.vana@leggett.com')
   })
 })

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { AuthProvider } from './contexts/AuthContext'
+import { AuthProvider, useAuth } from './contexts/AuthContext'
 import { AppShell } from './components/layout/AppShell'
+import { LoginPage } from './pages/LoginPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { NewRequestPage } from './pages/NewRequestPage'
 import { MyRequestsPage } from './pages/MyRequestsPage'
@@ -21,7 +22,8 @@ import { SecurityAuditPage } from './pages/SecurityAuditPage'
 import { QATestPage } from './pages/QATestPage'
 import { ProductionDeploymentPage } from './pages/ProductionDeploymentPage'
 
-function App() {
+function MainWorkspace() {
+  const { isAuthenticated } = useAuth()
   const [currentPath, setCurrentPath] = useState(
     typeof window !== 'undefined' ? window.location.pathname : '/'
   )
@@ -34,49 +36,60 @@ function App() {
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
+  // If user is not authenticated or explicitly visits /login, show LoginPage
+  if (!isAuthenticated || currentPath === '/login') {
+    return <LoginPage />
+  }
+
+  return (
+    <AppShell>
+      {currentPath === '/new-request' ? (
+        <NewRequestPage />
+      ) : currentPath === '/my-requests' ? (
+        <MyRequestsPage />
+      ) : currentPath === '/employees' ? (
+        <EmployeesPage />
+      ) : currentPath === '/leave' ? (
+        <LeaveManagementPage />
+      ) : currentPath === '/gate-pass' ? (
+        <GatePassPage />
+      ) : currentPath === '/attendance' ? (
+        <AttendancePage />
+      ) : currentPath === '/approvals' ? (
+        <ApprovalsHubPage />
+      ) : currentPath === '/signatures' ? (
+        <SignatureSettingsPage />
+      ) : currentPath === '/documents' ? (
+        <DocumentCenterPage />
+      ) : currentPath === '/pipeline' ? (
+        <DocumentPipelinePage />
+      ) : currentPath === '/qa' ? (
+        <QATestPage />
+      ) : currentPath === '/reports' ? (
+        <ReportsPage />
+      ) : currentPath === '/notifications' ? (
+        <NotificationsPage />
+      ) : currentPath === '/quick-approve' ? (
+        <OutlookActionPage />
+      ) : currentPath === '/settings/security' ? (
+        <SecurityAuditPage />
+      ) : currentPath === '/settings/deployment' ? (
+        <ProductionDeploymentPage />
+      ) : currentPath === '/settings/entra-id' ? (
+        <EntraSettingsPage />
+      ) : currentPath === '/settings/outlook-advanced' ? (
+        <OutlookAdvancedConfigPage />
+      ) : (
+        <DashboardPage />
+      )}
+    </AppShell>
+  )
+}
+
+function App() {
   return (
     <AuthProvider>
-      <AppShell>
-        {currentPath === '/new-request' ? (
-          <NewRequestPage />
-        ) : currentPath === '/my-requests' ? (
-          <MyRequestsPage />
-        ) : currentPath === '/employees' ? (
-          <EmployeesPage />
-        ) : currentPath === '/leave' ? (
-          <LeaveManagementPage />
-        ) : currentPath === '/gate-pass' ? (
-          <GatePassPage />
-        ) : currentPath === '/attendance' ? (
-          <AttendancePage />
-        ) : currentPath === '/approvals' ? (
-          <ApprovalsHubPage />
-        ) : currentPath === '/signatures' ? (
-          <SignatureSettingsPage />
-        ) : currentPath === '/documents' ? (
-          <DocumentCenterPage />
-        ) : currentPath === '/pipeline' ? (
-          <DocumentPipelinePage />
-        ) : currentPath === '/qa' ? (
-          <QATestPage />
-        ) : currentPath === '/reports' ? (
-          <ReportsPage />
-        ) : currentPath === '/notifications' ? (
-          <NotificationsPage />
-        ) : currentPath === '/quick-approve' ? (
-          <OutlookActionPage />
-        ) : currentPath === '/settings/security' ? (
-          <SecurityAuditPage />
-        ) : currentPath === '/settings/deployment' ? (
-          <ProductionDeploymentPage />
-        ) : currentPath === '/settings/entra-id' ? (
-          <EntraSettingsPage />
-        ) : currentPath === '/settings/outlook-advanced' ? (
-          <OutlookAdvancedConfigPage />
-        ) : (
-          <DashboardPage />
-        )}
-      </AppShell>
+      <MainWorkspace />
     </AuthProvider>
   )
 }

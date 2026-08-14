@@ -78,9 +78,12 @@ export interface AuthContextType {
   roles: string[]
   currentRole: AppUserRole
   activeUser: DemoUserProfile
+  isAuthenticated: boolean
   isLoading: boolean
   signIn: (email: string, password?: string) => Promise<{ error: Error | null }>
+  login: (usernameOrEmail: string, password?: string) => Promise<{ success: boolean; error: Error | null }>
   signOut: () => Promise<{ error: Error | null }>
+  logout: () => void
   switchDemoUser: (userKey: string) => void
   setRoleOverride: (role: AppUserRole) => void
 }
@@ -92,6 +95,7 @@ export interface AuthProviderProps {
 }
 
 const SAVED_USER_KEY = 'lpvn_saved_user_key'
+const AUTH_KEY = 'lpvn_is_authenticated'
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null)
@@ -105,7 +109,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
     return 'admin'
   })
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem(AUTH_KEY) !== 'false'
+    }
+    return true
+  })
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const activeUser = DEMO_SUPPLY_CHAIN_USERS[activeUserKey] || DEMO_SUPPLY_CHAIN_USERS.admin
 
@@ -146,6 +156,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     const initializeAuth = async () => {
       try {
+        setIsLoading(true)
         const { data } = await supabase.auth.getSession()
         if (!isMounted) return
 
@@ -155,8 +166,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         if (currentSession?.user) {
           await fetchProfileAndRoles(currentSession.user.id)
+          setIsAuthenticated(true)
+          if (typeof window !== 'undefined') localStorage.setItem(AUTH_KEY, 'true')
         } else {
-          // Set role from active demo user
           setCurrentRole(activeUser.role)
         }
       } catch (error) {
@@ -178,12 +190,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       if (newSession?.user) {
         await fetchProfileAndRoles(newSession.user.id)
+        setIsAuthenticated(true)
+        if (typeof window !== 'undefined') localStorage.setItem(AUTH_KEY, 'true')
       } else {
         setProfile(null)
         setRoles([])
         setCurrentRole(activeUser.role)
       }
-      setIsLoading(false)
     })
 
     return () => {
@@ -192,8 +205,65 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [activeUserKey])
 
+  const login = async (usernameOrEmail: string, _password?: string) => {
+    const cleanInput = usernameOrEmail.trim().toLowerCase()
+    
+    // 1. Check in DEMO_SUPPLY_CHAIN_USERS by key, code, or email
+    const matchingKey = Object.keys(DEMO_SUPPLY_CHAIN_USERS).find((k) => {
+      const u = DEMO_SUPPLY_CHAIN_USERS[k]
+      return (
+        k.toLowerCase() === cleanInput ||
+        u.code.toLowerCase() === cleanInput ||
+        u.email.toLowerCase() === cleanInput ||
+        u.name.toLowerCase().includes(cleanInput)
+      )
+    })
+
+    if (matchingKey) {
+      switchDemoUser(matchingKey)
+      setIsAuthenticated(true)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(AUTH_KEY, 'true')
+        localStorage.setItem(SAVED_USER_KEY, matchingKey)
+      }
+      return { success: true, error: null }
+    }
+
+    // 2. Query Supabase profiles table
+    try {
+      const { data: dbProfile } = await supabase
+        .from('profiles')
+        .select('*')
+        .or(`email.ilike.${cleanInput},employee_code.ilike.${cleanInput}`)
+        .maybeSingle()
+
+      if (dbProfile) {
+        setProfile(dbProfile as Profile)
+        setIsAuthenticated(true)
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(AUTH_KEY, 'true')
+        }
+        return { success: true, error: null }
+      }
+    } catch {
+      // ignore
+    }
+
+    // Fallback: Default to admin if any credentials provided
+    if (cleanInput) {
+      switchDemoUser('admin')
+      setIsAuthenticated(true)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(AUTH_KEY, 'true')
+        localStorage.setItem(SAVED_USER_KEY, 'admin')
+      }
+      return { success: true, error: null }
+    }
+
+    return { success: false, error: new Error('Tài khoản hoặc mật khẩu không chính xác.') }
+  }
+
   const signIn = async (email: string, _password?: string) => {
-    // Find matching demo user or sign in with OTP
     const matchingKey = Object.keys(DEMO_SUPPLY_CHAIN_USERS).find(
       (k) => DEMO_SUPPLY_CHAIN_USERS[k].email.toLowerCase() === email.toLowerCase()
     )
@@ -211,7 +281,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setRoles([])
     setUser(null)
     setSession(null)
+    setIsAuthenticated(false)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(AUTH_KEY, 'false')
+    }
     return { error: error as Error | null }
+  }
+
+  const logout = () => {
+    setIsAuthenticated(false)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(AUTH_KEY, 'false')
+      window.history.pushState({}, '', '/login')
+      window.dispatchEvent(new PopStateEvent('popstate'))
+    }
   }
 
   const switchDemoUser = (userKey: string) => {
@@ -237,9 +320,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
         roles,
         currentRole,
         activeUser,
+        isAuthenticated,
         isLoading,
         signIn,
+        login,
         signOut,
+        logout,
         switchDemoUser,
         setRoleOverride,
       }}

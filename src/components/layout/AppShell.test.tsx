@@ -20,7 +20,7 @@ describe('AppShell - Global Vision Pro Spatial Workspace', () => {
     expect(screen.getAllByText('Leggett & Platt').length).toBeGreaterThan(0)
   })
 
-  it('renders floating left dock and bottom dock with key navigation routes', () => {
+  it('renders floating left dock with key navigation routes', () => {
     render(
       <AuthProvider>
         <AppShell>
@@ -29,7 +29,6 @@ describe('AppShell - Global Vision Pro Spatial Workspace', () => {
       </AuthProvider>
     )
     expect(screen.getByRole('complementary', { name: 'Global Vision Pro Navigation Dock' })).toBeInTheDocument()
-    expect(screen.getByRole('navigation', { name: 'Bottom Navigation' })).toBeInTheDocument()
   })
 
   it('renders frosted glass footer By Vinh © 2026', () => {

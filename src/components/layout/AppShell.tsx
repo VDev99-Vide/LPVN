@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import {
   BarChart3,
   CheckSquare,
@@ -11,15 +11,17 @@ import {
   Glasses,
   LayoutDashboard,
   LogOut,
-  Receipt,
   Rocket,
   Search,
   Settings,
   ShieldCheck,
   TestTube2,
-  UserCheck,
   Users,
   Wallet,
+  ChevronDown,
+  Check,
+  User,
+  Shield,
 } from 'lucide-react'
 import { useAuth, type AppUserRole } from '@/contexts/AuthContext'
 import { NotificationBell } from '@/components/business/NotificationBell'
@@ -53,79 +55,74 @@ const ALL_DOCK_ITEMS: NavDockItem[] = [
 ]
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { currentRole, activeUser, switchDemoUser } = useAuth()
+  const { currentRole, activeUser, switchDemoUser, logout } = useAuth()
+  const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false)
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/'
 
   const visibleDockItems = ALL_DOCK_ITEMS.filter((item) => item.roles.includes(currentRole))
 
-  // Instant 0ms Zero-Flicker SPA Navigation
   const navigateTo = (href: string) => {
     if (typeof window !== 'undefined') {
-      if (window.location.pathname !== href) {
-        window.history.pushState({}, '', href)
-        window.dispatchEvent(new PopStateEvent('popstate'))
-      }
+      window.history.pushState({}, '', href)
+      window.dispatchEvent(new PopStateEvent('popstate'))
     }
+  }
+
+  const roleTitleMap: Record<AppUserRole, string> = {
+    ADMIN: 'Admin',
+    SUPERVISOR: 'Supervisor',
+    TEAM_LEADER: 'Team Leader',
+    EMPLOYEE: 'Nhân viên',
   }
 
   const getInitials = (name: string) => {
     return name
       .split(' ')
-      .map((w) => w[0])
+      .map((n) => n[0])
       .slice(-2)
       .join('')
       .toUpperCase()
   }
 
-  const roleTitleMap: Record<AppUserRole, string> = {
-    EMPLOYEE: 'Nhân Viên',
-    TEAM_LEADER: 'Trưởng Nhóm',
-    SUPERVISOR: 'Giám Sát',
-    ADMIN: 'Quản Trị Viên',
-  }
-
   const sampleNotifications = [
     {
       id: 'notif-1',
-      recipient_id: activeUser.id || 'admin',
-      event_type: 'REQUEST_ASSIGNED' as const,
-      title: 'Yêu cầu phê duyệt Đơn nghỉ phép',
-      message: 'Trần Văn An gửi đơn xin nghỉ phép 2 ngày chờ bạn phê duyệt.',
+      recipient_id: activeUser.id,
+      event_type: 'REQUEST_SUBMITTED' as const,
+      title: 'Đơn nghỉ phép mới cần duyệt',
+      message: 'Nguyễn Văn A (LPVN-0231) vừa gửi đơn xin nghỉ phép 1 ngày (10/08/2026).',
       action_url: '/approvals',
-      is_read: false,
       read_at: null,
       metadata: {},
-      created_at: new Date().toISOString(),
+      is_read: false,
+      created_at: '2026-08-14T08:00:00Z',
     },
     {
       id: 'notif-2',
-      recipient_id: activeUser.id || 'admin',
-      event_type: 'DOCUMENT_GENERATED' as const,
-      title: 'Đã xuất bản Biểu mẫu ISO',
-      message: 'Biểu mẫu LPVN-HR-F-0014 đã được đóng dấu chữ ký và lưu trữ hash SHA-256.',
-      action_url: '/documents',
-      is_read: false,
+      recipient_id: activeUser.id,
+      event_type: 'REQUEST_APPROVED' as const,
+      title: 'Giấy phép ra cổng đã duyệt',
+      message: 'Trưởng nhóm Lê Văn C đã phê duyệt giấy phép ra cổng công tác số GP-2026-014.',
+      action_url: '/gate-pass',
       read_at: null,
       metadata: {},
-      created_at: new Date(Date.now() - 3600000).toISOString(),
+      is_read: false,
+      created_at: '2026-08-14T07:30:00Z',
     },
   ]
 
-  const bottomTabs = [
-    { label: 'Dashboard', href: '/', icon: Glasses, match: (p: string) => p === '/' },
-    { label: 'Tạo đơn', href: '/new-request', icon: FilePlus2, match: (p: string) => p === '/new-request' },
-    { label: 'Quản lý phép', href: '/leave', icon: Receipt, match: (p: string) => p === '/leave' },
-    { label: 'Chấm công', href: '/attendance', icon: Clock, match: (p: string) => p === '/attendance' },
-    { label: 'Duyệt đơn', href: '/approvals', icon: UserCheck, match: (p: string) => p === '/approvals' },
-    { label: 'Báo cáo', href: '/reports', icon: BarChart3, match: (p: string) => p === '/reports' },
-    { label: 'Cài đặt', href: '/settings/security', icon: Settings, match: (p: string) => p.startsWith('/settings') },
+  const roleOptions = [
+    { key: 'admin', label: 'Admin (Aaron Zhang)', desc: 'Tổng Quản Trị Hệ Thống', role: 'ADMIN' as AppUserRole, icon: ShieldCheck },
+    { key: 'sup1', label: 'Supervisor (Trần Thị B)', desc: 'Giám sát Chuỗi Cung Ứng', role: 'SUPERVISOR' as AppUserRole, icon: Shield },
+    { key: 'tl1', label: 'Team Leader (Lê Văn C)', desc: 'Trưởng nhóm Cung ứng & Kho', role: 'TEAM_LEADER' as AppUserRole, icon: Users },
+    { key: 'emp1', label: 'Nhân viên (Nguyễn Văn A)', desc: 'Nhân viên Điều độ Cung ứng', role: 'EMPLOYEE' as AppUserRole, icon: User },
   ]
 
   return (
     <div className="vision-spatial-root">
       
-      {/* Top Global Header Bar (Leggett Bright Logo + LPVN + Search + Role Switcher + Notifs + Profile) */}
-      <header className="w-full max-w-[1360px] flex items-center justify-between py-2.5 px-3 mb-3 z-20 flex-wrap gap-3">
+      {/* Top Floating Glass Header */}
+      <header className="top-floating-header" role="banner">
         
         {/* Left: Bright Transparent Leggett Logo & LPVN Brand */}
         <div className="flex items-center gap-3">
@@ -166,27 +163,64 @@ export function AppShell({ children }: { children: ReactNode }) {
         {/* Right Controls: Role Switcher, Notification Bell & Profile Avatar */}
         <div className="flex items-center gap-2.5">
           
-          {/* Demo Role Switcher Pill */}
-          <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-xl border border-white/15 px-3 py-1 rounded-full shadow-lg">
-            <span className="text-[11px] text-white/70 font-medium hidden sm:inline">Vai trò:</span>
-            <select
-              value={
-                currentRole === 'EMPLOYEE'
-                  ? 'emp1'
-                  : currentRole === 'TEAM_LEADER'
-                    ? 'tl1'
-                    : currentRole === 'SUPERVISOR'
-                      ? 'sup1'
-                      : 'admin'
-              }
-              onChange={(e) => switchDemoUser(e.target.value)}
-              className="bg-transparent text-white text-xs font-semibold focus:outline-none cursor-pointer pr-1"
+          {/* Custom VisionOS Glass Role Switcher Dropdown (No native white background) */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
+              className="flex items-center gap-2 bg-black/40 backdrop-blur-xl border border-white/15 hover:border-white/30 px-3 py-1 rounded-full shadow-lg text-white text-xs font-semibold cursor-pointer transition-all"
             >
-              <option value="emp1" className="text-black bg-white">Nhân viên (Nguyễn Văn A)</option>
-              <option value="tl1" className="text-black bg-white">Team Leader (Lê Văn C)</option>
-              <option value="sup1" className="text-black bg-white">Supervisor (Trần Thị B)</option>
-              <option value="admin" className="text-black bg-white">Admin (Aaron Zhang)</option>
-            </select>
+              <span className="text-[11px] text-white/60 font-medium hidden sm:inline">Vai trò:</span>
+              <span className="text-teal-300 font-bold">{roleTitleMap[currentRole]}</span>
+              <ChevronDown className={`w-3.5 h-3.5 text-white/60 transition-transform duration-200 ${isRoleDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isRoleDropdownOpen && (
+              <>
+                {/* Backdrop to close on click outside */}
+                <div 
+                  className="fixed inset-0 z-40" 
+                  onClick={() => setIsRoleDropdownOpen(false)} 
+                />
+                
+                {/* Frosted Glass Dropdown Menu */}
+                <div className="absolute top-full mt-2 right-0 w-64 p-2 rounded-2xl bg-[#12151e]/95 backdrop-blur-3xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-50 animate-in fade-in space-y-1 text-white">
+                  <div className="px-2 py-1 text-[10px] uppercase font-bold text-white/50 tracking-wider">
+                    Chuyển đổi vai trò Demo
+                  </div>
+                  {roleOptions.map((item) => {
+                    const isCurrent = currentRole === item.role
+                    const Icon = item.icon
+                    return (
+                      <button
+                        key={item.key}
+                        type="button"
+                        onClick={() => {
+                          switchDemoUser(item.key)
+                          setIsRoleDropdownOpen(false)
+                        }}
+                        className={`w-full flex items-center justify-between p-2 rounded-xl text-left text-xs transition-all cursor-pointer ${
+                          isCurrent
+                            ? 'bg-teal-500/20 text-teal-300 border border-teal-400/30 font-bold shadow-[0_0_10px_rgba(45,212,191,0.2)]'
+                            : 'text-white/80 hover:bg-white/10 hover:text-white'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <div className={`p-1 rounded-lg ${isCurrent ? 'bg-teal-400/20 text-teal-300' : 'bg-white/5 text-white/60'}`}>
+                            <Icon className="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-xs text-white">{item.label}</div>
+                            <div className="text-[10px] text-white/50">{item.desc}</div>
+                          </div>
+                        </div>
+                        {isCurrent && <Check className="w-3.5 h-3.5 text-teal-300 shrink-0 ml-1" />}
+                      </button>
+                    )
+                  })}
+                </div>
+              </>
+            )}
           </div>
 
           {/* In-App Notification Bell */}
@@ -215,9 +249,9 @@ export function AppShell({ children }: { children: ReactNode }) {
 
           {/* Quick Logout to Demo Gateway */}
           <button
-            onClick={() => navigateTo('/login')}
+            onClick={logout}
             className="p-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/15 hover:border-red-400/40 text-white/60 hover:text-red-400 transition-all cursor-pointer"
-            title="Đăng xuất / Chọn tài khoản Demo"
+            title="Đăng xuất khỏi hệ thống"
           >
             <LogOut className="w-4 h-4" />
           </button>
@@ -251,62 +285,39 @@ export function AppShell({ children }: { children: ReactNode }) {
                   aria-label={item.label}
                 >
                   <Icon className="w-5 h-5" />
-                  {item.badge !== undefined && (
-                    <span className="absolute -top-1 -right-1 bg-coral-dark text-white text-[9px] font-extrabold px-1 rounded-full shadow-[0_0_8px_rgba(239,108,74,0.8)]">
+                  
+                  {/* Active glowing indicator pill */}
+                  {isActive && (
+                    <span className="absolute -left-1.5 top-1/2 -translate-y-1/2 w-1 h-3 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
+                  )}
+
+                  {/* Badge */}
+                  {item.badge && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-coral-dark text-white text-[9px] font-extrabold flex items-center justify-center border border-white/30 shadow-md">
                       {item.badge}
                     </span>
                   )}
                 </button>
-
               </div>
             )
           })}
         </aside>
 
-        {/* Main VisionOS Glass Container */}
-        <main className="vision-container">
-          {children}
-
-          {/* Bottom Floating Navigation Dock (Icons with Animated Hover Tooltips) */}
-          <nav className="bottom-nav-dock" aria-label="Bottom Navigation">
-            {bottomTabs.map((tab) => {
-              const Icon = tab.icon
-              const isActive = tab.match(currentPath)
-              return (
-                <div key={tab.href} className="relative group flex items-center justify-center">
-                  
-                  {/* Animated VisionOS Hover Tooltip Above */}
-                  <div className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-xl bg-[#141722]/95 backdrop-blur-xl border border-white/20 text-white text-[11px] font-medium whitespace-nowrap shadow-xl opacity-0 translate-y-1.5 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out z-50">
-                    {tab.label}
-                  </div>
-
-                  <button
-                    onClick={() => navigateTo(tab.href)}
-                    className={cn(
-                      'nav-tab-btn px-3.5 py-2 hover:scale-105 active:scale-95 transition-all duration-200',
-                      isActive && 'active'
-                    )}
-                    aria-label={tab.label}
-                  >
-                    <Icon className="w-4 h-4" />
-                  </button>
-
-                </div>
-              )
-            })}
-          </nav>
+        {/* Main Content Area */}
+        <main className="spatial-main-content">
+          <div className="vision-container pb-16">
+            {children}
+          </div>
         </main>
-
       </div>
 
-      {/* Subtle & Elegant "By Vinh © 2026" Badge on Bottom Right */}
+      {/* Fixed "By Vinh © 2026" Badge on Bottom Right */}
       <footer className="fixed bottom-3 right-4 z-40 pointer-events-auto">
         <div className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-[10.5px] font-medium text-white/50 shadow-md tracking-wider flex items-center gap-1.5 hover:text-white hover:opacity-100 hover:border-white/25 transition-all duration-300 opacity-60">
           <span className="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-[0_0_6px_rgba(45,212,191,0.8)]"></span>
           <span>By Vinh © 2026</span>
         </div>
       </footer>
-
     </div>
   )
 }

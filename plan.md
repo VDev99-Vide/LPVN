@@ -481,11 +481,11 @@ OutlookIntegration
   - [x] Chèn secure deep link `[ 🔎 XEM YÊU CẦU ]`.
 
 ### Phase 11b — Outlook Basic Mode (MVP Default)
-- [ ] Thiết lập Email Template chuẩn tương thích Microsoft 365 Outlook.
-- [ ] Xây dựng quy trình "View Request" dẫn từ email về LPVN Flow web app.
-- [ ] Tạo Secure Deep Links dính kèm short-lived verification tokens.
-- [ ] Yêu cầu Manager đăng nhập/xác thực danh tính trước khi duyệt trên web.
-- [ ] Đảm bảo vận hành hoàn hảo 100% mà KHÔNG cần quyền Admin Microsoft 365.
+- [x] Thiết lập Email Template chuẩn tương thích Microsoft 365 Outlook.
+- [x] Xây dựng quy trình "View Request" dẫn từ email về LPVN Flow web app.
+- [x] Tạo Secure Deep Links dính kèm short-lived verification tokens.
+- [x] Yêu cầu Manager đăng nhập/xác thực danh tính trước khi duyệt trên web.
+- [x] Đảm bảo vận hành hoàn hảo 100% mà KHÔNG cần quyền Admin Microsoft 365.
 
 ### Phase 11c — Microsoft Entra ID (Azure AD) Integration
 - [ ] Đánh giá khả năng tích hợp (Capability Assessment) của Tenant.

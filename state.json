@@ -2,13 +2,13 @@
   "project": "LPVN-HR-Workflow-SaaS",
   "schema_version": 1,
   "status": "PLANNING",
-  "current_phase": "phase-11",
-  "current_task": "phase-11b-outlook-basic-mode",
+  "current_phase": "phase-11b",
+  "current_task": "phase-11c-entra-id-integration",
   "agent_engine": "Antigravity AI Engine (Google DeepMind)",
   "last_session": {
     "status": "completed",
-    "summary": "Completed Phase 11 Notification Core & Email Integration: SQL migration (notifications & notification_queue), notification.service, email-template.service with Outlook HTML templates, NotificationBell, NotificationList, EmailPreviewModal, NotificationQueueTable, and NotificationsPage routing.",
-    "timestamp": "2026-08-14T02:30:00+00:00"
+    "summary": "Completed Phase 11b Outlook Basic Mode: outlook-basic.service for secure short-lived token deep linking & zero-admin verification, OutlookApprovalGate, OutlookDeepLinkGenerator, OutlookCompatibilityBadge, and OutlookActionPage routing (/quick-approve).",
+    "timestamp": "2026-08-14T02:46:00+00:00"
   },
   "progress": {
     "phase-00": { "status": "DONE", "percent": 100 },
@@ -23,8 +23,8 @@
     "phase-09": { "status": "DONE", "percent": 100 },
     "phase-10": { "status": "DONE", "percent": 100 },
     "phase-11": { "status": "DONE", "percent": 100 },
-    "phase-11b": { "status": "IN_PROGRESS", "percent": 0 },
-    "phase-11c": { "status": "LOCKED", "percent": 0 },
+    "phase-11b": { "status": "DONE", "percent": 100 },
+    "phase-11c": { "status": "IN_PROGRESS", "percent": 0 },
     "phase-11d": { "status": "LOCKED", "percent": 0 },
     "phase-11e": { "status": "LOCKED", "percent": 0 },
     "phase-12": { "status": "LOCKED", "percent": 0 },
@@ -159,6 +159,11 @@
       "id": "ADR-019",
       "decision": "Phase-11 Notification Core & Email: Schema migration (20260814000012_notification_system.sql), notifications & notification_queue tables, notificationService, emailTemplateService with Outlook-safe HTML templates, NotificationBell, NotificationList, EmailPreviewModal, NotificationQueueTable, Topbar integration, and NotificationsPage routing.",
       "status": "accepted"
+    },
+    {
+      "id": "ADR-020",
+      "decision": "Phase-11b Outlook Basic Mode: outlookBasicService with zero-admin verification and short-lived anti-replay tokens, OutlookApprovalGate, OutlookDeepLinkGenerator, OutlookCompatibilityBadge, and OutlookActionPage routing (/quick-approve).",
+      "status": "accepted"
     }
   ],
   "files_created": [
@@ -270,7 +275,14 @@
     "src/components/business/NotificationQueueTable.tsx",
     "src/pages/NotificationsPage.tsx",
     "docs/superpowers/specs/2026-08-14-phase-11-notification-core.md",
-    "docs/superpowers/plans/2026-08-14-phase-11-notification-core.md"
+    "docs/superpowers/plans/2026-08-14-phase-11-notification-core.md",
+    "src/services/outlook-basic.service.ts",
+    "src/components/business/OutlookApprovalGate.tsx",
+    "src/components/business/OutlookDeepLinkGenerator.tsx",
+    "src/components/business/OutlookCompatibilityBadge.tsx",
+    "src/pages/OutlookActionPage.tsx",
+    "docs/superpowers/specs/2026-08-14-phase-11b-outlook-basic-mode.md",
+    "docs/superpowers/plans/2026-08-14-phase-11b-outlook-basic-mode.md"
   ],
   "validation": {
     "documents_created": true,
@@ -287,11 +299,12 @@
     "phase_09_quality_gate": "passing",
     "phase_10_quality_gate": "passing",
     "phase_11_quality_gate": "passing",
+    "phase_11b_quality_gate": "passing",
     "outlook_architecture_added": true,
     "antigravity_skills_installed": true
   },
   "blockers": [],
   "next_actions": [
-    "Triển khai Phase 11b — Outlook Basic Mode (Quy trình View Request an toàn với token ngắn hạn, deep link bảo mật và phân quyền Manager không cần quyền Admin Microsoft 365)."
+    "Triển khai Phase 11c — Microsoft Entra ID (Azure AD) Integration (OAuth2/OIDC SSO, Tenant Capability Assessment, Identity & Role mapping và cơ chế Auth fallback)."
   ]
 }

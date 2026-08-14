@@ -11,6 +11,7 @@ import { SignatureSettingsPage } from './pages/SignatureSettingsPage'
 import { DocumentCenterPage } from './pages/DocumentCenterPage'
 import { ReportsPage } from './pages/ReportsPage'
 import { NotificationsPage } from './pages/NotificationsPage'
+import { OutlookActionPage } from './pages/OutlookActionPage'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -46,6 +47,8 @@ function App() {
           <ReportsPage />
         ) : currentPath === '/notifications' ? (
           <NotificationsPage />
+        ) : currentPath === '/quick-approve' ? (
+          <OutlookActionPage />
         ) : (
           <DashboardPage />
         )}

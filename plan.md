@@ -495,12 +495,12 @@ OutlookIntegration
 - [x] Cơ chế Auth Fallback tự động khi Entra ID không khả dụng.
 
 ### Phase 11d — Outlook Advanced Approval Mode (Feature Nâng cấp)
-- [ ] Tích hợp Microsoft Graph Email API Adapter.
-- [ ] Thiết kế Actionable Message Adaptive Card (Nút `[ ✅ CHẤP NHẬN ]`, `[ ❌ TỪ CHỐI ]`, `[ 🔎 XEM YÊU CẦU ]`).
-- [ ] Xây dựng Secure Action Approval Endpoint (`/api/approval/action`).
-- [ ] Kiểm tra Token mã hóa, hạn dùng và xác thực quyền duyệt (`approval_authority`).
-- [ ] Cơ chế Replay Protection (Chống nhấn lại nút duyệt nhiều lần).
-- [ ] `OutlookCapabilityDetector` tự động chuyển đổi giữa Basic Mode và Advanced Mode.
+- [x] Tích hợp Microsoft Graph Email API Adapter.
+- [x] Thiết kế Actionable Message Adaptive Card (Nút `[ ✅ CHẤP NHẬN ]`, `[ ❌ TỪ CHỐI ]`, `[ 🔎 XEM YÊU CẦU ]`).
+- [x] Xây dựng Secure Action Approval Endpoint (`/api/approval/action`).
+- [x] Kiểm tra Token mã hóa, hạn dùng và xác thực quyền duyệt (`approval_authority`).
+- [x] Cơ chế Replay Protection (Chống nhấn lại nút duyệt nhiều lần).
+- [x] `OutlookCapabilityDetector` tự động chuyển đổi giữa Basic Mode và Advanced Mode.
 
 ### Phase 11e — Approval → Document Pipeline Integration
 - [ ] Kích hoạt quy trình tự động ngay sau khi sự kiện `REQUEST_APPROVED` phát ra.

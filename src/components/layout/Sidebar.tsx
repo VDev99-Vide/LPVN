@@ -10,6 +10,7 @@ import {
   KeyRound,
   LayoutDashboard,
   Users,
+  Zap,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -25,6 +26,7 @@ const NAV_ITEMS = [
   { label: 'Nhân sự & Tổ chức', href: '/employees', icon: Users },
   { label: 'Reports', href: '/reports', icon: BarChart3 },
   { label: 'Entra ID SSO', href: '/settings/entra-id', icon: KeyRound },
+  { label: 'Outlook Actionable', href: '/settings/outlook-advanced', icon: Zap },
 ]
 
 export function Sidebar() {

@@ -20,6 +20,7 @@ describe('AppShell', () => {
     expect(screen.getByText('Nhân sự & Tổ chức')).toBeInTheDocument()
     expect(screen.getByText('Reports')).toBeInTheDocument()
     expect(screen.getByText('Entra ID SSO')).toBeInTheDocument()
+    expect(screen.getByText('Outlook Actionable')).toBeInTheDocument()
   })
 
   it('renders topbar with theme toggle and user', () => {

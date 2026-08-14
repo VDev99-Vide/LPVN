@@ -13,6 +13,7 @@ import { ReportsPage } from './pages/ReportsPage'
 import { NotificationsPage } from './pages/NotificationsPage'
 import { OutlookActionPage } from './pages/OutlookActionPage'
 import { EntraSettingsPage } from './pages/EntraSettingsPage'
+import { OutlookAdvancedConfigPage } from './pages/OutlookAdvancedConfigPage'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -52,6 +53,8 @@ function App() {
           <OutlookActionPage />
         ) : currentPath === '/settings/entra-id' ? (
           <EntraSettingsPage />
+        ) : currentPath === '/settings/outlook-advanced' ? (
+          <OutlookAdvancedConfigPage />
         ) : (
           <DashboardPage />
         )}

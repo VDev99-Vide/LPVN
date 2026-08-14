@@ -168,4 +168,37 @@ describe('Database Types Phase 04', () => {
     expect(mockSig.is_default).toBe(true)
     expect(mockLog.action).toBe('CREATED')
   })
+
+  it('includes document_templates and generated_documents tables in Database interface', () => {
+    type DocumentTemplateRow = Database['public']['Tables']['document_templates']['Row']
+    type GeneratedDocumentRow = Database['public']['Tables']['generated_documents']['Row']
+
+    const mockTemplate: DocumentTemplateRow = {
+      id: 'dt-1',
+      template_code: 'LPVN-HR-F-0013',
+      title: 'Đơn Xin Nghỉ Phép',
+      title_en: 'Leave Application',
+      current_version: '1.0',
+      field_mappings: {},
+      is_active: true,
+      created_at: '2026-08-14T00:00:00Z',
+      updated_at: '2026-08-14T00:00:00Z',
+    }
+
+    const mockGenDoc: GeneratedDocumentRow = {
+      id: 'gd-1',
+      template_id: 'dt-1',
+      document_no: 'LPVN-HR-F-0013',
+      source_entity_type: 'LEAVE',
+      source_entity_id: 'leave-1',
+      rendered_data_snapshot: { full_name: 'Nguyen Van A' },
+      document_hash: 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+      file_url: null,
+      generated_by: 'user-1',
+      created_at: '2026-08-14T00:00:00Z',
+    }
+
+    expect(mockTemplate.template_code).toBe('LPVN-HR-F-0013')
+    expect(mockGenDoc.document_hash).toHaveLength(64)
+  })
 })

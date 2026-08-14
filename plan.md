@@ -454,13 +454,13 @@ OutlookIntegration
 - [x] Audit log toàn bộ thao tác thêm/sửa/xóa chữ ký.
 
 ### Phase 09 — Document template & rendering
-- [ ] Định nghĩa Template Contract cho từng biểu mẫu ISO (LPVN-HR-F-0008, 0013, 0014).
-- [ ] Field mapping giữa dữ liệu Supabase và vị trí hiển thị trên mẫu ISO.
-- [ ] Quản lý phiên bản mẫu biểu (`document_templates` & `template_versions`).
-- [ ] Server-side PDF rendering pipeline (HTML/Canvas/PDFKit/Puppeteer hoặc Edge Function).
-- [ ] Màn hình xem trước biểu mẫu (Preview before export PDF).
-- [ ] Tự động gán mã tài liệu (`document_no`), mã đơn (`request_id`) và mã hash bảo mật vào file PDF.
-- [ ] Snapshot toàn bộ dữ liệu nghiệp vụ tại thời điểm xuất file.
+- [x] Định nghĩa Template Contract cho từng biểu mẫu ISO (LPVN-HR-F-0008, 0013, 0014).
+- [x] Field mapping giữa dữ liệu Supabase và vị trí hiển thị trên mẫu ISO.
+- [x] Quản lý phiên bản mẫu biểu (`document_templates` & `template_versions`).
+- [x] Server-side PDF rendering pipeline (HTML/Canvas/PDFKit/Puppeteer hoặc Edge Function).
+- [x] Màn hình xem trước biểu mẫu (Preview before export PDF).
+- [x] Tự động gán mã tài liệu (`document_no`), mã đơn (`request_id`) và mã hash bảo mật vào file PDF.
+- [x] Snapshot toàn bộ dữ liệu nghiệp vụ tại thời điểm xuất file.
 
 ### Phase 10 — Reporting & Analytics
 - [ ] Dashboard báo cáo ngày nghỉ theo tháng và năm.

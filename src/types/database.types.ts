@@ -609,6 +609,79 @@ export interface Database {
           created_at?: string
         }
       }
+      document_templates: {
+        Row: {
+          id: string
+          template_code: string
+          title: string
+          title_en: string
+          current_version: string
+          field_mappings: Record<string, any> | null
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          template_code: string
+          title: string
+          title_en: string
+          current_version?: string
+          field_mappings?: Record<string, any> | null
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          template_code?: string
+          title?: string
+          title_en?: string
+          current_version?: string
+          field_mappings?: Record<string, any> | null
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      generated_documents: {
+        Row: {
+          id: string
+          template_id: string | null
+          document_no: string
+          source_entity_type: 'LEAVE' | 'GATE_PASS' | 'ATTENDANCE_CONFIRMATION'
+          source_entity_id: string
+          rendered_data_snapshot: Record<string, any>
+          document_hash: string
+          file_url: string | null
+          generated_by: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          template_id?: string | null
+          document_no: string
+          source_entity_type: 'LEAVE' | 'GATE_PASS' | 'ATTENDANCE_CONFIRMATION'
+          source_entity_id: string
+          rendered_data_snapshot: Record<string, any>
+          document_hash: string
+          file_url?: string | null
+          generated_by?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          template_id?: string | null
+          document_no?: string
+          source_entity_type?: 'LEAVE' | 'GATE_PASS' | 'ATTENDANCE_CONFIRMATION'
+          source_entity_id?: string
+          rendered_data_snapshot?: Record<string, any>
+          document_hash?: string
+          file_url?: string | null
+          generated_by?: string | null
+          created_at?: string
+        }
+      }
     }
   }
 }

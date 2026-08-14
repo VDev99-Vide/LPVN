@@ -10,6 +10,7 @@ import {
   KeyRound,
   LayoutDashboard,
   ShieldCheck,
+  TestTube2,
   Users,
   Zap,
 } from 'lucide-react'
@@ -43,6 +44,7 @@ const ALL_NAV_ITEMS: NavItemDef[] = [
   { label: 'Biểu Mẫu ISO', href: '/documents', icon: FileText, roles: ['ADMIN'] },
   { label: 'Pipeline Tự Động', href: '/pipeline', icon: GitMerge, roles: ['ADMIN'] },
   { label: 'An Ninh & RLS', href: '/settings/security', icon: ShieldCheck, roles: ['ADMIN'] },
+  { label: 'Kiểm Thử & QA', href: '/qa', icon: TestTube2, roles: ['ADMIN'] },
   { label: 'Entra ID & Email', href: '/settings/entra-id', icon: KeyRound, roles: ['ADMIN'] },
   { label: 'Outlook Actionable', href: '/settings/outlook-advanced', icon: Zap, roles: ['ADMIN'] },
 ]

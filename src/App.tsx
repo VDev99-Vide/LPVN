@@ -18,6 +18,7 @@ import { EntraSettingsPage } from './pages/EntraSettingsPage'
 import { OutlookAdvancedConfigPage } from './pages/OutlookAdvancedConfigPage'
 import { DocumentPipelinePage } from './pages/DocumentPipelinePage'
 import { SecurityAuditPage } from './pages/SecurityAuditPage'
+import { QATestPage } from './pages/QATestPage'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -55,6 +56,8 @@ function App() {
           <DocumentCenterPage />
         ) : currentPath === '/pipeline' ? (
           <DocumentPipelinePage />
+        ) : currentPath === '/qa' ? (
+          <QATestPage />
         ) : currentPath === '/reports' ? (
           <ReportsPage />
         ) : currentPath === '/notifications' ? (

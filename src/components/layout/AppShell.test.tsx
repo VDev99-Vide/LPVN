@@ -22,6 +22,7 @@ describe('AppShell', () => {
     expect(screen.getByText('Biểu Mẫu ISO')).toBeInTheDocument()
     expect(screen.getByText('Pipeline Tự Động')).toBeInTheDocument()
     expect(screen.getByText('An Ninh & RLS')).toBeInTheDocument()
+    expect(screen.getByText('Kiểm Thử & QA')).toBeInTheDocument()
   })
 
   it('renders topbar with theme toggle and user', () => {

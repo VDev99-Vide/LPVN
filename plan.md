@@ -523,13 +523,13 @@ OutlookIntegration
 - [x] Secret scanning & kiểm tra bảo mật dependency.
 
 ### Phase 13 — Testing & Quality Assurance
-- [ ] Unit tests cho Business Logic & State Machines.
-- [ ] Integration tests cho Approval Engine & Notification Adapters.
-- [ ] Testing RLS policies với các vai trò người dùng khác nhau.
-- [ ] Snapshot testing cho rendering tài liệu ISO.
-- [ ] E2E Testing luồng Happy Path (Tạo đơn → Gửi email → Manager duyệt → Sinh PDF → Lưu R2 → Thông báo).
-- [ ] E2E Testing luồng Rejection Path & Balance checking.
-- [ ] E2E Testing cơ chế Fallback khi Outlook Advanced bị tắt/lỗi.
+- [x] Unit tests cho Business Logic & State Machines.
+- [x] Integration tests cho Approval Engine & Notification Adapters.
+- [x] Testing RLS policies với các vai trò người dùng khác nhau.
+- [x] Snapshot testing cho rendering tài liệu ISO.
+- [x] E2E Testing luồng Happy Path (Tạo đơn → Gửi email → Manager duyệt → Sinh PDF → Lưu R2 → Thông báo).
+- [x] E2E Testing luồng Rejection Path & Balance checking.
+- [x] E2E Testing cơ chế Fallback khi Outlook Advanced bị tắt/lỗi.
 
 ### Phase 14 — Production deployment
 - [ ] Khởi tạo Production Supabase project & cấu hình môi trường.

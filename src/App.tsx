@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { AuthProvider } from './contexts/AuthContext'
 import { AppShell } from './components/layout/AppShell'
 import { DashboardPage } from './pages/DashboardPage'
+import { NewRequestPage } from './pages/NewRequestPage'
+import { MyRequestsPage } from './pages/MyRequestsPage'
 import { EmployeesPage } from './pages/EmployeesPage'
 import { LeaveManagementPage } from './pages/LeaveManagementPage'
 import { GatePassPage } from './pages/GatePassPage'
@@ -32,7 +34,11 @@ function App() {
   return (
     <AuthProvider>
       <AppShell>
-        {currentPath === '/employees' ? (
+        {currentPath === '/new-request' ? (
+          <NewRequestPage />
+        ) : currentPath === '/my-requests' ? (
+          <MyRequestsPage />
+        ) : currentPath === '/employees' ? (
           <EmployeesPage />
         ) : currentPath === '/leave' ? (
           <LeaveManagementPage />

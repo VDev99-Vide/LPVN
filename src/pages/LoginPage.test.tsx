@@ -22,7 +22,7 @@ describe('LoginPage', () => {
   it('renders heading, SSO login button, and email input', () => {
     renderLoginPage()
 
-    expect(screen.getByText('Đăng nhập LPVN HR Flow')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('LPVN')
     expect(screen.getByRole('button', { name: /Đăng nhập bằng Microsoft 365/i })).toBeInTheDocument()
     expect(screen.getByPlaceholderText('nhanvien@leggett.com')).toBeInTheDocument()
   })
@@ -42,15 +42,19 @@ describe('LoginPage', () => {
     renderLoginPage()
 
     const input = screen.getByPlaceholderText('nhanvien@leggett.com')
-    const button = screen.getByRole('button', { name: /Gửi Mã Đăng Nhập Cục Bộ/i })
+    const passInput = screen.getByPlaceholderText('••••••••')
+    const button = screen.getByRole('button', { name: /^Đăng nhập$/i })
 
+    await user.clear(input)
     await user.type(input, 'nhanvien@leggett.com')
+    await user.clear(passInput)
+    await user.type(passInput, 'demo1234')
     await user.click(button)
 
     expect(signInSpy).toHaveBeenCalledWith({ email: 'nhanvien@leggett.com' })
 
     await waitFor(() => {
-      expect(screen.getByRole('status')).toHaveTextContent('Đã gửi liên kết đăng nhập đến email của bạn.')
+      expect(screen.getByRole('status')).toHaveTextContent('Đăng nhập thành công.')
     })
   })
 
@@ -69,9 +73,13 @@ describe('LoginPage', () => {
     renderLoginPage()
 
     const input = screen.getByPlaceholderText('nhanvien@leggett.com')
-    const button = screen.getByRole('button', { name: /Gửi Mã Đăng Nhập Cục Bộ/i })
+    const passInput = screen.getByPlaceholderText('••••••••')
+    const button = screen.getByRole('button', { name: /^Đăng nhập$/i })
 
+    await user.clear(input)
     await user.type(input, 'invalid@example.com')
+    await user.clear(passInput)
+    await user.type(passInput, 'demo1234')
     await user.click(button)
 
     await waitFor(() => {

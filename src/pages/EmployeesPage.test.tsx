@@ -90,13 +90,14 @@ describe('EmployeesPage', () => {
 
   afterEach(cleanup)
 
-  it('renders heading "Quản lý Nhân sự & Cơ cấu Tổ chức" and "+ Thêm Nhân Viên" button', async () => {
+  it('renders heading "Quản lý Nhân sự & Cơ cấu Tổ chức" and user creation buttons', async () => {
     render(<EmployeesPage />)
 
     expect(
       screen.getByRole('heading', { name: 'Quản lý Nhân sự & Cơ cấu Tổ chức' })
     ).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /\+ Thêm Nhân Viên/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /\+ Tạo User Trực Tiếp/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Thêm Hồ Sơ/i })).toBeInTheDocument()
   })
 
   it('renders tabs and loads employee table content by default', async () => {
@@ -124,10 +125,10 @@ describe('EmployeesPage', () => {
     })
   })
 
-  it('opens add drawer when "+ Thêm Nhân Viên" button is clicked', async () => {
+  it('opens add drawer when "Thêm Hồ Sơ" button is clicked', async () => {
     render(<EmployeesPage />)
 
-    const addButton = screen.getByRole('button', { name: /\+ Thêm Nhân Viên/i })
+    const addButton = screen.getByRole('button', { name: /Thêm Hồ Sơ/i })
     fireEvent.click(addButton)
 
     await waitFor(() => {

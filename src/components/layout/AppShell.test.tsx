@@ -13,15 +13,14 @@ describe('AppShell', () => {
       </AuthProvider>
     )
     expect(screen.getByText('Dashboard')).toBeInTheDocument()
+    expect(screen.getByText('Tạo đơn mới')).toBeInTheDocument()
+    expect(screen.getByText('Đơn của tôi')).toBeInTheDocument()
+    expect(screen.getByText('Duyệt đơn')).toBeInTheDocument()
+    expect(screen.getByText('Thư viện chữ ký')).toBeInTheDocument()
+    expect(screen.getByText('Nhân sự & Tạo User')).toBeInTheDocument()
     expect(screen.getByText('Quản lý Phép năm')).toBeInTheDocument()
-    expect(screen.getByText('Gate Pass')).toBeInTheDocument()
-    expect(screen.getByText('Attendance')).toBeInTheDocument()
-    expect(screen.getByText('Thông Báo')).toBeInTheDocument()
-    expect(screen.getByText('Nhân sự & Tổ chức')).toBeInTheDocument()
-    expect(screen.getByText('Reports')).toBeInTheDocument()
-    expect(screen.getByText('Entra ID SSO')).toBeInTheDocument()
-    expect(screen.getByText('Outlook Actionable')).toBeInTheDocument()
-    expect(screen.getByText('Pipeline ISO')).toBeInTheDocument()
+    expect(screen.getByText('Biểu Mẫu ISO')).toBeInTheDocument()
+    expect(screen.getByText('Pipeline Tự Động')).toBeInTheDocument()
   })
 
   it('renders topbar with theme toggle and user', () => {

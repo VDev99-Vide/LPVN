@@ -15,6 +15,9 @@ import {
 } from '@/services/employee.service'
 import { supabase } from '@/lib/supabase'
 
+import { AdminUserCreatorModal, type CreatedUserData } from '@/components/business/AdminUserCreatorModal'
+import { UserPlus } from 'lucide-react'
+
 export function EmployeesPage() {
   const [employees, setEmployees] = useState<EmployeeWithRelations[]>([])
   const [orgChartDepartments, setOrgChartDepartments] = useState<DepartmentRow[]>([])
@@ -27,6 +30,7 @@ export function EmployeesPage() {
   const [activeTab, setActiveTab] = useState('list')
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isUserCreatorOpen, setIsUserCreatorOpen] = useState(false)
   const [editingEmployee, setEditingEmployee] = useState<EmployeeWithRelations | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -68,6 +72,11 @@ export function EmployeesPage() {
   const handleOpenAddDrawer = () => {
     setEditingEmployee(null)
     setIsDrawerOpen(true)
+  }
+
+  const handleUserCreated = (_user: CreatedUserData) => {
+    loadEmployees()
+    loadOrgData()
   }
 
   const handleEditEmployee = (emp: EmployeeWithRelations) => {
@@ -113,10 +122,19 @@ export function EmployeesPage() {
             Quản lý thông tin nhân viên, chức danh và sơ đồ tổ chức công ty.
           </p>
         </div>
-        <Button onClick={handleOpenAddDrawer} className="shrink-0 gap-2">
-          <Plus className="h-4 w-4" />
-          + Thêm Nhân Viên
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            onClick={() => setIsUserCreatorOpen(true)}
+            className="shrink-0 gap-2 btn-gold text-xs h-9 px-4 font-bold rounded-full"
+          >
+            <UserPlus className="h-4 w-4" />
+            + Tạo User Trực Tiếp (Admin)
+          </Button>
+          <Button onClick={handleOpenAddDrawer} variant="outline" className="shrink-0 gap-2 text-xs h-9 rounded-full">
+            <Plus className="h-4 w-4" />
+            Thêm Hồ Sơ
+          </Button>
+        </div>
       </div>
 
       {/* Main Content Tabs */}
@@ -192,6 +210,13 @@ export function EmployeesPage() {
         positions={positions}
         initialData={editingEmployee as Partial<ProfileRow> | null}
         isSubmitting={isSubmitting}
+      />
+
+      {/* Admin User Creator Modal */}
+      <AdminUserCreatorModal
+        isOpen={isUserCreatorOpen}
+        onClose={() => setIsUserCreatorOpen(false)}
+        onUserCreated={handleUserCreated}
       />
     </div>
   )

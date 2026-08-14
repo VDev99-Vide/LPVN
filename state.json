@@ -2,13 +2,13 @@
   "project": "LPVN-HR-Workflow-SaaS",
   "schema_version": 1,
   "status": "PLANNING",
-  "current_phase": "phase-11d",
-  "current_task": "phase-11e-approval-to-document-pipeline-integration",
+  "current_phase": "phase-11e",
+  "current_task": "phase-12-security-hardening",
   "agent_engine": "Antigravity AI Engine (Google DeepMind)",
   "last_session": {
     "status": "completed",
-    "summary": "Completed Phase 11d Outlook Advanced Approval Mode: outlookAdvancedService with Actionable Message Adaptive Cards payload generator, In-Email HTTP action handler, AdaptiveCardPreview simulator, OutlookCapabilitySwitcher, GraphApiConfigModal, and OutlookAdvancedConfigPage routing.",
-    "timestamp": "2026-08-14T03:06:00+00:00"
+    "summary": "Completed Phase 11e Approval to Document Pipeline Integration: approvalDocumentPipelineService with automated signature resolution, template version locking, immutable snapshot generation, SHA-256 integrity checksum, R2/storage persistence, In-App & Outlook email dispatch, ApprovalPipelineStatusCard, PipelineTriggerButton, DocumentIntegrityVerifier, and DocumentPipelinePage routing.",
+    "timestamp": "2026-08-14T03:11:00+00:00"
   },
   "progress": {
     "phase-00": { "status": "DONE", "percent": 100 },
@@ -26,8 +26,8 @@
     "phase-11b": { "status": "DONE", "percent": 100 },
     "phase-11c": { "status": "DONE", "percent": 100 },
     "phase-11d": { "status": "DONE", "percent": 100 },
-    "phase-11e": { "status": "IN_PROGRESS", "percent": 0 },
-    "phase-12": { "status": "LOCKED", "percent": 0 },
+    "phase-11e": { "status": "DONE", "percent": 100 },
+    "phase-12": { "status": "IN_PROGRESS", "percent": 0 },
     "phase-13": { "status": "LOCKED", "percent": 0 },
     "phase-14": { "status": "LOCKED", "percent": 0 }
   },
@@ -40,7 +40,8 @@
       "SaaS workflow forms with post-approval document rendering",
       "Decoupled Notification Engine with Outlook Basic/Advanced Adapters",
       "Microsoft Entra ID (Azure AD) OIDC SSO & Group-to-Role Mapping",
-      "Microsoft Actionable Messages Adaptive Cards (In-Email Approval)"
+      "Microsoft Actionable Messages Adaptive Cards (In-Email Approval)",
+      "Automated End-to-End Approval-to-Document Generation Pipeline"
     ],
     "forms": [
       "LPVN-HR-F-0008 Attendance Confirmation",
@@ -61,6 +62,7 @@
       "approval",
       "signature",
       "document",
+      "pipeline",
       "notification",
       "entra-id",
       "actionable-messages",
@@ -177,6 +179,11 @@
     {
       "id": "ADR-022",
       "decision": "Phase-11d Outlook Advanced Mode: outlookAdvancedService with Adaptive Cards payload generator, In-Email HTTP action handler, AdaptiveCardPreview simulator, OutlookCapabilitySwitcher, GraphApiConfigModal, and OutlookAdvancedConfigPage routing.",
+      "status": "accepted"
+    },
+    {
+      "id": "ADR-023",
+      "decision": "Phase-11e Approval to Document Pipeline Integration: approvalDocumentPipelineService with 5-stage automated pipeline (Signature Resolution, Template Version Locking, Snapshot & SHA-256 Hashing, R2/Supabase Storage, Multi-channel dispatch), ApprovalPipelineStatusCard, PipelineTriggerButton, DocumentIntegrityVerifier, and DocumentPipelinePage routing.",
       "status": "accepted"
     }
   ],
@@ -311,7 +318,14 @@
     "src/components/business/GraphApiConfigModal.tsx",
     "src/pages/OutlookAdvancedConfigPage.tsx",
     "docs/superpowers/specs/2026-08-14-phase-11d-outlook-advanced-approval-mode.md",
-    "docs/superpowers/plans/2026-08-14-phase-11d-outlook-advanced-approval-mode.md"
+    "docs/superpowers/plans/2026-08-14-phase-11d-outlook-advanced-approval-mode.md",
+    "src/services/approval-document-pipeline.service.ts",
+    "src/components/business/ApprovalPipelineStatusCard.tsx",
+    "src/components/business/PipelineTriggerButton.tsx",
+    "src/components/business/DocumentIntegrityVerifier.tsx",
+    "src/pages/DocumentPipelinePage.tsx",
+    "docs/superpowers/specs/2026-08-14-phase-11e-approval-document-pipeline.md",
+    "docs/superpowers/plans/2026-08-14-phase-11e-approval-document-pipeline.md"
   ],
   "validation": {
     "documents_created": true,
@@ -331,11 +345,12 @@
     "phase_11b_quality_gate": "passing",
     "phase_11c_quality_gate": "passing",
     "phase_11d_quality_gate": "passing",
+    "phase_11e_quality_gate": "passing",
     "outlook_architecture_added": true,
     "antigravity_skills_installed": true
   },
   "blockers": [],
   "next_actions": [
-    "Triển khai Phase 11e — Approval → Document Pipeline Integration (Kích hoạt tự động tạo file PDF ISO sau khi duyệt, khóa phiên bản mẫu biểu, lưu trữ R2 / Supabase Storage và gửi link tải cho nhân viên)."
+    "Triển khai Phase 12 — Security hardening (RLS test matrix, RBAC/ABAC role checks, IDOR defenses, Department boundaries, Signature security & Tamper-resistance audit)."
   ]
 }

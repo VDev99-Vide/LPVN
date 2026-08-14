@@ -14,6 +14,7 @@ import { NotificationsPage } from './pages/NotificationsPage'
 import { OutlookActionPage } from './pages/OutlookActionPage'
 import { EntraSettingsPage } from './pages/EntraSettingsPage'
 import { OutlookAdvancedConfigPage } from './pages/OutlookAdvancedConfigPage'
+import { DocumentPipelinePage } from './pages/DocumentPipelinePage'
 
 function App() {
   const [currentPath, setCurrentPath] = useState(
@@ -45,6 +46,8 @@ function App() {
           <SignatureSettingsPage />
         ) : currentPath === '/documents' ? (
           <DocumentCenterPage />
+        ) : currentPath === '/pipeline' ? (
+          <DocumentPipelinePage />
         ) : currentPath === '/reports' ? (
           <ReportsPage />
         ) : currentPath === '/notifications' ? (

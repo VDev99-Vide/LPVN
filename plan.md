@@ -503,13 +503,13 @@ OutlookIntegration
 - [x] `OutlookCapabilityDetector` tự động chuyển đổi giữa Basic Mode và Advanced Mode.
 
 ### Phase 11e — Approval → Document Pipeline Integration
-- [ ] Kích hoạt quy trình tự động ngay sau khi sự kiện `REQUEST_APPROVED` phát ra.
-- [ ] Tự động lấy nét ký (Signature Resolution) của Manager.
-- [ ] Khóa phiên bản mẫu biểu (`Template Version Locking`).
-- [ ] Sinh file PDF chuẩn ISO & Validate dung lượng/trạng thái file.
-- [ ] Lưu trữ file PDF an toàn vào Cloudflare R2 / Supabase Storage.
-- [ ] Cập nhật Document Metadata (`document_hash`, `storage_path`, `generated_at`).
-- [ ] Gửi thông báo hoàn tất đính kèm link tải PDF tới Nhân viên.
+- [x] Kích hoạt quy trình tự động ngay sau khi sự kiện `REQUEST_APPROVED` phát ra.
+- [x] Tự động lấy nét ký (Signature Resolution) của Manager.
+- [x] Khóa phiên bản mẫu biểu (`Template Version Locking`).
+- [x] Sinh file PDF chuẩn ISO & Validate dung lượng/trạng thái file.
+- [x] Lưu trữ file PDF an toàn vào Cloudflare R2 / Supabase Storage.
+- [x] Cập nhật Document Metadata (`document_hash`, `storage_path`, `generated_at`).
+- [x] Gửi thông báo hoàn tất đính kèm link tải PDF tới Nhân viên.
 
 ### Phase 12 — Security hardening
 - [ ] RLS test matrix cho tất cả các bảng dữ liệu.

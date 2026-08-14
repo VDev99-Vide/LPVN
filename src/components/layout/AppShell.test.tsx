@@ -21,6 +21,7 @@ describe('AppShell', () => {
     expect(screen.getByText('Reports')).toBeInTheDocument()
     expect(screen.getByText('Entra ID SSO')).toBeInTheDocument()
     expect(screen.getByText('Outlook Actionable')).toBeInTheDocument()
+    expect(screen.getByText('Pipeline ISO')).toBeInTheDocument()
   })
 
   it('renders topbar with theme toggle and user', () => {
